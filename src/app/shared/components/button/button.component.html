@@ -1,0 +1,11 @@
+<button [type]="type" [disabled]="loading || disabled" [class]="'h-9 px-4 py-1 rounded-full w-full text-lg text-white bg-primary hover:opacity-80' + className">
+  @if(loading){
+    <div class="flex justify-center items-center">
+      <div className="w-6 h-6 border-2 border-t-transparent border-white rounded-full animate-spin"></div>
+    </div>
+  } @else {
+    <div class="text-white">
+        <ng-content></ng-content>
+    </div>
+  }
+</button>

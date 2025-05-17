@@ -1,0 +1,45 @@
+<div class="bg-primary text-white flex items-center justify-between p-4">
+  <div class="flex justify-center items-">
+    <div class="flex justify-center items-center gap-2 lg:mx-12">
+      <a class="flex justify-center items-center gap-2" routerLink="/">
+        <mat-icon class="material-icons-outlined">home</mat-icon>
+        Tap & Travel
+      </a>
+    </div>
+  </div>
+
+  <button class="lg:hidden" (click)="toggleMenu()">
+    <mat-icon class="material-icons-outlined">menu</mat-icon>
+  </button>
+
+  <div class="hidden lg:flex justify-center items-center gap-10">
+    @for(item of menuItems; track $index){
+    <div class="flex justify-center items-center gap-2">
+      <a class="flex justify-center items-center gap-2" [routerLink]="item.route">
+        <mat-icon class="material-icons-outlined">{{ item.icon }}</mat-icon>
+        {{ item.label }}
+      </a>
+    </div>
+    }
+  </div>
+
+  @if(isMenuOpen){
+  <div class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50" (click)="toggleMenu()">
+    <div class="bg-gray-900 text-white w-1/2 h-full right-0 fixed shadow-lg py-6 px-4" (click)="$event.stopPropagation()">
+      <button (click)="toggleMenu()" class="absolute top-4 right-4">
+        <mat-icon class="material-icons-outlined">close</mat-icon>
+      </button>
+      <div class="flex flex-col items-start space-y-4 mt-12">
+        @for(item of menuItems; track $index){
+        <div class="flex justify-center items-center gap-2">
+          <a class="flex justify-center items-center gap-2" [routerLink]="item.route">
+            <mat-icon class="material-icons-outlined">{{ item.icon }}</mat-icon>
+            {{ item.label }}
+          </a>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>

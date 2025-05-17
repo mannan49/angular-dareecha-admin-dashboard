@@ -1,1 +1,99 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  background-color: #e2e8f0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@theme {
+  --color-primary: #1e293b;
+}
+
+input,
+textarea,
+select {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  display: inline-block;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color: #1e293b;
+}
+
+p,
+button {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color: #1e293b;
+}
+label {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color: #1e293b;
+  font-size: 2rem;
+}
+
+a {
+  text-decoration: none;
+}
+ul,
+li {
+  list-style: none;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+input[type='date'],
+select,
+input[type='text'],
+input[type='number'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type='radio']:checked + label {
+  background-color: var(--tertiary-color);
+  color: var(--main-color);
+}
+
+/* Bar Code Styling */
+.barcode {
+  left: 50%;
+  box-shadow: 1px 0 0 1px, 5px 0 0 1px, 10px 0 0 1px, 11px 0 0 1px, 15px 0 0 1px, 18px 0 0 1px, 22px 0 0 1px, 23px 0 0 1px, 26px 0 0 1px,
+    30px 0 0 1px, 35px 0 0 1px, 37px 0 0 1px, 41px 0 0 1px, 44px 0 0 1px, 47px 0 0 1px, 51px 0 0 1px, 56px 0 0 1px, 59px 0 0 1px,
+    64px 0 0 1px, 68px 0 0 1px, 72px 0 0 1px, 74px 0 0 1px, 77px 0 0 1px, 81px 0 0 1px, 85px 0 0 1px, 88px 0 0 1px, 92px 0 0 1px,
+    95px 0 0 1px, 96px 0 0 1px, 97px 0 0 1px, 101px 0 0 1px, 105px 0 0 1px, 109px 0 0 1px, 110px 0 0 1px, 113px 0 0 1px, 116px 0 0 1px,
+    120px 0 0 1px, 123px 0 0 1px, 127px 0 0 1px, 130px 0 0 1px, 131px 0 0 1px, 134px 0 0 1px, 135px 0 0 1px, 138px 0 0 1px, 141px 0 0 1px,
+    144px 0 0 1px, 147px 0 0 1px, 148px 0 0 1px, 151px 0 0 1px, 155px 0 0 1px, 158px 0 0 1px, 162px 0 0 1px, 165px 0 0 1px, 168px 0 0 1px,
+    173px 0 0 1px, 176px 0 0 1px, 177px 0 0 1px, 180px 0 0 1px;
+  display: inline-block;
+  transform: translateX(-90px);
+}
