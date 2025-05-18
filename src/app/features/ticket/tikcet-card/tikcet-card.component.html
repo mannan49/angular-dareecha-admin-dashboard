@@ -1,0 +1,102 @@
+<div class="max-w-md w-full h-full mx-auto z-10 rounded-3xl" [ngClass]="{ 'opacity-75': filterSelected === 'past' }">
+  <div class="flex flex-col">
+    <div class="bg-white relative drop-shadow-2xl rounded-3xl p-4 m-4">
+      <div class="flex-auto justify-evenly">
+        <!-- Admin & Bus Number -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center my-1">
+            <h2 class="font-medium italic ml-2">{{ ticket?.adminName }}</h2>
+          </div>
+          <div class="ml-auto text-secondary">{{ ticket?.busDetails?.busNumber }}</div>
+        </div>
+
+        <!-- Dashed Divider -->
+        <div class="border-dashed border-b-2 border-tertiary/40 my-5"></div>
+
+        <!-- Cities and Date -->
+        <div class="grid grid-cols-10">
+          <!-- Origin -->
+          <div class="flex flex-col col-span-4 text-center">
+            <div class="text-xs my-1">{{ ticket?.date | date : 'EEE' }} {{ ticket?.date | date : 'd MMM' }}</div>
+            <div class="text font-medium leading-none text-secondary">
+              {{ ticket?.route?.startCity | uppercase }}
+            </div>
+            <div class="text-xs">{{ ticket?.route?.stops?.[0]?.name }}</div>
+          </div>
+
+          <!-- Bus Image -->
+          <div class="flex flex-col mx-auto col-span-2">
+            <img [src]="ticket?.busDetails?.imageSrc" class="h-14 p-1" alt="Bus Logo" />
+          </div>
+
+          <!-- Destination -->
+          <div class="flex flex-col text-center col-span-4">
+            <div class="text-xs my-1">{{ ticket?.date | date : 'EEE' }} {{ ticket?.date | date : 'd MMM' }}</div>
+            <div class="font-medium leading-none text-secondary">
+              {{ ticket?.route?.endCity | uppercase }}
+            </div>
+            <div class="text-xs">{{ ticket?.route?.stops?.[ticket?.route?.stops?.length - 1]?.name }}</div>
+          </div>
+        </div>
+
+        <!-- Divider with Circles -->
+        <div class="border-dashed border-b-2 my-5 pt-5 relative">
+          <div class="absolute rounded-full w-5 h-5 bg-primary -mt-2 -left-2"></div>
+          <div class="absolute rounded-full w-5 h-5 bg-primary -mt-2 -right-2"></div>
+        </div>
+
+        <!-- Bus Number and Gate -->
+        <div class="flex items-center mb-5 px-5 text-sm">
+          <div class="flex flex-col">
+            <span class="text-sm">Bus Number</span>
+            <div class="font-medium">{{ ticket?.busDetails?.busNumber }}</div>
+          </div>
+          <div class="flex flex-col ml-auto">
+            <span class="text-sm">Gate</span>
+            <div class="font-medium">B3</div>
+          </div>
+        </div>
+
+        <!-- Departure / Arrival -->
+        <div class="flex justify-between items-center mb-4 px-5">
+          <div class="flex flex-col text-sm">
+            <span>Departure</span>
+            <div class="font-medium">{{ ticket?.departureTime }}</div>
+          </div>
+          <div class="flex flex-col text-sm">
+            <span>Arrival</span>
+            <div class="font-medium">{{ ticket?.arrivalTime }}</div>
+          </div>
+        </div>
+
+        <!-- Divider with Circles -->
+        <div class="border-dashed border-b-2 my-5 pt-5 relative">
+          <div class="absolute rounded-full w-5 h-5 bg-primary -mt-2 -left-2"></div>
+          <div class="absolute rounded-full w-5 h-5 bg-primary -mt-2 -right-2"></div>
+        </div>
+
+        <!-- Passenger / Class / Seat -->
+        <div class="flex items-center px-5 pt-3 text-sm">
+          <div class="flex flex-col items-center">
+            <span>Passenger</span>
+            <div class="font-medium">{{ ticket?.user }}</div>
+          </div>
+          <div class="flex flex-col mx-auto items-center">
+            <span>Class</span>
+            <div class="font-medium">{{ ticket?.busDetails?.standard?.toUpperCase() }}</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <span>Seat</span>
+            <div class="font-medium">{{ ticket?.seatNumber | extractSeatNumber }}</div>
+          </div>
+        </div>
+
+        <!-- Show to driver -->
+        <div class="flex flex-col py-5 justify-center text-sm">
+          <h6 class="text-center text-sm">Show this to driver in the bus</h6>
+          <div class="barcode h-14 w-0 inline-block mt-4 relative left-auto"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

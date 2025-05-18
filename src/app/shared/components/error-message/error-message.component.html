@@ -1,0 +1,9 @@
+<div *ngIf="show && errorKey" class="text-sm text-red-600 mt-1">
+  <div *ngIf="errorKey === 'required'">*Required</div>
+  <div *ngIf="errorKey === 'invalidEmail'">*Email is not valid</div>
+  <div *ngIf="errorKey === 'specialCharEmail'">*Only dot(.) and &#64; are allowed as special characters</div>
+  <div *ngIf="errorKey === 'minLength'">*Password must be at least 8 characters</div>
+  <div *ngIf="errorKey === 'alphanumeric'">*Password must contain letters and numbers</div>
+  <div *ngIf="errorKey === 'specialChar'">*Password must include a special character</div>
+  <div *ngIf="errorKey === 'confirmPasswordMismatch'">*Password and Confirm Passoword must match.</div>
+</div>

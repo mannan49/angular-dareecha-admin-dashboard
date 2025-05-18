@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { catchError, EMPTY, filter, take, tap } from 'rxjs';
+import { catchError, EMPTY, filter, finalize, take, tap } from 'rxjs';
 
 import { Bus } from '@models/bus.model';
 
@@ -13,6 +13,7 @@ import { ApiHttpService } from '@shared/services/api-http.service';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
+  loading = false;
   buses: Bus[] = [];
 
   constructor(private apiHttpService: ApiHttpService) {}
@@ -22,6 +23,7 @@ export class DashboardComponent {
   }
 
   fetchUpcomingBuses() {
+    this.loading = true;
     this.apiHttpService
       .getUpcomingBuses()
       .pipe(
@@ -34,7 +36,8 @@ export class DashboardComponent {
         catchError(error => {
           window.alert('Something went wrong');
           return EMPTY;
-        })
+        }),
+        finalize(()=> this.loading = false)
       )
       .subscribe();
   }
