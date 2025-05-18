@@ -11,9 +11,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AuthLayoutComponent, MainLayoutComponent],
   imports: [MatIconModule, BrowserModule, AppRoutingModule, HeaderComponent, FooterComponent, FontAwesomeModule, HttpClientModule],
   providers: [
     {

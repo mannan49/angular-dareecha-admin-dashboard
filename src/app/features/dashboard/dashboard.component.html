@@ -1,6 +1,12 @@
 <app-booking-form />
-<div class="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-  @for(bus of buses; track $index){
-  <app-bus-preview-card [bus]="bus" />
-  }
-</div>
+@if(loading) {
+    <div class="mt-20">
+      <app-loader />
+    </div>
+} @else { 
+    <div class="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+      @for(bus of buses; track $index){
+        <app-bus-preview-card [bus]="bus" />
+      } 
+    </div>
+}
