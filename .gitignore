@@ -40,3 +40,14 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+
+# Ignore Visual Studio user-specific and layout files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vsscc
+*.vsidx
+*.wsuo
