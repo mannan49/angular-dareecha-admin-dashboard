@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '@shared/services/auth.service';
 import { MenuItemsConstants } from 'src/app/constants/menu-items.constant';
 
 @Component({
@@ -14,7 +15,16 @@ export class HeaderComponent {
   isMenuOpen = false;
   menuItems = MenuItemsConstants;
 
+  constructor(private router: Router, private authService: AuthService){}
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
+
+  logout(event: MouseEvent) {
+    event.preventDefault();
+    this.authService.logout(); 
+    this.router.navigate(['/auth/login']);
+  }
+  
 }

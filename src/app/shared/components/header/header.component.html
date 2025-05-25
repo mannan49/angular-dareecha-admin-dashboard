@@ -15,7 +15,7 @@
   <div class="hidden lg:flex justify-center items-center gap-10">
     @for(item of menuItems; track $index){
     <div class="flex justify-center items-center gap-2">
-      <a class="flex justify-center items-center gap-2" [routerLink]="item.route">
+      <a class="flex justify-center items-center gap-2" [routerLink]="item.route" (click)="item.label === 'Logout' ? logout($event) : null">
         <mat-icon class="material-icons-outlined">{{ item.icon }}</mat-icon>
         {{ item.label }}
       </a>
