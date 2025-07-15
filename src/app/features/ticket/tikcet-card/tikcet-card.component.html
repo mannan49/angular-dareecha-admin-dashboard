@@ -14,9 +14,9 @@
         <div class="border-dashed border-b-2 border-tertiary/40 my-5"></div>
 
         <!-- Cities and Date -->
-        <div class="grid grid-cols-10">
+        <div class="grid grid-cols-13">
           <!-- Origin -->
-          <div class="flex flex-col col-span-4 text-center">
+          <div class="flex flex-col col-span-5 text-center">
             <div class="text-xs my-1">{{ ticket?.date | date : 'EEE' }} {{ ticket?.date | date : 'd MMM' }}</div>
             <div class="text font-medium leading-none text-secondary">
               {{ ticket?.route?.startCity | uppercase }}
@@ -25,12 +25,12 @@
           </div>
 
           <!-- Bus Image -->
-          <div class="flex flex-col mx-auto col-span-2">
+          <div class="flex flex-col mx-auto col-span-3">
             <img [src]="ticket?.busDetails?.imageSrc" class="h-14 p-1" alt="Bus Logo" />
           </div>
 
           <!-- Destination -->
-          <div class="flex flex-col text-center col-span-4">
+          <div class="flex flex-col text-center col-span-5">
             <div class="text-xs my-1">{{ ticket?.date | date : 'EEE' }} {{ ticket?.date | date : 'd MMM' }}</div>
             <div class="font-medium leading-none text-secondary">
               {{ ticket?.route?.endCity | uppercase }}
