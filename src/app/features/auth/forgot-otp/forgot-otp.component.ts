@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { take, filter, tap, catchError, EMPTY, finalize } from 'rxjs';
 
 import { ApiHttpService } from '@shared/services/api-http.service';
-import { OtpVerificationPayload } from '@models/payload/otp-verification-payload.model';
 
 @Component({
   selector: 'app-forgot-otp',
@@ -59,35 +58,35 @@ export class ForgotOtpComponent {
     if (this.forgotOtpForm.invalid) return;
 
     const otp = this.otpControls.map(key => this.forgotOtpForm.get(key)?.value).join('');
-    const otpPayload = new OtpVerificationPayload();
-    otpPayload.email = this.email;
-    otpPayload.otp = otp;
-    this.loading = true;
-    this.verifyOtp(otpPayload);
+    // const otpPayload = new OtpVerificationPayload();
+    // otpPayload.email = this.email;
+    // otpPayload.otp = otp;
+    // this.loading = true;
+    // this.verifyOtp(otpPayload);
   }
 
-  verifyOtp(otpPayload: OtpVerificationPayload) {
-    this.apiHttpService
-      .forgotOtpVerification(otpPayload)
-      .pipe(
-        take(1),
-        filter(res => !!res),
-        tap((res) => {
-          this.router.navigate(['/auth/set-password'], { state: {
-            email: this.email,
-            secret_key: res?.secret_key 
-          }})
-          window.alert(res?.message);
-        }),
-        catchError(err => {
-          const { error } = err;
-          window.alert(error?.message);
-          return EMPTY;
-        }),
-        finalize(() => (this.loading = false))
-      )
-      .subscribe();
-  }
+  // verifyOtp(otpPayload: OtpVerificationPayload) {
+  //   this.apiHttpService
+  //     .forgotOtpVerification(otpPayload)
+  //     .pipe(
+  //       take(1),
+  //       filter(res => !!res),
+  //       tap((res) => {
+  //         this.router.navigate(['/auth/set-password'], { state: {
+  //           email: this.email,
+  //           secret_key: res?.secret_key 
+  //         }})
+  //         window.alert(res?.message);
+  //       }),
+  //       catchError(err => {
+  //         const { error } = err;
+  //         window.alert(error?.message);
+  //         return EMPTY;
+  //       }),
+  //       finalize(() => (this.loading = false))
+  //     )
+  //     .subscribe();
+  // }
 
   startResendTimer() {
     this.resendTimer = 60;
@@ -105,18 +104,18 @@ export class ForgotOtpComponent {
   }
 
   onResendOtpClick() {
-    this.apiHttpService.requestForgotPasswordOtp(this.email).pipe(
-        take(1),
-        filter(res => !!res),
-        tap(res => {
-          window.alert(res?.message);
-        }),
-        catchError(err => {
-          const { error } = err;
-          window.alert(error?.message);
-          return EMPTY;
-        })
-      ).subscribe();
+    // this.apiHttpService.requestForgotPasswordOtp(this.email).pipe(
+    //     take(1),
+    //     filter(res => !!res),
+    //     tap(res => {
+    //       window.alert(res?.message);
+    //     }),
+    //     catchError(err => {
+    //       const { error } = err;
+    //       window.alert(error?.message);
+    //       return EMPTY;
+    //     })
+    //   ).subscribe();
   }
 
 }

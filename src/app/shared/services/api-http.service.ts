@@ -3,16 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-
-import { Bus } from '@models/bus.model';
-import { LoginPayload } from '@models/payload/login-payload.model';
-import { SignupPayload } from '@models/payload/signup-payload.model';
-import { LoginApiResponse } from '@models/response/login-api-response.model';
-import { SignupApiResponse } from '@models/response/signup-api-response.model';
-import { TicketApiResponse } from '@models/response/ticket-api-response.model';
-import { ResetPasswordPayload } from '@models/payload/reset-password-payload.model';
-import { OtpVerificationPayload } from '@models/payload/otp-verification-payload.model';
-import { ForgotOtpVerificationApiResponse } from '@models/response/forgot-otp-verification-api-response.model';
+import { Note } from '@models/entities/note.model';
+import { NoteFilter } from '@models/payload/note-filter.model';
+import { PagedResponse } from '@models/response/paged-response.model';
 
 import { ApiUrlService } from './api-url.service';
 
@@ -22,39 +15,35 @@ import { ApiUrlService } from './api-url.service';
 export class ApiHttpService {
   constructor(private httpClient: HttpClient) {}
 
-  getUpcomingBuses(): Observable<Bus[]> {
-    return this.httpClient.get<Bus[]>(ApiUrlService.getUpcomingBusesUrl());
-  }
+  // login(payload: LoginPayload): Observable<LoginApiResponse> {
+  //   return this.httpClient.post<LoginApiResponse>(ApiUrlService.loginUrl(), payload);
+  // }
 
-  getUserTickets(userId: string): Observable<TicketApiResponse> {
-    return this.httpClient.get<TicketApiResponse>(ApiUrlService.getUserTicketsUrl(userId));
-  }
+  // signup(payload: SignupPayload): Observable<SignupApiResponse> {
+  //   return this.httpClient.post<SignupApiResponse>(ApiUrlService.signupUrl(), payload);
+  // }
 
-  login(payload: LoginPayload): Observable<LoginApiResponse> {
-    return this.httpClient.post<LoginApiResponse>(ApiUrlService.loginUrl(), payload);
-  }
+  // signupOtpVerification(payload: OtpVerificationPayload): Observable<LoginApiResponse> {
+  //   return this.httpClient.post<LoginApiResponse>(ApiUrlService.verifySignupOtpUrl(), payload);
+  // }
 
-  signup(payload: SignupPayload): Observable<SignupApiResponse> {
-    return this.httpClient.post<SignupApiResponse>(ApiUrlService.signupUrl(), payload);
-  }
+  // resendSignupOtp(email: string): Observable<{ message: string }> {
+  //   return this.httpClient.post<{ message: string }>(ApiUrlService.resendSignupOtpUrl(), { email });
+  // }
 
-  signupOtpVerification(payload: OtpVerificationPayload): Observable<LoginApiResponse> {
-    return this.httpClient.post<LoginApiResponse>(ApiUrlService.verifySignupOtpUrl(), payload);
-  }
+  // requestForgotPasswordOtp(email: string): Observable<{ message: string }> {
+  //   return this.httpClient.post<{ message: string }>(ApiUrlService.sendForgotOtpUrl(), { email });
+  // }
 
-  resendSignupOtp(email: string): Observable<{ message: string }> {
-    return this.httpClient.post<{ message: string }>(ApiUrlService.resendSignupOtpUrl(), { email });
-  }
+  // forgotOtpVerification(payload: OtpVerificationPayload): Observable<ForgotOtpVerificationApiResponse> {
+  //   return this.httpClient.post<ForgotOtpVerificationApiResponse>(ApiUrlService.verirfyForgotOtpUrl(), payload);
+  // }
 
-  requestForgotPasswordOtp(email: string): Observable<{ message: string }> {
-    return this.httpClient.post<{ message: string }>(ApiUrlService.sendForgotOtpUrl(), { email });
-  }
+  // resetPassword(payload: ResetPasswordPayload): Observable<{ message: string }> {
+  //   return this.httpClient.post<{ message: string }>(ApiUrlService.resetPasswordUrl(), payload);
+  // }
 
-  forgotOtpVerification(payload: OtpVerificationPayload): Observable<ForgotOtpVerificationApiResponse> {
-    return this.httpClient.post<ForgotOtpVerificationApiResponse>(ApiUrlService.verirfyForgotOtpUrl(), payload);
-  }
-
-  resetPassword(payload: ResetPasswordPayload): Observable<{ message: string }> {
-    return this.httpClient.post<{ message: string }>(ApiUrlService.resetPasswordUrl(), payload);
+  getNotesByFilter(filter: NoteFilter) : Observable<PagedResponse<Note>> {
+    return this.httpClient.post<PagedResponse<Note>>(ApiUrlService.getNotesByFilter(), filter);
   }
 }

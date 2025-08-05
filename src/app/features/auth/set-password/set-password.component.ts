@@ -7,8 +7,6 @@ import { catchError, EMPTY, filter, finalize, take, tap } from 'rxjs';
 import { confirmPasswordValidator } from '@shared/validators/confirmPasswordValidator';
 import { passwordStrengthValidator } from '@shared/validators/passwordStrengthValidator';
 
-import { ResetPasswordPayload } from '@models/payload/reset-password-payload.model';
-
 import { ApiHttpService } from '@shared/services/api-http.service';
 
 @Component({
@@ -54,28 +52,28 @@ export class SetPasswordComponent {
 
   onSubmitForm() {
     this.loading = true;
-    const payload = new ResetPasswordPayload();
-    payload.email = this.email;
-    payload.secret_key = this.secretKey;
-    payload.newPassword = this.setPasswordForm.get('password')?.value;
-    this.resetPassword(payload);
+    // const payload = new ResetPasswordPayload();
+    // payload.email = this.email;
+    // payload.secret_key = this.secretKey;
+    // payload.newPassword = this.setPasswordForm.get('password')?.value;
+    // this.resetPassword(payload);
   }
 
-  resetPassword(payload: ResetPasswordPayload) {
-    this.apiHttpService
-      .resetPassword(payload)
-      .pipe(
-        take(1),
-        filter(res => !!res),
-        tap(res => {
-          window.alert(res?.message);
-          this.router.navigate(['/auth/login']);
-        }),
-        catchError(() => {
-          return EMPTY;
-        }),
-        finalize(() => (this.loading = false))
-      )
-      .subscribe();
-  }
+  // resetPassword(payload: ResetPasswordPayload) {
+  //   this.apiHttpService
+  //     .resetPassword(payload)
+  //     .pipe(
+  //       take(1),
+  //       filter(res => !!res),
+  //       tap(res => {
+  //         window.alert(res?.message);
+  //         this.router.navigate(['/auth/login']);
+  //       }),
+  //       catchError(() => {
+  //         return EMPTY;
+  //       }),
+  //       finalize(() => (this.loading = false))
+  //     )
+  //     .subscribe();
+  // }
 }

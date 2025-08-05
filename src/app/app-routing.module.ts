@@ -17,9 +17,9 @@ const routes: Routes = [
         loadChildren: () => import('@features/dashboard/dashboard.module').then(m => m.DashboardModule),
       },
       {
-        path: 'tickets',
-        loadChildren: () => import('@features/ticket/ticket.module').then(m => m.TicketModule),
-      },
+        path: 'notes',
+        loadChildren: () => import('@features/notes/notes.module').then(m => m.NotesModule),
+      }
     ],
   },
   {

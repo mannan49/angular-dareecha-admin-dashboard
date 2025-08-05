@@ -9,6 +9,7 @@ import { MenuItemsConstants } from 'src/app/constants/menu-items.constant';
 @Component({
   selector: 'app-header',
   imports: [RouterModule, CommonModule, MatIconModule],
+  styleUrl : './header.component.css',
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {

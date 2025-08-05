@@ -35,23 +35,23 @@ export class ForgotEmailComponent {
   }
 
   sendForgotPasswordOtp(email: string) {
-    this.apiHttpService
-      .requestForgotPasswordOtp(email)
-      .pipe(
-        take(1),
-        filter(res => !!res),
-        tap(res => {
-          this.router.navigate(['/auth/forgot-otp'], {state: {email: this.forgotEmailForm.get('email')?.value}});
-          window.alert(res?.message);
-        }),
-        catchError(err => {
-          const { error } = err;
-          window.alert(error?.message);
-          return EMPTY;
-        }),
-        finalize(() => (this.loading = false))
-      )
-      .subscribe();
+    // this.apiHttpService
+    //   .requestForgotPasswordOtp(email)
+    //   .pipe(
+    //     take(1),
+    //     filter(res => !!res),
+    //     tap(res => {
+    //       this.router.navigate(['/auth/forgot-otp'], {state: {email: this.forgotEmailForm.get('email')?.value}});
+    //       window.alert(res?.message);
+    //     }),
+    //     catchError(err => {
+    //       const { error } = err;
+    //       window.alert(error?.message);
+    //       return EMPTY;
+    //     }),
+    //     finalize(() => (this.loading = false))
+    //   )
+    //   .subscribe();
   }
 
   onLoginButtonClick() {

@@ -1,0 +1,11 @@
+<span class="icon icon-adobeacrobatreader"></span>
+
+<h1 class="text-center my-4 text-4xl font-bold">Featured Notes</h1>
+
+<app-notes-filter [notes]="notes" (filtersSelection)="handleFiltersSelection($event)" />
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  @for(note of notes; track $index){
+  <app-notes-card [note]="note" />
+  }
+</div>

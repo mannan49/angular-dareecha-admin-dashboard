@@ -9,7 +9,8 @@ body {
 }
 body {
   margin: 0;
-  background-color: #e2e8f0;
+  background-color: #f8f5f2;
+  color: #f8f5f2;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
@@ -18,9 +19,11 @@ body {
 }
 
 @theme {
-  --color-primary: #1e293b;
-  --color-secondary: #ef6f7f;
-  --color-tertiary: #999fbb;
+  --color-stroke: #232323;
+  --color-main: #fffffe;
+  --color-primary: #078080;
+  --color-secondary: #f45d48;
+  --color-tertiary: #f8f5f2;
 }
 
 input,
@@ -45,12 +48,11 @@ h4,
 h5,
 h6 {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  color: #1e293b;
+  color: #232323;
 }
 
 button {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  color: #1e293b;
 }
 label {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
@@ -69,8 +71,12 @@ ul {
   padding: 0;
 }
 
+.icon {
+  font-size: 18px;
+}
+
+
 input[type='date'],
-select,
 input[type='text'],
 input[type='number'] {
   -webkit-appearance: none;

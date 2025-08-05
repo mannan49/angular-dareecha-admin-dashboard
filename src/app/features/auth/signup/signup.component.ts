@@ -49,22 +49,22 @@ export class SignupComponent {
     this.signupUser(signupPayload);
   }
   signupUser(payload: SignupPayload) {
-    this.apiHttpService
-      .signup(payload)
-      .pipe(
-        take(1),
-        filter(res => !!res),
-        tap(res => {
-          window.alert(res?.message);
-          this.router.navigate(['/auth/otp'], {state: {email: this.signupForm.get('email')?.value}});
-        }),
-        catchError(err => {
-          const { error } = err;
-          window.alert(error?.message);
-          return EMPTY;
-        }),
-        finalize(() => (this.loading = false))
-      )
-      .subscribe();
+    // this.apiHttpService
+    //   .signup(payload)
+    //   .pipe(
+    //     take(1),
+    //     filter(res => !!res),
+    //     tap(res => {
+    //       window.alert(res?.message);
+    //       this.router.navigate(['/auth/otp'], {state: {email: this.signupForm.get('email')?.value}});
+    //     }),
+    //     catchError(err => {
+    //       const { error } = err;
+    //       window.alert(error?.message);
+    //       return EMPTY;
+    //     }),
+    //     finalize(() => (this.loading = false))
+    //   )
+    //   .subscribe();
   }
 }

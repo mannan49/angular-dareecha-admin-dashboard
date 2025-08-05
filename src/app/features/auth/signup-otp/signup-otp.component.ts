@@ -4,8 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { catchError, EMPTY, filter, finalize, take, tap } from 'rxjs';
 
-import { OtpVerificationPayload } from '@models/payload/otp-verification-payload.model';
-
 import { ApiHttpService } from '@shared/services/api-http.service';
 
 @Component({
@@ -55,33 +53,33 @@ export class SignupOtpComponent {
     if (this.otpForm.invalid) return;
 
     const otp = this.otpControls.map(key => this.otpForm.get(key)?.value).join('');
-    const otpPayload = new OtpVerificationPayload();
-    otpPayload.email = this.email;
-    otpPayload.otp = otp;
-    this.loading = true;
-    this.verifyOtp(otpPayload);
+    // const otpPayload = new OtpVerificationPayload();
+    // otpPayload.email = this.email;
+    // otpPayload.otp = otp;
+    // this.loading = true;
+    // this.verifyOtp(otpPayload);
   }
 
-  verifyOtp(otpPayload: OtpVerificationPayload) {
-    this.apiHttpService
-      .signupOtpVerification(otpPayload)
-      .pipe(
-        take(1),
-        filter(res => !!res),
-        tap((res) => {
-          localStorage.setItem("access_token", res?.token);
-          this.router.navigate(['/'])
-           window.alert(res?.message);
-        }),
-        catchError(err => {
-          const { error } = err;
-          window.alert(error?.message);
-          return EMPTY;
-        }),
-        finalize(() => (this.loading = false))
-      )
-      .subscribe();
-  }
+  // verifyOtp(otpPayload: OtpVerificationPayload) {
+  //   this.apiHttpService
+  //     .signupOtpVerification(otpPayload)
+  //     .pipe(
+  //       take(1),
+  //       filter(res => !!res),
+  //       tap((res) => {
+  //         localStorage.setItem("access_token", res?.token);
+  //         this.router.navigate(['/'])
+  //          window.alert(res?.message);
+  //       }),
+  //       catchError(err => {
+  //         const { error } = err;
+  //         window.alert(error?.message);
+  //         return EMPTY;
+  //       }),
+  //       finalize(() => (this.loading = false))
+  //     )
+  //     .subscribe();
+  // }
 
   startResendTimer() {
     this.resendTimer = 60;
@@ -99,17 +97,17 @@ export class SignupOtpComponent {
   }
 
   onResendOtpClick() {
-    this.apiHttpService.resendSignupOtp(this.email).pipe(
-        take(1),
-        filter(res => !!res),
-        tap(res => {
-          window.alert(res?.message);
-        }),
-        catchError(err => {
-          const { error } = err;
-          window.alert(error?.message);
-          return EMPTY;
-        })
-      ).subscribe();
+    // this.apiHttpService.resendSignupOtp(this.email).pipe(
+    //     take(1),
+    //     filter(res => !!res),
+    //     tap(res => {
+    //       window.alert(res?.message);
+    //     }),
+    //     catchError(err => {
+    //       const { error } = err;
+    //       window.alert(error?.message);
+    //       return EMPTY;
+    //     })
+    //   ).subscribe();
   }
 }

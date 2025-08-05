@@ -12,8 +12,9 @@ export class ButtonComponent {
   @Input() loading = false;
   @Input() disabled = false;
   @Input() type = 'button';
-  @Input() className = String.Empty;
   @Input() label = String.Empty;
+  @Input() iconClass = String.Empty;
+  @Input() className = "bg-primary";
   @Output() onClick = new EventEmitter<void>();
 
   onButtonClick() {

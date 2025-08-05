@@ -4,15 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiUrlService {
-  static apiBaseUrl = 'https://tap-and-travel-backend.vercel.app/api/v1';
-  // static apiBaseUrl = 'http://localhost:5000/api/v1';
+  static apiBaseUrl = 'http://localhost:5057/api/v1';
 
-  static getUpcomingBusesUrl(): string {
-    return `${this.apiBaseUrl}/bus/future`;
-  }
-  static getUserTicketsUrl(userId: string): string {
-    return `${this.apiBaseUrl}/ticket/user/information/${userId}`;
-  }
   static loginUrl(): string {
     return `${this.apiBaseUrl}/user/login`;
   }
@@ -42,5 +35,9 @@ export class ApiUrlService {
   }
   static changePasswordUrl(): string {
     return `${this.apiBaseUrl}/user/change-password`;
+  }
+  
+  static getNotesByFilter() : string{
+    return `${this.apiBaseUrl}/Note/advance-search`;
   }
 }

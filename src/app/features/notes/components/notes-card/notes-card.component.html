@@ -1,0 +1,17 @@
+<div class="mb-2 aspect-[2.5/3] bg-stroke rounded-2xl pb-2">
+  <img [src]="note?.coverImage?.url" class="h-full w-full object-cover rounded-2xl" [alt]="note?.coverImage?.title" />
+  <div class="p-2">
+    <p>{{ note?.title }}</p>
+    <div class="flex gap-1 mb-1">
+      <p>{{ note?.grade }}</p>
+      <p>{{ note?.subject }}</p>
+    </div>
+    <div class="flex justify-between px-2">
+      <app-button label="View" iconClass="icon-download" />
+      <div class="bg-primary rounded-full px-6 py-1 cursor-pointer flex justify-center items-center gap-1">
+        <span class="icon icon-download"></span>
+        <button class="cursor-pointer" (click)="onDownlaodButtonClick()">Download</button>
+      </div>
+    </div>
+  </div>
+</div>

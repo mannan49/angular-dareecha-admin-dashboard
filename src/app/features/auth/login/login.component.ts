@@ -7,8 +7,6 @@ import { catchError, EMPTY, filter, finalize, take, tap } from 'rxjs';
 import { customEmailValidator } from '@shared/validators/customEmailValidator';
 import { passwordStrengthValidator } from '@shared/validators/passwordStrengthValidator';
 
-import { LoginPayload } from '@models/payload/login-payload.model';
-
 import { ApiHttpService } from '@shared/services/api-http.service';
 
 @Component({
@@ -40,26 +38,26 @@ export class LoginComponent {
 
   onSubmitForm() {
     this.loading = true;
-    this.requestLogin(this.loginForm.value);
+    // this.requestLogin(this.loginForm.value);
   }
 
-  requestLogin(payload: LoginPayload) {
-    this.apiHttpService.login(payload).pipe(
-      take(1),
-      filter((res)=> !!res),
-      tap((res)=>{
-        localStorage.setItem("access_token", res?.token);
-        this.router.navigate(['/'])
-        window.alert(res?.message);
-      }),
-      catchError((err)=>{
-        const {error} = err;
-        window.alert(error?.message);
-        return EMPTY;
-      }),
-      finalize(()=> this.loading = false)
-    ).subscribe()
-  }
+  // requestLogin(payload: LoginPayload) {
+  //   this.apiHttpService.login(payload).pipe(
+  //     take(1),
+  //     filter((res)=> !!res),
+  //     tap((res)=>{
+  //       localStorage.setItem("access_token", res?.token);
+  //       this.router.navigate(['/'])
+  //       window.alert(res?.message);
+  //     }),
+  //     catchError((err)=>{
+  //       const {error} = err;
+  //       window.alert(error?.message);
+  //       return EMPTY;
+  //     }),
+  //     finalize(()=> this.loading = false)
+  //   ).subscribe()
+  // }
 
   onSignupButtonClick() {
     this.router.navigate(['/auth/signup']);
