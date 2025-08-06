@@ -8,7 +8,6 @@ export function passwordStrengthValidator(): ValidatorFn {
     const errors: ValidationErrors = {};
     if (password.length < 8) errors['minLength'] = true;
     if (!/[a-zA-Z]/.test(password) || !/\d/.test(password)) errors['alphanumeric'] = true;
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) errors['specialChar'] = true;
 
     return Object.keys(errors).length ? errors : null;
   };

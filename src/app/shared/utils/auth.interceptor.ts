@@ -1,22 +1,58 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import { AuthService } from '@shared/services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authService: AuthService) {}
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // const token = localStorage.getItem('access_token') ;
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ODIwZTU3Y2MxNGZiZjE4YTBmNjExYTciLCJyb2xlIjoidXNlciIsIm5hbWUiOiJVbWVyIEhhZmVleiIsImVtYWlsIjoibWFsaWt1bWVyaGFmZWV6QGdtYWlsLmNvbSIsImlhdCI6MTc0NzQ4MzU4MiwiZXhwIjoxNzQ4MDg4MzgyfQ.r9sbBRoIDumfsmNzXz6JsxXWy4dRuiFCSJeUHW_Lj-I';
-    if (token) {
-      const authReq = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return next.handle(authReq);
+    if (this.isAuthEndpoint(req.url)) {
+      return next.handle(req);
     }
-    return next.handle(req);
+
+    const accessToken = this.authService.getToken();
+
+    const authReq = accessToken
+      ? req.clone({
+          setHeaders: { Authorization: `Bearer ${accessToken}` },
+          withCredentials: true,
+        })
+      : req.clone({ withCredentials: true });
+
+    return next.handle(authReq).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401 && !this.isRefreshRequest(req.url)) {
+          return this.authService.refreshToken().pipe(
+            switchMap(res => {
+              this.authService.setAccessToken(res.accessToken);
+              this.authService.startTokenRefreshTimer();
+              const retryReq = req.clone({
+                setHeaders: {
+                  Authorization: `Bearer ${res.accessToken}`,
+                },
+                withCredentials: true,
+              });
+              return next.handle(retryReq);
+            }),
+            catchError(refreshError => {
+              this.authService.logout();
+              return throwError(() => refreshError);
+            })
+          );
+        }
+        return throwError(() => error);
+      })
+    );
+  }
+
+  private isAuthEndpoint(url: string): boolean {
+    return url.includes('/login') || url.includes('/refresh-token');
+  }
+
+  private isRefreshRequest(url: string): boolean {
+    return url.includes('/refresh-token');
   }
 }

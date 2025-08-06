@@ -2,9 +2,4 @@
   <app-input controlName="email" label="Email" placeholder="Enter Your Email" />
   <app-input controlName="password" label="Password" placeholder="Enter Your Password" />
   <app-button label="Login" type="submit" [loading]="loading" [disabled]="!loginForm.valid" [className]="'bg-primary w-full'" />
-  <div class="flex justify-between items-center gap-2 my-2">
-    <p class="italic">Don't haven't an account, then</p>
-    <p class="text-red-500 font-medium italic cursor-pointer" routerLink="/auth/forgot-email">Forgot Password?</p>
-  </div>
-  <app-button label="Create Account" [className]="'bg-primary w-full'" (click)="onSignupButtonClick()" />
 </form>

@@ -8,6 +8,7 @@ import { NoteFilter } from '@models/payload/note-filter.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 
 import { ApiUrlService } from './api-url.service';
+import { AuthResponse } from '@models/response/auth-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +16,17 @@ import { ApiUrlService } from './api-url.service';
 export class ApiHttpService {
   constructor(private httpClient: HttpClient) {}
 
-  // login(payload: LoginPayload): Observable<LoginApiResponse> {
-  //   return this.httpClient.post<LoginApiResponse>(ApiUrlService.loginUrl(), payload);
-  // }
+  login(email: string, password: string): Observable<AuthResponse> {
+    return this.httpClient.get<AuthResponse>(ApiUrlService.loginUrl(email, password), { withCredentials: true });
+  }
+
+  logout() : Observable<any>{
+    return this.httpClient.get<any>(ApiUrlService.logout(), { withCredentials: true })
+  }
+
+  refreshToken(): Observable<AuthResponse> {
+    return this.httpClient.get<AuthResponse>(ApiUrlService.refreshTokenUrl(), { withCredentials: true });
+  }
 
   getNotesByFilter(filter: NoteFilter) : Observable<PagedResponse<Note>> {
     return this.httpClient.post<PagedResponse<Note>>(ApiUrlService.getNotesByFilter(), filter);
