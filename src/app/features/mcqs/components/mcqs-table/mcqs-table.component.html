@@ -1,0 +1,28 @@
+<table id="example" class="table-auto bg-main w-full">
+  <thead>
+    <tr>
+      <th class="px-4 border py-2">Statement</th>
+      <th class="px-4 border py-2">Option A</th>
+      <th class="px-4 border py-2">Option B</th>
+      <th class="px-4 border py-2">Option C</th>
+      <th class="px-4 border py-2">Option D</th>
+      <th class="px-4 border py-2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(mcq of pagedMcqs?.items; track $index){
+        <tr>
+            <td class="border px-4 py-2">{{ mcq?.statement }}</td>
+            @for(option of mcq.options; track $index){
+              <td class="border text-center px-4 py-2" [ngClass]="{ 'correct-option': isCorrectOption(mcq, option) }">{{ option?.text }}</td>
+            }
+            <td class="border px-4 py-2">
+                <div class="flex justify-center items-center gap-2">
+                <span class="icon-edit-pencil cursor-pointer" (click)="onEditButtonClick(mcq?.id)"></span>
+                <span class="text-xl icon-delete cursor-pointer" (click)="onDeleteMcqButtonClick(mcq?.id)"></span>
+                </div>
+            </td>
+        </tr>
+    }
+  </tbody>
+</table>

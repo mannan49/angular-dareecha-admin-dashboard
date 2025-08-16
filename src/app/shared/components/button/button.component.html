@@ -2,7 +2,7 @@
   [type]="type"
   [disabled]="disabled || loading"
   (click)="onButtonClick()"
-  [ngClass]="['py-1 rounded-full px-4 flex justify-center items-center cursor-pointer', className]"
+  [ngClass]="[className]"
 >
   @if (loading) {
   <div class="w-6 h-6 border-2 border-t-transparent border-white rounded-full animate-spin"></div>

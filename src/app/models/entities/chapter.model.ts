@@ -9,5 +9,5 @@ export class Chapter extends BaseEntity {
   name: string;
   index: number;
   author: Reference;
-  Media: Attachment;
+  media: Attachment;
 }

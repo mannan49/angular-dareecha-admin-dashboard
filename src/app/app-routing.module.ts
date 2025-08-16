@@ -17,6 +17,14 @@ const routes: Routes = [
         loadChildren: () => import('@features/dashboard/dashboard.module').then(m => m.DashboardModule),
       },
       {
+        path: 'mcqs',
+        loadChildren: () => import('@features/mcqs/mcqs.module').then(m => m.McqsModule),
+      },
+      {
+        path: 'chapters',
+        loadChildren: () => import('@features/chapters/chapters.module').then(m => m.ChaptersModule),
+      },
+      {
         path: 'notes',
         loadChildren: () => import('@features/notes/notes.module').then(m => m.NotesModule),
       }

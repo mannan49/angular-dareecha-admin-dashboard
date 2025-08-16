@@ -58,7 +58,7 @@ export class AuthService {
     const expiresAt = payload.exp * 1000;
     const now = Date.now();
 
-    const delay = expiresAt - now - 890000;
+    const delay = expiresAt - now - 10000;
 
     if (delay <= 0) {
       this.refreshToken().subscribe();

@@ -1,0 +1,36 @@
+<div class="bg-main p-6 m-4 rounded-2xl shadow-lg" mt-4>
+    @if(isEditMode){
+        <h1 class="font-bold text-2xl text-center my-2">Edit Chapter Form</h1>
+    } @else {
+        <h1 class="font-bold text-2xl text-center my-2">Add Chapter Form</h1>
+    }
+  <form [formGroup]="chapterForm" (ngSubmit)="onSubmitForm()">
+    <div class="grid grid-cols-12 items-end gap-4">
+        <app-input class="col-span-10" placeholder="Enter Chapter's Name" label="Name" controlName="name" />
+        <div class="col-span-2 cursor-pointer">
+            <input type="file" #fileInput hidden (change)="onFileSelected($event)" />
+            @if(filePreview){
+                <div class="flex items-center gap-1">
+                    <img [src]="filePreview" class="w-26 max-h-16 object-cover rounded cursor-pointer" (click)="triggerFileInput(fileInput)" />
+                    <button type="button" (click)="removeUploadedFile()">
+                        <span class="icon-close-outline text-xl cursor-pointer"></span>
+                    </button>
+                </div>
+            } @else {
+                <div (click)="triggerFileInput(fileInput)">
+                    <app-button label="Upload" [className]="'bg-primary py-1.5 w-full mx-auto'" iconClass="text-white icon-file_upload" />
+                </div>
+            }
+        </div>
+    </div>
+    <div class="grid grid-cols-12 gap-5 mt-2">
+        <app-select class="col-span-6" placeholder="Select Class" label="Class" controlName="grade" [options]="gradesList" />
+        <app-select class="col-span-6" placeholder="Select Subject" label="Subject" controlName="subject" [options]="subjectsList" />
+        <app-select class="col-span-6" placeholder="Select Board" label="Board" controlName="board" [options]="boardsList" />
+        <app-input class="col-span-6" placeholder="Enter Index of Chapter" label="Index" controlName="index" type="number" />
+    </div>
+    <div class="mt-4">
+      <app-button label="Submit" [disabled]="chapterForm.invalid" type="submit" [loading]="loading" [className]="'bg-primary w-1/3 mx-auto'" />
+    </div>
+  </form>
+</div>

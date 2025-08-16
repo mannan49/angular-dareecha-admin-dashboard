@@ -1,0 +1,34 @@
+
+<div class="mt-4 px-4 sm:px-6 lg:px-8">
+    <app-search-bar (searchClicked)="handleSearchClick($event)" />
+    <div class="mt-4 grid grid-cols-3 gap-4">
+        <app-dropdown placeholder="Choose Class" [options]="gradesList" (selectionChanged)="handleGradeSelectionChange($event)" />
+        <app-dropdown placeholder="Choose Subject" [options]="subjectsList" (selectionChanged)="handleSubjectSelectionChange($event)" />
+        <app-dropdown placeholder="Choose Board" [options]="boardsList" (selectionChanged)="handleBoardSelectionChange($event)" />
+  </div>
+</div>
+
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-12">
+        <h2 class="text-2xl col-span-10 font-bold text-center mb-4">MCQs List</h2>
+        <div class="col-span-2">
+            <app-button label="Add New MCQ" (click)="onAddNewButtonClick()"
+             [className]="'bg-primary w-full'" iconClass="icon-add text-white" />
+        </div>
+    </div>
+    @if(loading){
+        <app-loader />
+    } @else {
+        <app-mcqs-table [pagedMcqs]="pagedMcqs" (deleteButtonClicked)="handleDeleteMcq($event)" />
+        <div class="grid grid-cols-12 items-center py-4">
+            <div class="col-span-4">
+                Showing {{ pagedMcqs?.items?.length * pagedMcqs?.pageIndex }} of {{pagedMcqs?.totalCount}} mcqs
+            </div>
+    
+            <div class="col-span-8">
+                <app-pagination-actions [pagedResponse]="pagedMcqs" (pageChanged)="handlePageChange($event)" />
+            </div>
+        </div>
+    }
+</div>

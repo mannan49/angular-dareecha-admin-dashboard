@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { provideHotToastConfig } from '@ngxpert/hot-toast';
 import { MatIconModule } from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -16,8 +17,19 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 
 @NgModule({
   declarations: [AppComponent, AuthLayoutComponent, MainLayoutComponent],
-  imports: [MatIconModule, BrowserModule, AppRoutingModule, HeaderComponent, FooterComponent, FontAwesomeModule, HttpClientModule],
+  imports: [
+    MatIconModule,
+    BrowserModule, 
+    HeaderComponent,
+    FooterComponent, 
+    AppRoutingModule, 
+    HttpClientModule,
+    FontAwesomeModule,
+  ],
   providers: [
+    provideHotToastConfig({
+      duration: 2000
+    }),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

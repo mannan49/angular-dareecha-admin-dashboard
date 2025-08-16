@@ -1,0 +1,41 @@
+<div class="mt-4 mx-auto px-4 sm:px-6 lg:px-8">
+  <app-search-bar (searchClicked)="handleSearchClick($event)" />
+  <div class="mt-4 grid grid-cols-3 gap-4">
+    <app-dropdown placeholder="Choose Class" [options]="gradesList" (selectionChanged)="handleGradeSelectionChange($event)" />
+    <app-dropdown placeholder="Choose Subject" [options]="subjectsList" (selectionChanged)="handleSubjectSelectionChange($event)" />
+    <app-dropdown placeholder="Choose Board" [options]="boardsList" (selectionChanged)="handleBoardSelectionChange($event)" />
+  </div>
+</div>
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="grid grid-cols-12">
+        <h2 class="text-2xl col-span-10 font-bold text-center mb-4">Chapters List</h2>
+        <div class="col-span-2">
+            <app-button label="Add New Chapter" (click)="onAddNewButtonClick()"
+             [className]="'bg-primary w-full'" iconClass="icon-add text-white" />
+        </div>
+    </div>
+
+  @if(loading){
+    <app-loader />
+  } @else {
+        @if(pagedChapters?.items?.length > 0){
+            <app-chapters-table [pagedChapters]="pagedChapters" (deleteButtonClicked) = "handleDeleteButtonClick($event)" />
+        } @else {
+            <div class="flex bg-main py-10 rounded-2xl flex-col justify-center items-center gap-2 my-auto mt-10">
+                <span class="icon-clear text-5xl"></span>
+                <h2 class="text-2xl">No chapter exists on search criteria.</h2>
+            </div>
+        }
+        
+        @if( pagedChapters?.totalCount > pagedChapters?.pageSize ){
+            <div class="grid grid-cols-12 items-center py-4">
+              <div class="col-span-4">Showing {{ pagedChapters?.items?.length * pagedChapters?.pageIndex }} of {{ pagedChapters?.totalCount }} chapters</div>
+              <div class="col-span-8">
+                <app-pagination-actions [pagedResponse]="pagedChapters" (pageChanged)="handlePageChange($event)" />
+              </div>
+            </div>
+        }
+    }
+
+</div>

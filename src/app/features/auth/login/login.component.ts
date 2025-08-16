@@ -5,11 +5,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError, EMPTY, filter, finalize, take, tap } from 'rxjs';
 
 import { customEmailValidator } from '@shared/validators/customEmailValidator';
-import { passwordStrengthValidator } from '@shared/validators/passwordStrengthValidator';
 
-import { ApiHttpService } from '@shared/services/api-http.service';
 import { AuthResponse } from '@models/response/auth-response.model';
+
 import { AuthService } from '@shared/services/auth.service';
+import { ApiHttpService } from '@shared/services/api-http.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,7 @@ export class LoginComponent {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private apiHttpService: ApiHttpService,
+    private apiHttpService: ApiHttpService
   ) {}
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class LoginComponent {
   initializeForm() {
     this.loginForm = this.formBuilder.group({
       email: [String.Empty, [Validators.required, customEmailValidator()]],
-      password: [String.Empty, [Validators.required, passwordStrengthValidator()]],
+      password: [String.Empty, [Validators.required]],
     });
   }
 

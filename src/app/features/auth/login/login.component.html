@@ -1,5 +1,5 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmitForm()">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmitForm()" class="flex flex-col gap-3">
   <app-input controlName="email" label="Email" placeholder="Enter Your Email" />
-  <app-input controlName="password" label="Password" placeholder="Enter Your Password" />
+  <app-input controlName="password" label="Password" type="password" placeholder="Enter Your Password" />
   <app-button label="Login" type="submit" [loading]="loading" [disabled]="!loginForm.valid" [className]="'bg-primary w-full'" />
 </form>

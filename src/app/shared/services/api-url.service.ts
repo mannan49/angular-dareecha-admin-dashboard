@@ -18,7 +18,31 @@ export class ApiUrlService {
     return `${this.apiBaseUrl}/user/logout`;
   }
 
-  static getNotesByFilter() : string{
+  static getNotesByFilterUrl() : string{
     return `${this.apiBaseUrl}/Note/advance-search`;
+  }
+
+  static getMcqsByFilterUrl() : string{
+    return `${this.apiBaseUrl}/Mcq/advance-search`;
+  }
+
+  static addMcqUrl() : string{
+    return `${this.apiBaseUrl}/Mcq`;
+  }
+
+  static addChapterUrl() : string{
+    return `${this.apiBaseUrl}/Chapter`;
+  }
+
+  static mcqByIdUrl(id: string) : string {
+    return `${this.apiBaseUrl}/Mcq/${id}`
+  }
+
+  static getChaptersByFilterUrl() : string {
+    return `${this.apiBaseUrl}/Chapter/advance-search`
+  }
+
+  static chapterByIdUrl(id: string) : string {
+    return `${this.apiBaseUrl}/Chapter/${id}`;
   }
 }

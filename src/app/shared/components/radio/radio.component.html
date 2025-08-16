@@ -1,0 +1,29 @@
+<div class="flex items-center gap-4">
+  @if (label) {
+    <label for="{{ controlName }}" class="text-xl lg:text-2xl font-semibold mb-2">{{ label }}</label>
+  }
+  
+  <div>
+    <div class="flex items-center justify-around gap-2">
+      @for(option of options; track option[valueField]) {
+          <label class="flex bg-gray-100 rounded-md px-3 py-2 my-3 hover:bg-primary cursor-pointer">
+            <input
+              type="radio"
+              [formControl]="control"
+              [value]="option[valueField]"
+              [name]="controlName"
+              form_control
+              #inputValidator="appValidate"
+            />
+            <i class="pl-2">{{ option[displayField] }}</i>
+          </label>
+          <app-error-message class="ml-1" [show]="inputValidator.showErrors" [errorKey]="inputValidator.firstErrorKey" />
+        }
+    </div>
+  </div>
+
+</div>
+
+
+
+
