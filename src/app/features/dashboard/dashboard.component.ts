@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { ChartConfiguration, ChartOptions } from 'chart.js';
+
 import { ApiHttpService } from '@shared/services/api-http.service';
 
 @Component({
