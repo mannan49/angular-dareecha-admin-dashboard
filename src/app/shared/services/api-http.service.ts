@@ -47,8 +47,16 @@ export class ApiHttpService {
     return this.httpClient.post<ActionResponse>(ApiUrlService.addMcqUrl(), mcq);
   }
 
+  addNote(note: FormData): Observable<ActionResponse> {
+    return this.httpClient.post<ActionResponse>(ApiUrlService.addNoteUrl(), note);
+  }
+
   updateMcq(id: string, mcq: FormData): Observable<ActionResponse> {
     return this.httpClient.put<ActionResponse>(ApiUrlService.mcqByIdUrl(id), mcq);
+  }
+
+  updateNote(id: string, note: FormData): Observable<ActionResponse> {
+    return this.httpClient.put<ActionResponse>(ApiUrlService.noteByIdUrl(id), note);
   }
 
   deleteMcq(id: string): Observable<boolean> {
@@ -65,6 +73,10 @@ export class ApiHttpService {
 
   deleteChapter(id: string): Observable<ActionResponse> {
     return this.httpClient.delete<ActionResponse>(ApiUrlService.chapterByIdUrl(id));
+  }
+
+  deleteNote(id: string): Observable<ActionResponse> {
+    return this.httpClient.delete<ActionResponse>(ApiUrlService.noteByIdUrl(id));
   }
 
   editChapter(id: string, chapter: FormData): Observable<ActionResponse> {

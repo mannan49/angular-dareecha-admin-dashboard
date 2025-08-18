@@ -36,9 +36,6 @@ export class AuthService {
       .logout()
       .pipe(
         take(1),
-        tap(() => {
-          window.alert('Logging Out');
-        }),
         catchError(() => {
           return EMPTY;
         }),

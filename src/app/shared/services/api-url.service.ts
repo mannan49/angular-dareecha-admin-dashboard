@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiUrlService {
-  static apiBaseUrl = 'http://localhost:5057/api/v1';
+  // static apiBaseUrl = 'http://localhost:5057/api/v1';
+  static apiBaseUrl = 'http://dareechaapi.ap-south-1.elasticbeanstalk.com/api/v1';
 
   static loginUrl(email: string, password: string): string {
     return `${this.apiBaseUrl}/user/login?email=${email}&password=${password}&role=Admin`;
@@ -30,12 +31,20 @@ export class ApiUrlService {
     return `${this.apiBaseUrl}/Mcq`;
   }
 
+  static addNoteUrl() : string{
+    return `${this.apiBaseUrl}/Note`;
+  }
+
   static addChapterUrl() : string{
     return `${this.apiBaseUrl}/Chapter`;
   }
 
   static mcqByIdUrl(id: string) : string {
     return `${this.apiBaseUrl}/Mcq/${id}`
+  }
+
+  static noteByIdUrl(id: string) : string {
+    return `${this.apiBaseUrl}/Note/${id}`
   }
 
   static getChaptersByFilterUrl() : string {

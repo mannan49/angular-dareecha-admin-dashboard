@@ -1,6 +1,7 @@
+import { BaseEntity } from './base-entity.model';
 import { Annotation } from '../shared/annotation.model';
 import { Attachment } from '../shared/attachment.model';
-import { BaseEntity } from './base-entity.model';
+import { Reference } from '@models/shared/reference.model';
 
 export class Note extends BaseEntity {
   title: string;
@@ -13,6 +14,6 @@ export class Note extends BaseEntity {
   board: string;
   file: Attachment;
   coverImage: Attachment;
-  uploadedBy: string;
+  uploadedBy: Reference;
   annotations: Annotation[];
 }

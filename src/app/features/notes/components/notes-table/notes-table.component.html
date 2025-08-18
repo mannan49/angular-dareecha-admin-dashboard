@@ -1,0 +1,30 @@
+<div class="hidden rounded-t-2xl md:grid grid-cols-18 bg-gray-200 font-bold text-gray-700 uppercase py-4 px-2">
+    <div class="col-span-6 pl-4 text-center">Title</div>
+    <div class="col-span-2">Subject</div>
+    <div class="col-span-2">Board</div>
+    <div class="col-span-2 ml-3">Class</div>
+    <div class="col-span-2 ml-2">Size</div>
+    <div class="col-span-2 text-center">Uploaded By</div>
+    <div class="col-span-2 text-center">Actions</div>
+</div>
+
+@for(note of pagedNotes?.items; track $index){
+    <div class="grid grid-cols-18 items-center border-b bg-main border-gray-200 py-2 px-2">
+        <div class="col-span-6 flex items-center">
+            <img [src]="note?.coverImage?.url" class="w-10 h-10 object-cover rounded-full cursor-pointer" />
+            @if(note?.file?.url){
+                <span class="icon-file-pdf text-red-600 text-2xl ml-3 cursor-pointer" (click)="onPdfIconClick(note.file.url)"></span>
+            }
+            <div class="col-span-5 truncate pl-4"> {{ note?.title }}</div>
+        </div>
+        <div class="col-span-2 truncate">{{ note?.subject }}</div>
+        <div class="col-span-2">{{ note?.board }}</div>
+        <div class="col-span-2">{{ note?.grade }}</div>
+        <div class="col-span-2">{{ (note?.file?.size / 1024 / 1024) | number:'1.2-2' }} MB</div>
+        <div class="col-span-2 text-center">{{ note?.uploadedBy?.text }}</div>
+        <div class="col-span-2 flex justify-center items-center gap-2">
+            <span class="icon-edit-pencil text-primary cursor-pointer" (click)="onEditButtonClick(note?.id)"></span>
+            <span class="text-xl icon-delete text-secondary cursor-pointer" (click)="onDeleteButtonClick(note?.id)"></span>
+        </div>
+    </div>
+}

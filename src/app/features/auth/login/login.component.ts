@@ -10,6 +10,7 @@ import { AuthResponse } from '@models/response/auth-response.model';
 
 import { AuthService } from '@shared/services/auth.service';
 import { ApiHttpService } from '@shared/services/api-http.service';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
+    private toast: HotToastService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private apiHttpService: ApiHttpService
@@ -57,7 +59,7 @@ export class LoginComponent {
         }),
         catchError(err => {
           const { error } = err;
-          window.alert(error?.message);
+          this.toast.error(error?.message || "Invalid Credentials");
           return EMPTY;
         }),
         finalize(() => (this.loading = false))

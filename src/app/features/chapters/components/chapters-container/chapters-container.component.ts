@@ -78,6 +78,7 @@ export class ChaptersContainerComponent {
   handlePageChange(index: number) {
     const filter = this.constructChapterFilter();
     filter.pageIndex = index;
+    this.loading = true;
     this.getChaptersByFilter(filter);
   }
 

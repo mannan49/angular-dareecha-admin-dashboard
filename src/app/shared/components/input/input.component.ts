@@ -11,10 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './input.component.css',
 })
 export class InputComponent {
+  @Input() type = 'text';
+  @Input() classes = 'font-medium';
   @Input() label = String.Empty;
   @Input() placeholder = String.Empty;
   @Input() controlName = String.Empty;
-  @Input() type = 'text';
 
   control: FormControl;
 

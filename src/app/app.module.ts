@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -15,6 +15,8 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { appInitializer } from './app.initializer';
+import { AuthService } from '@shared/services/auth.service';
 
 @NgModule({
   declarations: [AppComponent, AuthLayoutComponent, MainLayoutComponent],
@@ -28,6 +30,12 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
     FontAwesomeModule,
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializer,
+      deps: [AuthService],
+      multi: true,
+    },
     provideHotToastConfig({
       duration: 2000
     }),
