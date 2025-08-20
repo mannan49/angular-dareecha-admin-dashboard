@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ApiUrlService {
   // static apiBaseUrl = 'http://localhost:5057/api/v1';
-  static apiBaseUrl = 'http://dareechaapi.ap-south-1.elasticbeanstalk.com/api/v1';
+  static apiBaseUrl = 'https://dareecha-api.online/api/v1';
 
   static loginUrl(email: string, password: string): string {
     return `${this.apiBaseUrl}/user/login?email=${email}&password=${password}&role=Admin`;
