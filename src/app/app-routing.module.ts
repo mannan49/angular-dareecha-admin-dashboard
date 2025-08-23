@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '@shared/guard/auth.guard';
 
@@ -27,7 +27,7 @@ const routes: Routes = [
       {
         path: 'notes',
         loadChildren: () => import('@features/notes/notes.module').then(m => m.NotesModule),
-      }
+      },
     ],
   },
   {
@@ -40,7 +40,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
