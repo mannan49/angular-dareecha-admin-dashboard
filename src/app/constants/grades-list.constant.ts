@@ -5,4 +5,6 @@ export const GradesList: Select[] = [
   { Display: '10th Class', Value: '10th Class' },
   { Display: '11th Class', Value: '11th Class' },
   { Display: '12th Class', Value: '12th Class' },
+  { Display: 'ECAT', Value: 'ECAT' },
+  { Display: 'MDCAT', Value: 'MDCAT' },
 ];
