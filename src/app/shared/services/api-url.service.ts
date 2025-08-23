@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiUrlService {
-  
-  // static apiBaseUrl = 'http://localhost:5057/api/v1';
-  static apiBaseUrl = 'https://dareecha-api.online/api/v1';
+
+  static apiBaseUrl = environment.apiBaseUrl;
 
   //#region Auth
 
