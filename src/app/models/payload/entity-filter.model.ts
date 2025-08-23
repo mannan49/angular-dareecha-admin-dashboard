@@ -7,5 +7,6 @@ export class EntityFilter extends BaseFilter {
   query?: string;
   type?: string;
   grade?: string;
+  chapterIds?: string[];
   difficultyLevel?: string;
 }

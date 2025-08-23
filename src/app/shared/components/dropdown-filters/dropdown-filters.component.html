@@ -1,0 +1,9 @@
+<div class="mt-4 grid gap-4" [ngClass]="[styleClasses]">
+    <app-dropdown placeholder="Choose Class" [options]="gradesList" (selectionChanged)="handleGradeSelectionChange($event)" />
+    <app-dropdown placeholder="Choose Subject" [options]="subjectsList" (selectionChanged)="handleSubjectSelectionChange($event)" />
+    <app-dropdown placeholder="Choose Board" [options]="boardsList" (selectionChanged)="handleBoardSelectionChange($event)" />
+    @if(showChaptersFilter){
+      <app-dropdown placeholder="Choose Chapters" [options]="chaptersList" (selectionChanged)="handleChapterSelectionChange($event)" />
+    }  
+</div>
+

@@ -2,8 +2,8 @@ import { Router } from '@angular/router';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Dialog } from '@models/shared/dialog.model';
-import { Chapter } from '@models/entities/chapter.model';
 import { PagedResponse } from '@models/response/paged-response.model';
+import { ChapterAggregatedResponse } from '@models/response/chapter-aggregated-response.model';
 
 import { DialogService } from '@shared/services/dialog.service';
 
@@ -14,13 +14,19 @@ import { DialogService } from '@shared/services/dialog.service';
   styleUrl: './chapters-table.component.css',
 })
 export class ChaptersTableComponent {
-  @Input() pagedChapters: PagedResponse<Chapter>;
+  @Input() pagedChapters: PagedResponse<ChapterAggregatedResponse>;
   @Output() deleteButtonClicked = new EventEmitter<string>();
 
   constructor(private router: Router, private dialogService: DialogService) {}
 
   onEditButtonClick(chapterId: string) {
     this.router.navigate([`chapters/form/${chapterId}`]);
+  }
+  
+  onRightArrowButtonClick(chapterId: string, mcqCount: number){
+    if(mcqCount > 1){
+      this.router.navigate([`mcqs/${chapterId}`]);
+    }
   }
 
   onDeleteButtonClick(chapterId: string) {

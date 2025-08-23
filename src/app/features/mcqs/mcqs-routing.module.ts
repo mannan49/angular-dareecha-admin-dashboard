@@ -1,26 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { McqsContainerComponent } from './components/mcqs-container/mcqs-container.component';
+
 import { McqFormComponent } from './components/mcq-form/mcq-form.component';
+import { McqsContainerComponent } from './components/mcqs-container/mcqs-container.component';
+import { SingleChapterMcqsComponent } from './components/single-chapter-mcqs/single-chapter-mcqs.component';
 
 const routes: Routes = [
   {
     path: String.Empty,
-    component: McqsContainerComponent
+    component: McqsContainerComponent,
   },
   {
-    path: "form/:id",
-    component: McqFormComponent
+    path: ':id',
+    component: SingleChapterMcqsComponent,
   },
   {
-    path: "form",
-    component: McqFormComponent
-  }
+    path: 'form/:id',
+    component: McqFormComponent,
+  },
+  {
+    path: 'form',
+    component: McqFormComponent,
+  },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class McqsRoutingModule { }
+export class McqsRoutingModule {}

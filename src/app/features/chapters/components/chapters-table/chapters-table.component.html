@@ -1,22 +1,26 @@
-<div class="hidden rounded-t-2xl md:grid grid-cols-15 bg-gray-200 font-bold text-gray-700 uppercase py-4 px-2">
+<div class="hidden rounded-t-2xl md:grid grid-cols-14 bg-gray-200 font-bold text-gray-700 uppercase py-4 px-2">
     <div class="col-span-5 pl-4">Name</div>
     <div class="col-span-2">Subject</div>
-    <div class="col-span-2">Board</div>
-    <div class="col-span-2">Class</div>
+    <div class="col-span-1">Board</div>
+    <div class="col-span-1 text-center">Class</div>
     <div class="col-span-2 text-center">Author</div>
+    <div class="col-span-1 text-center">MCQs</div>
     <div class="col-span-2 text-center">Actions</div>
 </div>
 
 @for(chapter of pagedChapters?.items; track $index){
-    <div class="grid grid-cols-15 items-center border-b bg-main border-gray-200 py-4 px-2">
+    <div class="grid grid-cols-14 items-center border-b bg-main border-gray-200 py-4 px-2">
         <div class="col-span-5 truncate pl-4">{{ chapter?.index }}. {{ chapter?.name }}</div>
         <div class="col-span-2 truncate">{{ chapter?.subject }}</div>
-        <div class="col-span-2">{{ chapter?.board }}</div>
-        <div class="col-span-2">{{ chapter?.grade }}</div>
-        <div class="col-span-2 text-center">{{ chapter?.author?.text }}</div>
-        <div class="col-span-2 flex justify-center items-center gap-2">
+        <div class="col-span-1">{{ chapter?.board }}</div>
+        <div class="col-span-1 text-center">{{ chapter?.grade }}</div>
+        <div class="col-span-2 text-center text-sm">{{ chapter?.author?.text }}</div>
+        <div class="col-span-1 truncate text-center">{{ chapter?.mcqCount }}</div>
+        <div class="col-span-2 flex justify-center items-center gap-1">
             <span class="icon-edit-pencil text-primary cursor-pointer" (click)="onEditButtonClick(chapter?.id)"></span>
             <span class="text-xl icon-delete text-secondary cursor-pointer" (click)="onDeleteButtonClick(chapter?.id)"></span>
+            <span class="text-xl icon-arrow-right cursor-pointer" [ngClass]="{'disabled-arrow': chapter?.mcqCount < 1}"
+             (click)="onRightArrowButtonClick(chapter?.id, chapter?.mcqCount)"></span>
         </div>
     </div>
 }

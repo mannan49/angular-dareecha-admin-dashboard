@@ -1,7 +1,8 @@
 <div class="col-span-12 grid grid-cols-4 grid-rows-2 items-center gap-3 sm:flex sm:justify-center">
   <div class="wt-button-font order-2 col-span-2 flex justify-end gap-2">
     <a class="pagination-button" (click)="onFirstButtonClick()">First</a>
-    <a class="pagination-button" (click)="onBackButtonClick()" [ngClass]="{'disabled-button': startPage == 1 }" >Back</a>
+    <button class="pagination-button icon-arrow-left text-2xl" [disabled]="startPage == 1"
+     (click)="onBackButtonClick()" [ngClass]="{'disabled-button': startPage == 1 }"></button>
   </div>
 
   <div class="order-1 col-span-4 flex justify-center gap-3 sm:order-2">
@@ -11,8 +12,10 @@
     }
   </div>
 
-  <div class="wt-button-font order-2 col-span-2 flex items-center gap-2">
-    <a class="pagination-button" [ngClass]="{'disabled-button': !pagedResponse?.hasNextPage }" (click)="onNextButtonClick()">Next</a>
-    <a class="pagination-button" (click)="onLastButtonClick()">Last</a>
+  <div class="wt-button-font order-2 col-span-2 flex justify-end gap-2">
+    <button class="pagination-button icon-arrow-right text-2xl" (click)="onNextButtonClick()"
+     [disabled]="(pagedResponse?.totalPages - pagedResponse?.pageIndex) < 6"
+     [ngClass]="{'disabled-button': (pagedResponse?.totalPages - pagedResponse?.pageIndex) < 6  }" ></button>
+    <span class="pagination-button" (click)="onLastButtonClick()">Last</span>
   </div>
 </div>

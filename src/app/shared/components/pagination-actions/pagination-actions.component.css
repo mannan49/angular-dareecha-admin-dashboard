@@ -17,14 +17,21 @@
   color: white;
 }
 
+.pagination-button:disabled:hover {
+  background-color: var(--color-main);
+  color: inherit;
+  opacity: 0.9;
+  cursor: not-allowed;
+  color: #9ca3af;
+}
+
 .active-page {
   background-color: var(--color-primary);
   color: white;
 }
 
 .disabled-button {
-  pointer-events: none;
   opacity: 0.9;
-  cursor: no-drop;
+  cursor: not-allowed;
   color: #9ca3af;
 }

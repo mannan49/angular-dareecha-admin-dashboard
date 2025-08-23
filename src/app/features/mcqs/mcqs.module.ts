@@ -9,18 +9,21 @@ import { McqFormComponent } from './components/mcq-form/mcq-form.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { SelectComponent } from '@shared/components/select/select.component';
+import { McqsTableComponent } from './components/mcqs-table/mcqs-table.component';
 import { DropdownComponent } from '@shared/components/dropdown/dropdown.component';
 import { SearchBarComponent } from '@shared/components/search-bar/search-bar.component';
 import { McqsContainerComponent } from './components/mcqs-container/mcqs-container.component';
 import { MultiSelectComponent } from '@shared/components/multi-select/multi-select.component';
+import { DropdownFiltersComponent } from "@shared/components/dropdown-filters/dropdown-filters.component";
+import { SingleChapterMcqsComponent } from './components/single-chapter-mcqs/single-chapter-mcqs.component';
 import { PaginationActionsComponent } from '@shared/components/pagination-actions/pagination-actions.component';
-import { McqsTableComponent } from './components/mcqs-table/mcqs-table.component';
 
 @NgModule({
   declarations: [
     McqsContainerComponent,
     McqFormComponent,
     McqsTableComponent,
+    SingleChapterMcqsComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { McqsTableComponent } from './components/mcqs-table/mcqs-table.component
     SearchBarComponent,
     ReactiveFormsModule,
     MultiSelectComponent,
+    DropdownFiltersComponent,
     PaginationActionsComponent,
-  ]
+]
 })
 export class McqsModule { }

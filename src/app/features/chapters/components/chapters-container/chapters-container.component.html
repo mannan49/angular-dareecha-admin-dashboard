@@ -1,10 +1,10 @@
 <div class="mt-4 mx-auto px-4 sm:px-6 lg:px-8">
   <app-search-bar (searchClicked)="handleSearchClick($event)" />
-  <div class="mt-4 grid grid-cols-3 gap-4">
-    <app-dropdown placeholder="Choose Class" [options]="gradesList" (selectionChanged)="handleGradeSelectionChange($event)" />
-    <app-dropdown placeholder="Choose Subject" [options]="subjectsList" (selectionChanged)="handleSubjectSelectionChange($event)" />
-    <app-dropdown placeholder="Choose Board" [options]="boardsList" (selectionChanged)="handleBoardSelectionChange($event)" />
-  </div>
+  <app-dropdown-filters
+    (boardSelected)="handleBoardSelectionChange($event)" 
+    (gradeSelected)="handleGradeSelectionChange($event)"
+    (subjectSelected)="handleSubjectSelectionChange($event)"
+  />
 </div>
 
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">

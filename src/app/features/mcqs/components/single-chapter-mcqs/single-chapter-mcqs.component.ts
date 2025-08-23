@@ -1,5 +1,5 @@
-import { Router } from '@angular/router';
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { catchError, EMPTY, filter, finalize, take, tap } from 'rxjs';
 
@@ -13,26 +13,26 @@ import { DialogService } from '@shared/services/dialog.service';
 import { ApiHttpService } from '@shared/services/api-http.service';
 
 @Component({
-  selector: 'app-mcqs-container',
+  selector: 'app-single-chapter-mcqs',
   standalone: false,
-  templateUrl: './mcqs-container.component.html',
-  styleUrl: './mcqs-container.component.css',
+  templateUrl: './single-chapter-mcqs.component.html',
+  styleUrl: './single-chapter-mcqs.component.css',
 })
-export class McqsContainerComponent {
+export class SingleChapterMcqsComponent {
   loading = false;
   searchedQuery = String.Empty;
-  selectedGrade = String.Empty;
-  selectedBoard = String.Empty;
-  selectedSubject = String.Empty;
   selectedChapterId = String.Empty;
   pagedMcqs: PagedResponse<Mcq>;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private toast: HotToastService,
     private dialogService: DialogService,
     private apiHttpService: ApiHttpService
-  ) {}
+  ) {
+    this.selectedChapterId = this.route.snapshot.paramMap.get('id');
+  }
 
   ngOnInit() {
     this.fetchMcqs();
@@ -46,15 +46,9 @@ export class McqsContainerComponent {
 
   constructMcqFilter(): EntityFilter {
     const filter = new EntityFilter();
-    filter.grade = this.selectedGrade;
-    if (this.selectedBoard) {
-      filter.boards = [this.selectedBoard];
-    }
-    filter.subject = this.selectedSubject;
     filter.query = this.searchedQuery;
-    if (this.selectedChapterId) {
-      filter.chapterIds = [this.selectedChapterId];
-    }
+    filter.chapterIds = [this.selectedChapterId];
+    filter.limit = 999;
     return filter;
   }
 
@@ -75,32 +69,6 @@ export class McqsContainerComponent {
         })
       )
       .subscribe();
-  }
-
-  handleGradeSelectionChange(grade: string) {
-    this.selectedGrade = grade;
-    this.fetchMcqs();
-  }
-
-  handleSubjectSelectionChange(subject: string) {
-    this.selectedSubject = subject;
-    this.fetchMcqs();
-  }
-
-  handleBoardSelectionChange(board: string) {
-    this.selectedBoard = board;
-    this.fetchMcqs();
-  }
-
-  handleChapterSelectionChange(chapterId: string) {
-    this.selectedChapterId = chapterId;
-    this.fetchMcqs();
-  }
-
-  handlePageChange(index: number) {
-    const filter = this.constructMcqFilter();
-    filter.pageIndex = index;
-    this.getMcqsByFilter(filter);
   }
 
   handleDeleteMcq(id: string) {

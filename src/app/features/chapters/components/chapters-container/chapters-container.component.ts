@@ -3,15 +3,10 @@ import { Component } from '@angular/core';
 
 import { take, filter, tap, catchError, EMPTY, finalize } from 'rxjs';
 
-import { Select } from '@models/shared/select.model';
-import { Chapter } from '@models/entities/chapter.model';
 import { EntityFilter } from '@models/payload/entity-filter.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 import { ActionResponse } from '@models/response/action-response.model';
-
-import { GradesList } from '@constants/grades-list.constant';
-import { BoardsList } from '@constants/boards-list.constants';
-import { SubjectsList } from '@constants/subjects-list.constants';
+import { ChapterAggregatedResponse } from '@models/response/chapter-aggregated-response.model';
 
 import { HotToastService } from '@ngxpert/hot-toast';
 import { ApiHttpService } from '@shared/services/api-http.service';
@@ -28,10 +23,7 @@ export class ChaptersContainerComponent {
   selectedGrade = String.Empty;
   selectedBoard = String.Empty;
   selectedSubject = String.Empty;
-  gradesList: Select[] = GradesList;
-  boardsList: Select[] = BoardsList;
-  subjectsList: Select[] = SubjectsList;
-  pagedChapters: PagedResponse<Chapter>;
+  pagedChapters: PagedResponse<ChapterAggregatedResponse>;
 
   constructor(private router: Router, private toast: HotToastService, private apiHttpService: ApiHttpService) {}
 
@@ -48,7 +40,7 @@ export class ChaptersContainerComponent {
   constructChapterFilter(): EntityFilter {
     const filter = new EntityFilter();
     filter.grade = this.selectedGrade;
-    if(this.selectedBoard){
+    if (this.selectedBoard) {
       filter.boards = [this.selectedBoard];
     }
     filter.subject = this.selectedSubject;
@@ -56,13 +48,13 @@ export class ChaptersContainerComponent {
     return filter;
   }
 
-  getChaptersByFilter(chaptersFilter) {
+  getChaptersByFilter(chaptersFilter: EntityFilter) {
     this.apiHttpService
-      .getChaptersByFilter(chaptersFilter)
+      .getAggregatedChaptersByFilter(chaptersFilter)
       .pipe(
         take(1),
         filter(res => !!res),
-        tap((res: PagedResponse<Chapter>) => {
+        tap((res: PagedResponse<ChapterAggregatedResponse>) => {
           this.pagedChapters = res;
         }),
         catchError(() => {
@@ -118,7 +110,7 @@ export class ChaptersContainerComponent {
       .subscribe();
   }
 
-  handleSearchClick(query: string){
+  handleSearchClick(query: string) {
     this.searchedQuery = query;
     this.fetchChapters();
   }

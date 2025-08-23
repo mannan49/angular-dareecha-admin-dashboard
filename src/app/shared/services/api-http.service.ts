@@ -10,6 +10,7 @@ import { EntityFilter } from '@models/payload/entity-filter.model';
 import { AuthResponse } from '@models/response/auth-response.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 import { ActionResponse } from '@models/response/action-response.model';
+import { ChapterAggregatedResponse } from '@models/response/chapter-aggregated-response.model';
 
 import { ApiUrlService } from './api-url.service';
 
@@ -19,6 +20,7 @@ import { ApiUrlService } from './api-url.service';
 export class ApiHttpService {
   constructor(private httpClient: HttpClient) {}
 
+  //#region Auth
   login(email: string, password: string): Observable<AuthResponse> {
     return this.httpClient.get<AuthResponse>(ApiUrlService.loginUrl(email, password), { withCredentials: true });
   }
@@ -35,28 +37,20 @@ export class ApiHttpService {
     return this.httpClient.post<PagedResponse<Note>>(ApiUrlService.getNotesByFilterUrl(), filter);
   }
 
+  //#endregion;
+
+  //#region MCQ
+
   getMcqsByFilter(filter: EntityFilter): Observable<PagedResponse<Mcq>> {
     return this.httpClient.post<PagedResponse<Mcq>>(ApiUrlService.getMcqsByFilterUrl(), filter);
-  }
-
-  getChaptersByFilter(filter: EntityFilter): Observable<PagedResponse<Chapter>> {
-    return this.httpClient.post<PagedResponse<Chapter>>(ApiUrlService.getChaptersByFilterUrl(), filter);
   }
 
   addMcq(mcq: FormData): Observable<ActionResponse> {
     return this.httpClient.post<ActionResponse>(ApiUrlService.addMcqUrl(), mcq);
   }
 
-  addNote(note: FormData): Observable<ActionResponse> {
-    return this.httpClient.post<ActionResponse>(ApiUrlService.addNoteUrl(), note);
-  }
-
   updateMcq(id: string, mcq: FormData): Observable<ActionResponse> {
     return this.httpClient.put<ActionResponse>(ApiUrlService.mcqByIdUrl(id), mcq);
-  }
-
-  updateNote(id: string, note: FormData): Observable<ActionResponse> {
-    return this.httpClient.put<ActionResponse>(ApiUrlService.noteByIdUrl(id), note);
   }
 
   deleteMcq(id: string): Observable<boolean> {
@@ -67,16 +61,40 @@ export class ApiHttpService {
     return this.httpClient.get<Mcq>(ApiUrlService.mcqByIdUrl(id));
   }
 
-  addChapter(chapter: FormData): Observable<ActionResponse> {
-    return this.httpClient.post<ActionResponse>(ApiUrlService.addChapterUrl(), chapter);
+  // #endregion;
+
+  //#region Note
+
+  deleteNote(id: string): Observable<ActionResponse> {
+    return this.httpClient.delete<ActionResponse>(ApiUrlService.noteByIdUrl(id));
+  }
+
+  addNote(note: FormData): Observable<ActionResponse> {
+    return this.httpClient.post<ActionResponse>(ApiUrlService.addNoteUrl(), note);
+  }
+
+  updateNote(id: string, note: FormData): Observable<ActionResponse> {
+    return this.httpClient.put<ActionResponse>(ApiUrlService.noteByIdUrl(id), note);
+  }
+
+  // #endregion;
+
+  //#region Chapter
+
+  getChaptersByFilter(filter: EntityFilter): Observable<PagedResponse<Chapter>> {
+    return this.httpClient.post<PagedResponse<Chapter>>(ApiUrlService.getChaptersByFilterUrl(), filter);
+  }
+
+  getAggregatedChaptersByFilter(filter: EntityFilter): Observable<PagedResponse<ChapterAggregatedResponse>> {
+    return this.httpClient.post<PagedResponse<ChapterAggregatedResponse>>(ApiUrlService.getAggregatedChaptersByFilterUrl(), filter);
   }
 
   deleteChapter(id: string): Observable<ActionResponse> {
     return this.httpClient.delete<ActionResponse>(ApiUrlService.chapterByIdUrl(id));
   }
 
-  deleteNote(id: string): Observable<ActionResponse> {
-    return this.httpClient.delete<ActionResponse>(ApiUrlService.noteByIdUrl(id));
+  addChapter(chapter: FormData): Observable<ActionResponse> {
+    return this.httpClient.post<ActionResponse>(ApiUrlService.addChapterUrl(), chapter);
   }
 
   editChapter(id: string, chapter: FormData): Observable<ActionResponse> {
@@ -86,4 +104,6 @@ export class ApiHttpService {
   getChapterById(id: string): Observable<Chapter> {
     return this.httpClient.get<Chapter>(ApiUrlService.chapterByIdUrl(id));
   }
+
+  // #endregion;
 }

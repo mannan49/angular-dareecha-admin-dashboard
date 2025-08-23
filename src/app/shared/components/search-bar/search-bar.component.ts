@@ -18,7 +18,7 @@ export class SearchBarComponent {
 
   constructor() {
     this.searchSubject.pipe(
-      debounceTime(1500)
+      debounceTime(1000)
     ).subscribe(query => {
       this.onSearchButtonClick();
     });
