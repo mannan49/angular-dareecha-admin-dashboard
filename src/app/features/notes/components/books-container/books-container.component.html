@@ -1,0 +1,41 @@
+
+<div class="mt-4 px-4 sm:px-6 lg:px-8">
+    <app-search-bar (searchClicked)="handleSearchClick($event)" />
+    <app-dropdown-filters
+        (boardSelected)="handleBoardSelectionChange($event)" 
+        (gradeSelected)="handleGradeSelectionChange($event)"
+        (subjectSelected)="handleSubjectSelectionChange($event)"
+    />
+</div>
+
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-12">
+        <h2 class="text-2xl col-span-10 font-bold text-center mb-4">Books List</h2>
+        <div class="col-span-2">
+            <app-button label="Add New Books" (click)="onAddNewButtonClick()"
+             [className]="'bg-primary w-full'" iconClass="icon-add text-white" />
+        </div>
+    </div>
+    @if(loading){
+        <app-loader />
+    } @else {
+        @if(pagedNotes?.items?.length > 0){
+            <app-notes-table [pagedNotes]="pagedNotes" (deleteButtonClicked)="handleDeleteButtonClick($event)" />
+            <div class="grid grid-cols-12 items-center py-4">
+                <div class="col-span-4">
+                    Showing {{ pagedNotes?.items?.length * pagedNotes?.pageIndex }} of {{pagedNotes?.totalCount}} books
+                </div>
+        
+                <div class="col-span-8">
+                    <app-pagination-actions [pagedResponse]="pagedNotes" (pageChanged)="handlePageChange($event)" />
+                </div>
+            </div>
+        } @else {
+            <div class="flex py-10 rounded-2xl flex-col justify-center items-center gap-2 my-auto mt-10">
+                <span class="icon-clear text-5xl"></span>
+                <h2 class="text-2xl">No book found.</h2>
+            </div>
+        }
+    }
+</div>

@@ -8,17 +8,19 @@ import { EntityFilter } from '@models/payload/entity-filter.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 import { ActionResponse } from '@models/response/action-response.model';
 
-import { HotToastService } from '@ngxpert/hot-toast';
-import { ApiHttpService } from '@shared/services/api-http.service';
+import { ResourceType } from '@constants/resource-type.constans';
 import { ToasterMessageConstants } from '@constants/toaster-message.constant';
 
+import { HotToastService } from '@ngxpert/hot-toast';
+import { ApiHttpService } from '@shared/services/api-http.service';
+
 @Component({
-  selector: 'app-notes-container',
+  selector: 'app-books-container',
   standalone: false,
-  templateUrl: './notes-container.component.html',
-  styleUrl: './notes-container.component.css',
+  templateUrl: './books-container.component.html',
+  styleUrl: './books-container.component.css',
 })
-export class NotesContainerComponent {
+export class BooksContainerComponent {
   loading = false;
   searchedQuery = String.Empty;
   selectedGrade = String.Empty;
@@ -44,6 +46,7 @@ export class NotesContainerComponent {
     if (this.selectedBoard) {
       filter.boards = [this.selectedBoard];
     }
+    filter.types = [ResourceType.HELPING_BOOK, ResourceType.TEXT_BOOK];
     filter.subject = this.selectedSubject;
     filter.query = this.searchedQuery;
     return filter;

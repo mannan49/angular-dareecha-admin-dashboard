@@ -5,7 +5,7 @@ export class EntityFilter extends BaseFilter {
   boards?: string[];
   subject?: string;
   query?: string;
-  type?: string;
+  types?: string[];
   grade?: string;
   chapterIds?: string[];
   difficultyLevel?: string;
