@@ -22,6 +22,7 @@ export class SingleChapterMcqsComponent {
   loading = false;
   searchedQuery = String.Empty;
   selectedChapterId = String.Empty;
+  subjectAndClassName = String.Empty;
   pagedMcqs: PagedResponse<Mcq>;
 
   constructor(
@@ -60,6 +61,7 @@ export class SingleChapterMcqsComponent {
         filter(res => !!res),
         tap((res: PagedResponse<Mcq>) => {
           this.pagedMcqs = res;
+          this.subjectAndClassName = res?.items?.[0]?.grade + ' : ' + res?.items?.[0]?.subject;
         }),
         catchError(() => {
           return EMPTY;

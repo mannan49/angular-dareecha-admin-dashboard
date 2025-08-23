@@ -4,8 +4,12 @@
 </div>
 
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="grid grid-cols-12">
-        <h2 class="text-2xl col-span-10 font-bold text-center mb-4">MCQs List</h2>
+    <div class="grid grid-cols-14">
+        <div class="col-span-3">
+            <app-button [label] = "subjectAndClassName"
+                [className]="'bg-primary w-full'" iconClass="text-white" />
+        </div>
+        <h2 class="text-2xl col-span-9 font-bold text-center mb-4"> {{pagedMcqs?.items?.[0]?.chapters?.[0]?.text}} MCQs</h2>
         <div class="col-span-2">
             <app-button label="Add New MCQ" (click)="onAddNewButtonClick()"
              [className]="'bg-primary w-full'" iconClass="icon-add text-white" />

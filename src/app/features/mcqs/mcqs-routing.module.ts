@@ -6,21 +6,22 @@ import { McqsContainerComponent } from './components/mcqs-container/mcqs-contain
 import { SingleChapterMcqsComponent } from './components/single-chapter-mcqs/single-chapter-mcqs.component';
 
 const routes: Routes = [
+  
   {
     path: String.Empty,
     component: McqsContainerComponent,
   },
   {
-    path: ':id',
-    component: SingleChapterMcqsComponent,
+    path: 'form',
+    component: McqFormComponent,
   },
   {
     path: 'form/:id',
     component: McqFormComponent,
   },
   {
-    path: 'form',
-    component: McqFormComponent,
+    path: ':id',
+    component: SingleChapterMcqsComponent,
   },
 ];
 
