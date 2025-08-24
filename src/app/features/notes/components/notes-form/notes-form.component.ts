@@ -6,6 +6,7 @@ import { take, tap, catchError, EMPTY, finalize, filter } from 'rxjs';
 
 import { Note } from '@models/entities/note.model';
 import { Select } from '@models/shared/select.model';
+import { Chapter } from '@models/entities/chapter.model';
 import { EntityFilter } from '@models/payload/entity-filter.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 import { ActionResponse } from '@models/response/action-response.model';
@@ -18,7 +19,6 @@ import { ToasterMessageConstants } from '@constants/toaster-message.constant';
 
 import { HotToastService } from '@ngxpert/hot-toast';
 import { ApiHttpService } from '@shared/services/api-http.service';
-import { Chapter } from '@models/entities/chapter.model';
 
 @Component({
   selector: 'app-notes-form',
@@ -67,7 +67,7 @@ export class NotesFormComponent {
       grade: [String.Empty, Validators.required],
       board: [String.Empty, Validators.required],
       subject: [String.Empty, Validators.required],
-      chapter: [String.Empty, Validators.required],
+      chapter: [String.Empty],
       type: [String.Empty, Validators.required],
       coverImage: null,
       pdf: null,
