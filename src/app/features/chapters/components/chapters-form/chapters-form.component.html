@@ -6,7 +6,7 @@
     }
   <form [formGroup]="chapterForm" (ngSubmit)="onSubmitForm()">
     <div class="grid grid-cols-12 items-end gap-4">
-        <app-input class="col-span-10" placeholder="Enter Chapter's Name" label="Name" controlName="name" />
+        <app-input class="col-span-10" placeholder="Enter Title" label="Name" controlName="name" />
         <div class="col-span-2 cursor-pointer">
             <input type="file" #fileInput hidden (change)="onFileSelected($event)" />
             @if(filePreview){
