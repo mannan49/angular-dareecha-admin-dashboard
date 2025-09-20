@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://dareecha-api.online/api/v1',
+  apiBaseUrl: 'https://dareechaapi.azurewebsites.net/api/v1',
 };
