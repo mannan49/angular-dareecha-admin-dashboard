@@ -28,6 +28,10 @@ const routes: Routes = [
         path: 'notes',
         loadChildren: () => import('@features/notes/notes.module').then(m => m.NotesModule),
       },
+      {
+        path: 'profile',
+        loadChildren: () => import('@features/settings/settings.module').then(m => m.SettingsModule),
+      },
     ],
   },
   {
