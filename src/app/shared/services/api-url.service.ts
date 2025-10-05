@@ -18,6 +18,10 @@ export class ApiUrlService {
     return `${this.apiBaseUrl}/user/refresh-token`;
   }
 
+  static resetPasswordUrl(currentPassword:string, newPassword:string): string {
+    return `${this.apiBaseUrl}/user/reset-password?currentPassword=${currentPassword}&newPassword=${newPassword}`;
+  }
+
   static logout(): string {
     return `${this.apiBaseUrl}/user/logout`;
   }
