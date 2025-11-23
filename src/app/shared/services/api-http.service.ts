@@ -34,9 +34,10 @@ export class ApiHttpService {
     return this.httpClient.get<AuthResponse>(ApiUrlService.refreshTokenUrl(), { withCredentials: true });
   }
 
-  getNotesByFilter(filter: EntityFilter): Observable<PagedResponse<Note>> {
-    return this.httpClient.post<PagedResponse<Note>>(ApiUrlService.getNotesByFilterUrl(), filter);
+  resetPassword(currentPassword:string, newPassword:string): Observable<string> {
+    return this.httpClient.get<string>(ApiUrlService.resetPasswordUrl(currentPassword,newPassword));
   }
+
 
   //#endregion;
 
@@ -76,6 +77,10 @@ export class ApiHttpService {
 
   updateNote(id: string, note: Note): Observable<ActionResponse> {
     return this.httpClient.put<ActionResponse>(ApiUrlService.noteByIdUrl(id), note);
+  }
+
+  getNotesByFilter(filter: EntityFilter): Observable<PagedResponse<Note>> {
+    return this.httpClient.post<PagedResponse<Note>>(ApiUrlService.getNotesByFilterUrl(), filter);
   }
 
   // #endregion;

@@ -5,5 +5,6 @@
   <div *ngIf="errorKey === 'minLength'">*Password must be at least 8 characters</div>
   <div *ngIf="errorKey === 'alphanumeric'">*Password must contain letters and numbers</div>
   <div *ngIf="errorKey === 'specialChar'">*Password must include a special character</div>
-  <div *ngIf="errorKey === 'confirmPasswordMismatch'">*Password and Confirm Passoword must match.</div>
+  <div *ngIf="errorKey === 'passwordMismatch'">*Password and Confirm Passoword must match.</div>
+  <div *ngIf="errorKey === 'sameAsCurrentPassword'">*Current Password and New Password cannot be same.</div>
 </div>
