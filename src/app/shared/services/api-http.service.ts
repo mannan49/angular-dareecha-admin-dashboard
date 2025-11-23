@@ -11,6 +11,7 @@ import { AuthResponse } from '@models/response/auth-response.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 import { ActionResponse } from '@models/response/action-response.model';
 import { ChapterAggregatedResponse } from '@models/response/chapter-aggregated-response.model';
+import { UploadPreSignedUrlResponse } from '@models/response/upload-pre-signed-url-response.model';
 
 import { ApiUrlService } from './api-url.service';
 
@@ -69,11 +70,11 @@ export class ApiHttpService {
     return this.httpClient.delete<ActionResponse>(ApiUrlService.noteByIdUrl(id));
   }
 
-  addNote(note: FormData): Observable<ActionResponse> {
+  addNote(note: Note): Observable<ActionResponse> {
     return this.httpClient.post<ActionResponse>(ApiUrlService.addNoteUrl(), note);
   }
 
-  updateNote(id: string, note: FormData): Observable<ActionResponse> {
+  updateNote(id: string, note: Note): Observable<ActionResponse> {
     return this.httpClient.put<ActionResponse>(ApiUrlService.noteByIdUrl(id), note);
   }
 
@@ -103,6 +104,17 @@ export class ApiHttpService {
 
   getChapterById(id: string): Observable<Chapter> {
     return this.httpClient.get<Chapter>(ApiUrlService.chapterByIdUrl(id));
+  }
+
+  generatePreSignedUrl(fileType: string): Observable<UploadPreSignedUrlResponse> {
+    return this.httpClient.get<UploadPreSignedUrlResponse>(ApiUrlService.generatePreSignedUrl(fileType));
+  }
+
+  uploadFileToS3(url: string, file: File): Observable<any> {
+    return this.httpClient.put(url, file, {
+      reportProgress: true,
+      observe: 'events',
+    });
   }
 
   // #endregion;

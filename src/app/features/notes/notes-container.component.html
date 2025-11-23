@@ -20,15 +20,23 @@
     @if(loading){
         <app-loader />
     } @else {
-        <app-notes-table [pagedNotes]="pagedNotes" (deleteButtonClicked)="handleDeleteButtonClick($event)" />
+        @if(pagedNotes?.items?.length > 0){
+            <app-notes-table [pagedNotes]="pagedNotes" (deleteButtonClicked)="handleDeleteButtonClick($event)" />
+        } @else {
+             <div class="flex bg-main py-10 rounded-2xl flex-col justify-center items-center gap-2 my-auto mt-10">
+                <span class="icon-clear text-5xl"></span>
+                <h2 class="text-2xl">No resource found.</h2>
+            </div>
+        }
+        @if( pagedNotes?.totalCount > pagedNotes?.pageSize ){
         <div class="grid grid-cols-12 items-center py-4">
             <div class="col-span-4">
                 Showing {{ pagedNotes?.items?.length * pagedNotes?.pageIndex }} of {{pagedNotes?.totalCount}} notes
             </div>
-    
-            <div class="col-span-8">
-                <app-pagination-actions [pagedResponse]="pagedNotes" (pageChanged)="handlePageChange($event)" />
+                <div class="col-span-8">
+                    <app-pagination-actions [pagedResponse]="pagedNotes" (pageChanged)="handlePageChange($event)" />
+                </div>
             </div>
-        </div>
+        }
     }
 </div>

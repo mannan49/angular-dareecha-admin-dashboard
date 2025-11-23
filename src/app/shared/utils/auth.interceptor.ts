@@ -9,7 +9,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.isAuthEndpoint(req.url)) {
+    if (this.isAuthEndpoint(req.url) || this.isS3Upload(req.url)) {
       return next.handle(req);
     }
 
@@ -54,5 +54,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private isRefreshRequest(url: string): boolean {
     return url.includes('/refresh-token');
+  }
+
+  private isS3Upload(url: string): boolean {
+    return url.includes('amazonaws.com');
   }
 }

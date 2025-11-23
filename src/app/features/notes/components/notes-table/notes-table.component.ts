@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 import { Note } from '@models/entities/note.model';
 import { Dialog } from '@models/shared/dialog.model';
@@ -18,6 +19,8 @@ export class NotesTableComponent {
   @Input() pagedNotes: PagedResponse<Note>;
   @Output() deleteButtonClicked = new EventEmitter<string>();
 
+  cloudFrontUrl = environment.cloudFrontUrl;
+
   constructor(private router: Router, private dialogService: DialogService) {}
 
   onEditButtonClick(noteId: string) {
@@ -25,7 +28,8 @@ export class NotesTableComponent {
   }
 
   onPdfIconClick(url: string) {
-    window.open(url, '_blank');
+    const newUrl = this.cloudFrontUrl + url;
+    window.open(newUrl, '_blank');
   }
 
   onDeleteButtonClick(chapterId: string) {

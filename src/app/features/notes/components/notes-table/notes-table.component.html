@@ -11,9 +11,9 @@
 @for(note of pagedNotes?.items; track $index){
     <div class="grid grid-cols-18 items-center border-b bg-main border-gray-200 py-2 px-2">
         <div class="col-span-6 flex items-center">
-            <img [src]="note?.coverImage?.url" class="w-10 h-10 object-cover rounded-full cursor-pointer" />
+            <img [src]="cloudFrontUrl + note.coverImage.url"  class="w-10 h-10 object-cover rounded-full cursor-pointer" />
             @if(note?.file?.url){
-                <span class="icon-file-pdf text-red-600 text-2xl ml-3 cursor-pointer" (click)="onPdfIconClick(note.file.url)"></span>
+                <span class="icon-file-pdf text-red-600 text-2xl ml-3 cursor-pointer" (click)="onPdfIconClick(note?.file?.url)"></span>
             }
             <div class="col-span-5 truncate pl-4"> {{ note?.title }}</div>
         </div>

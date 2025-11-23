@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { environment } from 'src/environments/environment';
 import { take, tap, catchError, EMPTY, finalize, filter } from 'rxjs';
 
 import { Note } from '@models/entities/note.model';
 import { Select } from '@models/shared/select.model';
 import { Chapter } from '@models/entities/chapter.model';
+import { Attachment } from '@models/shared/attachment.model';
 import { EntityFilter } from '@models/payload/entity-filter.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 import { ActionResponse } from '@models/response/action-response.model';
@@ -27,25 +29,23 @@ import { ApiHttpService } from '@shared/services/api-http.service';
   styleUrl: './notes-form.component.css',
 })
 export class NotesFormComponent {
+  note = new Note();
   loading = false;
   isEditMode = false;
   noteLoading = false;
   notesForm: FormGroup;
-  existingNoteId = String.Empty;
+  resetMediaState = false;
+  filePreview = String.Empty;
   chaptersList: Select[] = [];
+  existingNoteId = String.Empty;
+  coverImagePreview = String.Empty;
   boardsList: Select[] = BoardsList;
   gradesList: Select[] = GradesList;
   subjectsList: Select[] = SubjectsList;
+  cloudFrontUrl = environment.cloudFrontUrl;
   resourceTypesList: Select[] = ResourceTypesList;
-  filePreview: string | ArrayBuffer | null = null;
-  coverImagePreview: string | ArrayBuffer | null = null;
 
-  constructor(
-    private route: ActivatedRoute,
-    private toast: HotToastService,
-    private formBuilder: FormBuilder,
-    private apiHttpService: ApiHttpService
-  ) {
+  constructor(private route: ActivatedRoute, private toast: HotToastService, private formBuilder: FormBuilder, private apiHttpService: ApiHttpService) {
     this.existingNoteId = this.route.snapshot.paramMap.get('id');
     this.isEditMode = !!this.existingNoteId;
   }
@@ -83,7 +83,8 @@ export class NotesFormComponent {
         take(1),
         filter(res => !!res),
         tap((res: PagedResponse<Note>) => {
-          this.patchNoteForm(res?.items?.[0]);
+          this.note = res?.items?.[0];
+          this.patchNoteForm();
         }),
         catchError(() => {
           return EMPTY;
@@ -95,88 +96,58 @@ export class NotesFormComponent {
       .subscribe();
   }
 
-  patchNoteForm(note: Note) {
+  patchNoteForm() {
     this.notesForm.patchValue({
-      title: note?.title,
-      description: note?.description,
-      topic: note?.topic,
-      grade: note?.grade,
-      board: note?.board,
-      subject: note?.subject,
-      chapter: note?.chapter,
-      type: note?.type,
+      title: this.note?.title,
+      description: this.note?.description,
+      topic: this.note?.topic,
+      grade: this.note?.grade,
+      board: this.note?.board,
+      subject: this.note?.subject,
+      chapter: this.note?.chapter,
+      type: this.note?.type,
     });
-    this.filePreview = note?.file?.url;
-    this.coverImagePreview = note?.coverImage?.url;
-  }
-
-  onFileSelected(event: Event, type: string) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      this.notesForm.patchValue({ [type]: file });
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (type === 'coverImage') {
-          this.coverImagePreview = reader.result;
-        } else if (type === 'pdf') {
-          this.filePreview = reader.result;
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
-  removeUploadedFile(type: string) {
-    this.notesForm.patchValue({ [type]: null });
-    if (type === 'coverImage') {
-      this.coverImagePreview = null;
-    } else if (type === 'pdf') {
-      this.filePreview = null;
-    }
-  }
-
-  triggerFileInput(fileInput: HTMLInputElement) {
-    fileInput.click();
+    this.filePreview = this.cloudFrontUrl + this.note?.file?.url;
+    this.coverImagePreview = this.cloudFrontUrl + this.note?.coverImage?.url;
   }
 
   onSubmitForm() {
     if (this.notesForm.invalid) {
       this.toast.warning(ToasterMessageConstants.INCOMPLETE_FORM);
     }
-    const formValue = this.notesForm.value;
-    const formData = this.convertToFormData(formValue);
+    const formValue = this.notesForm.getRawValue();
+    this.setFormData(formValue);
     if (this.isEditMode) {
-      this.editNote(formData);
+      this.editNote();
     } else {
-      this.addNote(formData);
+      this.addNote();
     }
   }
 
-  convertToFormData(formValue: any): FormData {
+  handleImageUpload(coverImage: Attachment) {
+    this.note.coverImage = coverImage;
+  }
+
+  handleFileUpload(file: Attachment) {
+    this.note.file = file;
+  }
+
+  setFormData(formValue: any) {
     console.log('Form Value', formValue);
-    const formData = new FormData();
-    formData.append('Title', formValue.title);
-    formData.append('Description', formValue.description);
-    formData.append('Grade', formValue.grade);
-    formData.append('Subject', formValue.subject);
-    formData.append('Topic', formValue.topic);
-    formData.append('Chapter', formValue.chapter);
-    formData.append('Type', formValue.type);
-    formData.append('Board', formValue.board);
-    if (formValue.coverImage) {
-      formData.append('CoverImage', formValue.coverImage);
-    }
-    if (formValue.pdf) {
-      formData.append('File', formValue.pdf);
-    }
-    return formData;
+    this.note.title = formValue.title;
+    this.note.description = formValue.description;
+    this.note.grade = formValue.grade;
+    this.note.subject = formValue.subject;
+    this.note.topic = formValue.topic;
+    this.note.chapter = formValue.chapter;
+    this.note.type = formValue.type;
+    this.note.board = formValue.board;
   }
 
-  addNote(note: FormData) {
+  addNote() {
     this.loading = true;
     this.apiHttpService
-      .addNote(note)
+      .addNote(this.note)
       .pipe(
         take(1),
         tap((res: ActionResponse) => {
@@ -194,10 +165,10 @@ export class NotesFormComponent {
       .subscribe();
   }
 
-  editNote(note: FormData) {
+  editNote() {
     this.loading = true;
     this.apiHttpService
-      .updateNote(this.existingNoteId, note)
+      .updateNote(this.existingNoteId, this.note)
       .pipe(
         take(1),
         filter(res => !!res),
@@ -205,7 +176,7 @@ export class NotesFormComponent {
           this.toast.success(res?.message);
         }),
         catchError(() => {
-          this.toast.error(ToasterMessageConstants.ERROR_UPDATING_MCQ);
+          this.toast.error(ToasterMessageConstants.ERROR_DELETING_NOTE);
           return EMPTY;
         }),
         finalize(() => {
@@ -264,7 +235,6 @@ export class NotesFormComponent {
       coverImage: null,
       pdf: null,
     });
-    this.filePreview = null;
-    this.coverImagePreview = null;
+    this.resetMediaState = true;
   }
 }

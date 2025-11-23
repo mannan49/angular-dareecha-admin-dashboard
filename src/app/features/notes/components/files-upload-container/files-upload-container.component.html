@@ -1,0 +1,79 @@
+<div class="w-145 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+  <div class="p-2 md:p-5 space-y-2">
+    <div>
+      <!-- Uploading File Content -->
+      <div class="mb-2 flex justify-between items-center">
+        <div class="flex items-center gap-x-3">
+          <input type="file" #coverImageInput hidden (change)="onFileSelected($event, 'coverImage')" />
+          @if(coverImagePreview){
+          <div class="flex items-center justify-end gap-1">
+            <img [src]="coverImagePreview" class="w-10 h-10 object-cover rounded cursor-pointer" (click)="triggerFileInput(coverImageInput)" />
+          </div>
+          } @else {
+          <app-icon-upload-svg (click)="triggerFileInput(coverImageInput)" />
+          }
+          <div>
+            <p class="text-sm font-medium text-gray-800 dark:text-white">
+              @if(imageAttachment?.title){
+                {{ imageAttachment.title }}
+              } @else {
+                Upload Cover Image
+              }
+            </p>
+            @if(imageAttachment?.size){
+            <p class="text-xs text-gray-500 dark:text-neutral-500">{{ (imageAttachment?.size / 1024 / 1024) | number: '1.2-2' }} MB</p>
+            }
+          </div>
+        </div>
+        <div class="inline-flex items-center gap-x-2">
+          @if(isImageUploadingCompleted){
+          <app-icon-done-svg />
+          <app-icon-delete-svg (click)="removeUploadedFile('coverImage')" />
+          }
+        </div>
+      </div>
+      <!-- End Uploading File Content -->
+
+      @if(imageUploadPercentage > 0 && imageUploadPercentage < 100) {
+      <app-progress-bar [width]="imageUploadPercentage" />
+      }
+    </div>
+    <div>
+      <!-- Uploading File Content -->
+      <div class="mb-2 flex justify-between items-center">
+        <div class="flex items-center gap-x-3">
+          <input type="file" #pdfInput hidden (change)="onFileSelected($event, 'pdf')" />
+          @if(filePreview){
+          <div class="flex items-center gap-1 cursor-pointer" (click)="triggerFileInput(pdfInput)">
+            <span class="icon-file-pdf ml-2 text-4xl text-primary"></span>
+          </div>
+          } @else {
+          <app-icon-upload-svg (click)="triggerFileInput(pdfInput)" />
+          }
+          <div>
+            <p class="text-sm font-medium text-gray-800 dark:text-white">
+              @if(fileAttachment?.title){
+                {{ fileAttachment?.title }}
+              } @else {
+                Upload File
+              }
+            </p>
+            @if(fileAttachment?.size){
+            <p class="text-xs text-gray-500 dark:text-neutral-500">{{ (fileAttachment?.size / 1024 / 1024) | number: '1.2-2' }} MB</p>
+            }
+          </div>
+        </div>
+        <div class="inline-flex items-center gap-x-2">
+          @if(isFileUploadingCompleted){
+          <app-icon-done-svg />
+          <app-icon-delete-svg (click)="removeUploadedFile('pdf')" />
+          }
+        </div>
+      </div>
+      <!-- End Uploading File Content -->
+      @if(fileUploadPercentage > 0 && fileUploadPercentage < 100){
+      <app-progress-bar [width]="fileUploadPercentage" />
+      }
+    </div>
+  </div>
+</div>

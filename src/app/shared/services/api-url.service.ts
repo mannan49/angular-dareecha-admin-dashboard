@@ -74,4 +74,12 @@ export class ApiUrlService {
   }
 
   // #endregion;
+
+  //#region S3
+
+  static generatePreSignedUrl(fileType: string){
+    return `${this.apiBaseUrl}/S3/generate-upload-url?fileType=${fileType}`;
+  }
+
+  //#endregion
 }

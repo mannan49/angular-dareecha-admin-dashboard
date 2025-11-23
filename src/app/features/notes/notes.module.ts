@@ -15,9 +15,14 @@ import { DropdownComponent } from '@shared/components/dropdown/dropdown.componen
 import { NotesTableComponent } from './components/notes-table/notes-table.component';
 import { NotesDetailComponent } from './components/notes-detail/notes-detail.component';
 import { SearchBarComponent } from '@shared/components/search-bar/search-bar.component';
+import { ProgressBarComponent } from '@shared/components/progress-bar/progress-bar.component';
 import { BooksContainerComponent } from './components/books-container/books-container.component';
-import { PaginationActionsComponent } from '@shared/components/pagination-actions/pagination-actions.component';
 import { DropdownFiltersComponent } from '@shared/components/dropdown-filters/dropdown-filters.component';
+import { PaginationActionsComponent } from '@shared/components/pagination-actions/pagination-actions.component';
+import { FilesUploadContainerComponent } from './components/files-upload-container/files-upload-container.component';
+import { IconUploadSvgComponent } from "@shared/components/svgs/icon-upload-svg/icon-upload-svg.component";
+import { IconDoneSvgComponent } from "@shared/components/svgs/icon-done-svg/icon-done-svg.component";
+import { IconDeleteSvgComponent } from "@shared/components/svgs/icon-delete-svg/icon-delete-svg.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +33,7 @@ import { DropdownFiltersComponent } from '@shared/components/dropdown-filters/dr
     NotesDetailComponent,
     NotesContainerComponent,
     BooksContainerComponent,
+    FilesUploadContainerComponent,
   ],
   imports: [
     CommonModule,
@@ -39,8 +45,12 @@ import { DropdownFiltersComponent } from '@shared/components/dropdown-filters/dr
     SearchBarComponent,
     NotesRoutingModule,
     ReactiveFormsModule,
+    ProgressBarComponent,
     DropdownFiltersComponent,
     PaginationActionsComponent,
-  ],
+    IconUploadSvgComponent,
+    IconDoneSvgComponent,
+    IconDeleteSvgComponent
+],
 })
 export class NotesModule {}
