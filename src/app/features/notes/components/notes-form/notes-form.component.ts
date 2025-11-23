@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { environment } from 'src/environments/environment';
@@ -15,6 +15,7 @@ import { ActionResponse } from '@models/response/action-response.model';
 
 import { GradesList } from '@constants/grades-list.constant';
 import { BoardsList } from '@constants/boards-list.constants';
+import { ResourceType } from '@constants/resource-type.constans';
 import { SubjectsList } from '@constants/subjects-list.constants';
 import { ResourceTypesList } from '@constants/resource-types-list.constant';
 import { ToasterMessageConstants } from '@constants/toaster-message.constant';
@@ -34,6 +35,7 @@ export class NotesFormComponent {
   isEditMode = false;
   noteLoading = false;
   notesForm: FormGroup;
+  isTextBookForm = false;
   resetMediaState = false;
   filePreview = String.Empty;
   chaptersList: Select[] = [];
@@ -45,9 +47,17 @@ export class NotesFormComponent {
   cloudFrontUrl = environment.cloudFrontUrl;
   resourceTypesList: Select[] = ResourceTypesList;
 
-  constructor(private route: ActivatedRoute, private toast: HotToastService, private formBuilder: FormBuilder, private apiHttpService: ApiHttpService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private toast: HotToastService,
+    private formBuilder: FormBuilder,
+    private apiHttpService: ApiHttpService
+  ) {
     this.existingNoteId = this.route.snapshot.paramMap.get('id');
     this.isEditMode = !!this.existingNoteId;
+    const typeParam = this.route.snapshot.queryParamMap.get('type') || String.Empty;
+    this.isTextBookForm = typeParam.toLowerCase().includes(ResourceType.TEXT_BOOK.toLowerCase());
   }
 
   ngOnInit() {
@@ -68,7 +78,7 @@ export class NotesFormComponent {
       board: [String.Empty, Validators.required],
       subject: [String.Empty, Validators.required],
       chapter: [String.Empty],
-      type: [String.Empty, Validators.required],
+      type: [String.Empty],
       coverImage: null,
       pdf: null,
     });
@@ -114,6 +124,7 @@ export class NotesFormComponent {
   onSubmitForm() {
     if (this.notesForm.invalid) {
       this.toast.warning(ToasterMessageConstants.INCOMPLETE_FORM);
+      return;
     }
     const formValue = this.notesForm.getRawValue();
     this.setFormData(formValue);
@@ -133,14 +144,17 @@ export class NotesFormComponent {
   }
 
   setFormData(formValue: any) {
-    console.log('Form Value', formValue);
     this.note.title = formValue.title;
     this.note.description = formValue.description;
     this.note.grade = formValue.grade;
     this.note.subject = formValue.subject;
     this.note.topic = formValue.topic;
     this.note.chapter = formValue.chapter;
-    this.note.type = formValue.type;
+    if (this.isTextBookForm) {
+      this.note.type = ResourceType.TEXT_BOOK;
+    } else {
+      this.note.type = formValue.type;
+    }
     this.note.board = formValue.board;
   }
 
@@ -163,6 +177,14 @@ export class NotesFormComponent {
         })
       )
       .subscribe();
+  }
+
+  onCancelButtonClick() {
+    if (this.isTextBookForm) {
+      this.router.navigate(['notes/books']);
+    } else {
+      this.router.navigate(['notes']);
+    }
   }
 
   editNote() {

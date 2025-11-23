@@ -72,7 +72,9 @@ export class BooksContainerComponent {
   }
 
   onAddNewButtonClick() {
-    this.router.navigate(['notes/form']);
+    this.router.navigate(['notes/form'], {
+      queryParams: { type: 'textbook' },
+    });
   }
 
   handleGradeSelectionChange(grade: string) {

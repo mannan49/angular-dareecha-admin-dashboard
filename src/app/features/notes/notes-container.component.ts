@@ -11,6 +11,7 @@ import { ActionResponse } from '@models/response/action-response.model';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { ApiHttpService } from '@shared/services/api-http.service';
 import { ToasterMessageConstants } from '@constants/toaster-message.constant';
+import { ResourceType } from '@constants/resource-type.constans';
 
 @Component({
   selector: 'app-notes-container',
@@ -46,6 +47,7 @@ export class NotesContainerComponent {
     }
     filter.subject = this.selectedSubject;
     filter.query = this.searchedQuery;
+    filter.types = [ResourceType.NOTES];
     return filter;
   }
 

@@ -21,7 +21,7 @@
         <app-loader />
     } @else {
         @if(pagedNotes?.items?.length > 0){
-            <app-notes-table [pagedNotes]="pagedNotes" (deleteButtonClicked)="handleDeleteButtonClick($event)" />
+            <app-notes-table [pagedNotes]="pagedNotes" [isTextBookResource]="true" (deleteButtonClicked)="handleDeleteButtonClick($event)" />
             <div class="grid grid-cols-12 items-center py-4">
                 <div class="col-span-4">
                     Showing {{ pagedNotes?.items?.length * pagedNotes?.pageIndex }} of {{pagedNotes?.totalCount}} books

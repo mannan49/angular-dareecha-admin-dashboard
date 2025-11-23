@@ -17,6 +17,7 @@ import { DialogService } from '@shared/services/dialog.service';
 })
 export class NotesTableComponent {
   @Input() pagedNotes: PagedResponse<Note>;
+  @Input() isTextBookResource = false;
   @Output() deleteButtonClicked = new EventEmitter<string>();
 
   cloudFrontUrl = environment.cloudFrontUrl;
@@ -24,7 +25,13 @@ export class NotesTableComponent {
   constructor(private router: Router, private dialogService: DialogService) {}
 
   onEditButtonClick(noteId: string) {
-    this.router.navigate([`notes/form/${noteId}`]);
+    if (this.isTextBookResource) {
+      this.router.navigate([`notes/form/${noteId}`], {
+        queryParams: { type: 'textbook' },
+      });
+    } else {
+      this.router.navigate([`notes/form/${noteId}`]);
+    }
   }
 
   onPdfIconClick(url: string) {
