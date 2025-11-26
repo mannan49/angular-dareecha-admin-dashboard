@@ -13,8 +13,10 @@ import { EntityFilter } from '@models/payload/entity-filter.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 import { ActionResponse } from '@models/response/action-response.model';
 
+import { Medium } from '@enums/medium.enum';
 import { GradesList } from '@constants/grades-list.constant';
 import { BoardsList } from '@constants/boards-list.constants';
+import { MediumList } from '@constants/medium-list.constants';
 import { ResourceType } from '@constants/resource-type.constans';
 import { SubjectsList } from '@constants/subjects-list.constants';
 import { ResourceTypesList } from '@constants/resource-types-list.constant';
@@ -43,6 +45,7 @@ export class NotesFormComponent {
   coverImagePreview = String.Empty;
   boardsList: Select[] = BoardsList;
   gradesList: Select[] = GradesList;
+  mediumList: Select[] = MediumList;
   subjectsList: Select[] = SubjectsList;
   cloudFrontUrl = environment.cloudFrontUrl;
   resourceTypesList: Select[] = ResourceTypesList;
@@ -78,6 +81,7 @@ export class NotesFormComponent {
       board: [String.Empty, Validators.required],
       subject: [String.Empty, Validators.required],
       chapter: [String.Empty],
+      medium: [Medium.ENGLISH as string],
       type: [String.Empty],
       coverImage: null,
       pdf: null,
@@ -115,6 +119,7 @@ export class NotesFormComponent {
       board: this.note?.board,
       subject: this.note?.subject,
       chapter: this.note?.chapter,
+      medium: this.note?.medium,
       type: this.note?.type,
     });
     this.filePreview = this.cloudFrontUrl + this.note?.file?.url;
@@ -150,6 +155,7 @@ export class NotesFormComponent {
     this.note.subject = formValue.subject;
     this.note.topic = formValue.topic;
     this.note.chapter = formValue.chapter;
+    this.note.medium = formValue.medium;
     if (this.isTextBookForm) {
       this.note.type = ResourceType.TEXT_BOOK;
     } else {
@@ -253,6 +259,7 @@ export class NotesFormComponent {
       board: String.Empty,
       subject: String.Empty,
       chapter: String.Empty,
+      medium: Medium.ENGLISH,
       type: String.Empty,
       coverImage: null,
       pdf: null,

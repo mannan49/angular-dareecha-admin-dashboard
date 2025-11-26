@@ -1,4 +1,4 @@
-<div class="w-145 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+<div class="w-145 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
   <div class="p-2 md:p-5 space-y-2">
     <div>
       <!-- Uploading File Content -->
@@ -13,7 +13,7 @@
           <app-icon-upload-svg (click)="triggerFileInput(coverImageInput)" />
           }
           <div>
-            <p class="text-sm font-medium text-gray-800 dark:text-white">
+            <p class="text-sm font-medium text-gray-800">
               @if(imageAttachment?.title){
                 {{ imageAttachment.title }}
               } @else {
@@ -21,7 +21,7 @@
               }
             </p>
             @if(imageAttachment?.size){
-            <p class="text-xs text-gray-500 dark:text-neutral-500">{{ (imageAttachment?.size / 1024 / 1024) | number: '1.2-2' }} MB</p>
+            <p class="text-xs text-gray-500">{{ (imageAttachment?.size / 1024 / 1024) | number: '1.2-2' }} MB</p>
             }
           </div>
         </div>
@@ -51,7 +51,7 @@
           <app-icon-upload-svg (click)="triggerFileInput(pdfInput)" />
           }
           <div>
-            <p class="text-sm font-medium text-gray-800 dark:text-white">
+            <p class="text-sm font-medium text-gray-800">
               @if(fileAttachment?.title){
                 {{ fileAttachment?.title }}
               } @else {

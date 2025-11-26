@@ -7,6 +7,10 @@
   <form [formGroup]="notesForm" (ngSubmit)="onSubmitForm()">
     <div class="grid grid-cols-12 gap-5 mt-2 items-start">
         <app-input class="col-span-6" placeholder="Enter Title" label="Title" controlName="title" />
+        @if(isTextBookForm){
+          <app-select class="col-span-6" placeholder="Select Board" label="Medium" controlName="medium"
+            (selectionChanged)="handleSelectionChange($event)" [options]="mediumList" />
+        }
         @if(!isTextBookForm){
           <app-input class="col-span-6" placeholder="Enter Topic" label="Topic" controlName="topic" />   
         }
@@ -19,7 +23,11 @@
          (selectionChanged)="handleSelectionChange($event)" [options]="boardsList" />
         @if(!isTextBookForm){
           <app-select class="col-span-6" placeholder="Select Chapter" label="Chapter" controlName="chapter" [options]="chaptersList" />
-          <app-select class="col-span-6" placeholder="Select Type" label="Type" controlName="type" [options]="resourceTypesList" />
+          <div class="col-span-6">
+            <app-select placeholder="Select Type" label="Type" controlName="type" [options]="resourceTypesList" />
+            <app-select placeholder="Select Board" label="Medium" controlName="medium"
+             (selectionChanged)="handleSelectionChange($event)" [options]="mediumList" />
+          </div>
         }
          <div class="col-span-6 grid grid-cols-6 gap-4 items-end">
             <app-files-upload-container (imageUploaded)="handleImageUpload($event)" (fileUploaded)="handleFileUpload($event)" [resetForm]="resetMediaState"

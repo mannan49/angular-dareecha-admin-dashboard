@@ -9,6 +9,7 @@ export class Note extends BaseEntity {
   grade: string;
   subject: string;
   chapter: string;
+  medium: string;
   topic: string;
   type: string;
   board: string;
