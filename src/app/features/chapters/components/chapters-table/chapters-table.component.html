@@ -10,12 +10,12 @@
 
 @for(chapter of pagedChapters?.items; track $index){
     <div class="grid grid-cols-14 items-center border-b bg-main border-gray-200 py-4 px-2">
-        <div class="col-span-5 truncate pl-4">{{ chapter?.index }}. {{ chapter?.name }}</div>
-        <div class="col-span-2 truncate">{{ chapter?.subject }}</div>
-        <div class="col-span-1">{{ chapter?.board }}</div>
-        <div class="col-span-1 text-center">{{ chapter?.grade }}</div>
-        <div class="col-span-2 text-center text-sm">{{ chapter?.author?.text }}</div>
-        <div class="col-span-1 truncate text-center">{{ chapter?.mcqCount }}</div>
+        <div class="col-span-12 md:col-span-5 truncate pl-4">{{ chapter?.index }}. {{ chapter?.name }}</div>
+        <div class="col-span-2 truncate hidden md:block">{{ chapter?.subject }}</div>
+        <div class="col-span-1 hidden md:block">{{ chapter?.board }}</div>
+        <div class="col-span-1 text-center hidden md:block">{{ chapter?.grade }}</div>
+        <div class="col-span-2 text-center text-sm hidden md:block">{{ chapter?.author?.text }}</div>
+        <div class="col-span-1 truncate text-center hidden md:block">{{ chapter?.mcqCount }}</div>
         <div class="col-span-2 flex justify-center items-center gap-1">
             <span class="icon-edit-pencil text-primary cursor-pointer" (click)="onEditButtonClick(chapter?.id)"></span>
             <span class="text-xl icon-delete text-secondary cursor-pointer" (click)="onDeleteButtonClick(chapter?.id)"></span>

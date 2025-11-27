@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './button.component.html',
   styleUrl: './button.component.css',
 })
-export class ButtonComponent {
+export class  ButtonComponent {
   @Input() loading = false;
   @Input() disabled = false;
   @Input() type = 'button';

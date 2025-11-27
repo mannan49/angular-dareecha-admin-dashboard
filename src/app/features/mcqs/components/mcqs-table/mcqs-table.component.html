@@ -2,10 +2,10 @@
   <thead>
     <tr>
       <th class="px-4 border py-2">Statement</th>
-      <th class="px-4 border py-2">Option A</th>
-      <th class="px-4 border py-2">Option B</th>
-      <th class="px-4 border py-2">Option C</th>
-      <th class="px-4 border py-2">Option D</th>
+      <th class="px-4 border py-2 hidden md:table-cell">Option A</th>
+      <th class="px-4 border py-2 hidden md:table-cell">Option B</th>
+      <th class="px-4 border py-2 hidden md:table-cell">Option C</th>
+      <th class="px-4 border py-2 hidden md:table-cell">Option D</th>
       <th class="px-4 border py-2">Actions</th>
     </tr>
   </thead>
@@ -14,7 +14,7 @@
         <tr>
             <td class="border px-4 py-2">{{ mcq?.statement }}</td>
             @for(option of mcq.options; track $index){
-              <td class="border text-center px-4 py-2" [ngClass]="{ 'correct-option': isCorrectOption(mcq, option) }">{{ option?.text }}</td>
+              <td class="border text-center px-4 py-2 hidden md:table-cell" [ngClass]="{ 'correct-option': isCorrectOption(mcq, option) }">{{ option?.text }}</td>
             }
             <td class="border px-4 py-2">
                 <div class="flex justify-center items-center gap-2">

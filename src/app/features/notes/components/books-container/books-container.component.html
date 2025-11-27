@@ -11,8 +11,8 @@
 
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="grid grid-cols-12">
-        <h2 class="text-2xl col-span-10 font-bold text-center mb-4">Books List</h2>
-        <div class="col-span-2">
+        <h2 class="text-2xl col-span-6 md:col-span-10 font-bold text-center mb-4">Books List</h2>
+        <div class="col-span-6 md:col-span-2">
             <app-button label="Add New Books" (click)="onAddNewButtonClick()"
              [className]="'bg-primary w-full'" iconClass="icon-add text-white" />
         </div>
@@ -22,12 +22,12 @@
     } @else {
         @if(pagedNotes?.items?.length > 0){
             <app-notes-table [pagedNotes]="pagedNotes" [isTextBookResource]="true" (deleteButtonClicked)="handleDeleteButtonClick($event)" />
-            <div class="grid grid-cols-12 items-center py-4">
-                <div class="col-span-4">
+            <div class="grid gird-cols-1 md:grid-cols-12 items-center py-4">
+                <div class="md:col-span-4 text-center md:text-left">
                     Showing {{ pagedNotes?.items?.length * pagedNotes?.pageIndex }} of {{pagedNotes?.totalCount}} books
                 </div>
         
-                <div class="col-span-8">
+                <div class="md:col-span-8">
                     <app-pagination-actions [pagedResponse]="pagedNotes" (pageChanged)="handlePageChange($event)" />
                 </div>
             </div>

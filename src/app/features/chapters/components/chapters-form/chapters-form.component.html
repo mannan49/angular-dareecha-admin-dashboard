@@ -17,17 +17,20 @@
                     </button>
                 </div>
             } @else {
-                <div (click)="triggerFileInput(fileInput)">
+                <div class="hidden md:block" (click)="triggerFileInput(fileInput)">
                     <app-button label="Upload" [className]="'bg-primary py-1.5 w-full mx-auto'" iconClass="text-white icon-file_upload" />
+                </div>
+                <div class="block md:hidden" (click)="triggerFileInput(fileInput)">
+                    <app-button [className]="'bg-primary py-1.5 w-full mx-auto'" iconClass="text-white icon-file_upload" />
                 </div>
             }
         </div>
     </div>
-    <div class="grid grid-cols-12 gap-5 mt-2">
-        <app-select class="col-span-6" placeholder="Select Class" label="Class" controlName="grade" [options]="gradesList" />
-        <app-select class="col-span-6" placeholder="Select Subject" label="Subject" controlName="subject" [options]="subjectsList" />
-        <app-select class="col-span-6" placeholder="Select Board" label="Board" controlName="board" [options]="boardsList" />
-        <app-input class="col-span-6" placeholder="Enter Index of Chapter" label="Index" controlName="index" type="number" />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-2">
+        <app-select placeholder="Select Class" label="Class" controlName="grade" [options]="gradesList" />
+        <app-select placeholder="Select Subject" label="Subject" controlName="subject" [options]="subjectsList" />
+        <app-select placeholder="Select Board" label="Board" controlName="board" [options]="boardsList" />
+        <app-input placeholder="Enter Index of Chapter" label="Index" controlName="index" type="number" />
     </div>
     <div class="mt-4">
       <app-button label="Submit" [disabled]="chapterForm.invalid" type="submit" [loading]="loading" [className]="'bg-primary w-1/3 mx-auto'" />

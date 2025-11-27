@@ -1,19 +1,19 @@
-<div class="col-span-12 grid grid-cols-4 grid-rows-2 items-center gap-3 sm:flex sm:justify-center">
-  <div class="wt-button-font order-2 col-span-2 flex justify-end gap-2">
-    <a class="pagination-button" (click)="onFirstButtonClick()">First</a>
-    <button class="pagination-button icon-arrow-left text-2xl" [disabled]="startPage == 1"
+<div class="max-w-full flex justify-center gap-1 md:gap-3 mt-2 md:mt-0">
+  <div class="wt-button-font order-2 col-span-2 flex justify-end gap-1 md:gap-2">
+    <a class="pagination-button" (click)="onFirstButtonClick()">1st</a>
+    <button class="pagination-button icon-arrow-left md:text-2xl" [disabled]="startPage == 1"
      (click)="onBackButtonClick()" [ngClass]="{'disabled-button': startPage == 1 }"></button>
   </div>
 
-  <div class="order-1 col-span-4 flex justify-center gap-3 sm:order-2">
+  <div class="col-span-4 flex justify-center gap-1 md:gap-3 order-2">
     @for(button of buttonArray; track $index){
         <a class="pagination-button" (click)="onPageButtonClick(button)"
           [ngClass]="{ 'active-page': button === currentPage }">{{ button }}</a>
     }
   </div>
 
-  <div class="wt-button-font order-2 col-span-2 flex justify-end gap-2">
-    <button class="pagination-button icon-arrow-right text-2xl" (click)="onNextButtonClick()"
+  <div class="wt-button-font order-2 col-span-2 flex justify-end gap-1 md:gap-2">
+    <button class="pagination-button icon-arrow-right md:text-2xl" (click)="onNextButtonClick()"
      [disabled]="(pagedResponse?.totalPages - pagedResponse?.pageIndex) < 6"
      [ngClass]="{'disabled-button': (pagedResponse?.totalPages - pagedResponse?.pageIndex) < 6  }" ></button>
     <span class="pagination-button" (click)="onLastButtonClick()">Last</span>

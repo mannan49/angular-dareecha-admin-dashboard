@@ -17,18 +17,21 @@
                         </button>
                     </div>
                 } @else {
-                    <div (click)="triggerFileInput(fileInput)">
+                    <div class="hidden md:block" (click)="triggerFileInput(fileInput)">
                         <app-button label="Attachment" [className]="'bg-primary py-1.5 w-full mx-auto'" iconClass="text-white icon-file_upload" />
+                    </div>
+                    <div class="block md:hidden" (click)="triggerFileInput(fileInput)">
+                        <app-button [className]="'bg-primary py-1.5 w-full mx-auto'" iconClass="text-white icon-file_upload" />
                     </div>
                 }
             </div>
         </div>
         <div class="grid grid-cols-12 gap-2">
             @for(option of optionFormGroups; track $index){ 
-                <div [formGroup]="option" class="col-span-6 my-2">
+                <div [formGroup]="option" class="col-span-12 md:col-span-6 my-2">
                     <div class="grid grid-cols-12 gap-2 items-end">
-                        <app-input controlName="text" class="col-span-9" [label]="'Option '+option?.value?.id" placeholder="Option" />
-                        <div class="col-span-3 cursor-pointer">
+                        <app-input controlName="text" class="col-span-10 md:col-span-9" [label]="'Option '+option?.value?.id" placeholder="Option" />
+                        <div class="col-span-2 md:col-span-3 cursor-pointer">
                             <input type="file" #fileInput hidden (change)="onFileSelected($event, option)" />
                             @if(filePreviews[option.value.id]){
                                 <div class="flex items-center gap-1">
@@ -38,8 +41,11 @@
                                     </button>
                                 </div>
                             } @else {
-                                <div (click)="triggerFileInput(fileInput)">
+                                <div class="hidden md:block" (click)="triggerFileInput(fileInput)">
                                     <app-button label="Upload" iconClass="text-white icon-file_upload" className="w-full bg-primary" />
+                                </div>
+                                <div class="block md:hidden" (click)="triggerFileInput(fileInput)">
+                                    <app-button iconClass="text-white icon-file_upload" className="w-full bg-primary" />
                                 </div>
                             }
                         </div>
@@ -47,16 +53,16 @@
                 </div>
             }
         </div>
-        <div class="grid grid-cols-12 gap-3">
-            <app-select class="col-span-6" placeholder="Select Class" label="Class"
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <app-select placeholder="Select Class" label="Class"
               controlName="grade" [options]="gradesList" (selectionChanged)="handleSelectionChange($event)" />
-            <app-select class="col-span-6" placeholder="Select Subject" label="Subject" 
+            <app-select placeholder="Select Subject" label="Subject" 
               controlName="subject" [options]="subjectsList" (selectionChanged)="handleSelectionChange($event)" />
-            <app-multi-select class="col-span-6" placeholder="Select Boards" controlName="boards"
+            <app-multi-select  placeholder="Select Boards" controlName="boards"
                   [options]="boardsList" (selectionChanged)="handleSelectionChange($event)" label="Boards" />
-            <app-multi-select class="col-span-6" placeholder="Select Chapter" label="Chapter" controlName="chapters" [options]="chapterList" />
-            <app-select class="col-span-6" placeholder="Choose Difficulty" controlName="difficultyLevel" [options]="difficultyLevelList" />
-            <app-radio class="col-span-6" label="Correct Option :" controlName="correctOption" [options]="optionsList" />
+            <app-multi-select placeholder="Select Chapter" label="Chapter" controlName="chapters" [options]="chapterList" />
+            <app-select placeholder="Choose Difficulty" controlName="difficultyLevel" [options]="difficultyLevelList" />
+            <app-radio label="Correct Option :" controlName="correctOption" [options]="optionsList" />
         </div>
         <div class="mt-4">
             <app-button label="Submit" [disabled]="mcqForm.invalid" type="submit" [loading]="loading" [className]="'bg-primary w-1/2 mx-auto'" />

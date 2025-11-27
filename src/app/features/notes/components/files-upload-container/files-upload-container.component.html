@@ -1,4 +1,4 @@
-<div class="w-145 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
+<div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
   <div class="p-2 md:p-5 space-y-2">
     <div>
       <!-- Uploading File Content -->
@@ -13,13 +13,18 @@
           <app-icon-upload-svg (click)="triggerFileInput(coverImageInput)" />
           }
           <div>
-            <p class="text-sm font-medium text-gray-800">
-              @if(imageAttachment?.title){
-                {{ imageAttachment.title }}
-              } @else {
-                Upload Cover Image
-              }
-            </p>
+            <div class="text-sm font-medium text-gray-800">
+              <div class="hidden md:block">
+                @if(imageAttachment?.title){
+                  {{ imageAttachment.title }}
+                }
+              </div>
+              <div class="text-xs sm:text-base">
+                @if(!imageAttachment.title){
+                  Upload Cover Image
+                }
+              </div>
+            </div>
             @if(imageAttachment?.size){
             <p class="text-xs text-gray-500">{{ (imageAttachment?.size / 1024 / 1024) | number: '1.2-2' }} MB</p>
             }
@@ -51,13 +56,18 @@
           <app-icon-upload-svg (click)="triggerFileInput(pdfInput)" />
           }
           <div>
-            <p class="text-sm font-medium text-gray-800">
-              @if(fileAttachment?.title){
-                {{ fileAttachment?.title }}
-              } @else {
-                Upload File
-              }
-            </p>
+            <div class="text-sm font-medium text-gray-800">
+              <div class="hidden md:block">
+                @if(fileAttachment?.title){
+                  {{ fileAttachment?.title }}
+                }
+              </div>
+              <div class="text-xs sm:text-base">
+                @if(!fileAttachment?.title){
+                  Upload File
+                }
+              </div>
+            </div>
             @if(fileAttachment?.size){
             <p class="text-xs text-gray-500 dark:text-neutral-500">{{ (fileAttachment?.size / 1024 / 1024) | number: '1.2-2' }} MB</p>
             }

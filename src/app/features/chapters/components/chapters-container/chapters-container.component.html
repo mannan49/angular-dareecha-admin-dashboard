@@ -9,8 +9,8 @@
 
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
     <div class="grid grid-cols-12">
-        <h2 class="text-2xl col-span-10 font-bold text-center mb-4">Chapters List</h2>
-        <div class="col-span-2">
+        <h2 class="text-2xl col-span-6 md:col-span-10 font-bold text-center mb-4">Chapters List</h2>
+        <div class="col-span-6 md:col-span-2">
             <app-button label="Add New Chapter" (click)="onAddNewButtonClick()"
              [className]="'bg-primary w-full'" iconClass="icon-add text-white" />
         </div>
@@ -30,8 +30,8 @@
         
         @if( pagedChapters?.totalCount > pagedChapters?.pageSize ){
             <div class="grid grid-cols-12 items-center py-4">
-              <div class="col-span-4">Showing {{ pagedChapters?.items?.length * pagedChapters?.pageIndex }} of {{ pagedChapters?.totalCount }} chapters</div>
-              <div class="col-span-8">
+              <div class="col-span-12 md:col-span-4 text-center md:text-left">Showing {{ pagedChapters?.items?.length * pagedChapters?.pageIndex }} of {{ pagedChapters?.totalCount }} chapters</div>
+              <div class="col-span-12 md:col-span-8">
                 <app-pagination-actions [pagedResponse]="pagedChapters" (pageChanged)="handlePageChange($event)" />
               </div>
             </div>
