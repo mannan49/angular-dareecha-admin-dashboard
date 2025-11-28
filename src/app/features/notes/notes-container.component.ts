@@ -41,13 +41,13 @@ export class NotesContainerComponent {
 
   constructNotesFilter(): EntityFilter {
     const filter = new EntityFilter();
-    filter.grade = this.selectedGrade;
+    filter.Grade = this.selectedGrade;
     if (this.selectedBoard) {
-      filter.boards = [this.selectedBoard];
+      filter.Boards = [this.selectedBoard];
     }
-    filter.subject = this.selectedSubject;
-    filter.query = this.searchedQuery;
-    filter.types = [ResourceType.NOTES];
+    filter.Subject = this.selectedSubject;
+    filter.Query = this.searchedQuery;
+    filter.Types = [ResourceType.NOTES];
     return filter;
   }
 
@@ -96,7 +96,7 @@ export class NotesContainerComponent {
 
   handlePageChange(index: number) {
     const filter = this.constructNotesFilter();
-    filter.pageIndex = index;
+    filter.PageIndex = index;
     this.loading = true;
     this.getNotesByFilter(filter);
   }
@@ -109,7 +109,7 @@ export class NotesContainerComponent {
         take(1),
         filter(res => !!res),
         tap((res: ActionResponse) => {
-          this.toast.success(res?.message);
+          this.toast.success(res?.Message);
         }),
         catchError(error => {
           this.toast.error(error?.error?.message || ToasterMessageConstants.ERROR_DELETING_NOTE);

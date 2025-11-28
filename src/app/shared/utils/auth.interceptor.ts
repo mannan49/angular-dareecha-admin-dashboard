@@ -27,11 +27,11 @@ export class AuthInterceptor implements HttpInterceptor {
         if (error.status === 401 && !this.isRefreshRequest(req.url)) {
           return this.authService.refreshToken().pipe(
             switchMap(res => {
-              this.authService.setAccessToken(res.accessToken);
+              this.authService.setAccessToken(res?.AccessToken);
               this.authService.startTokenRefreshTimer();
               const retryReq = req.clone({
                 setHeaders: {
-                  Authorization: `Bearer ${res.accessToken}`,
+                  Authorization: `Bearer ${res?.AccessToken}`,
                 },
                 withCredentials: true,
               });

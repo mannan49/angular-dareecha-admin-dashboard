@@ -76,7 +76,7 @@ export class FilesUploadContainerComponent {
       .pipe(
         take(1),
         switchMap((res: UploadPreSignedUrlResponse) => {
-          const url = res?.url;
+          const url = res?.Url;
           if (type === 'coverImage') {
             this.setImageAttachment(res, file);
           } else if (type === 'pdf') {
@@ -117,20 +117,20 @@ export class FilesUploadContainerComponent {
 
   setImageAttachment(res: UploadPreSignedUrlResponse, file: File) {
     this.imageUploadPercentage = 2;
-    this.imageAttachment.url = res?.fileName;
-    this.imageAttachment.publicId = res?.fileName;
-    this.imageAttachment.contentType = file.type;
-    this.imageAttachment.title = file.name;
-    this.imageAttachment.size = file.size;
+    this.imageAttachment.Url = res?.FileName;
+    this.imageAttachment.PublicId = res?.FileName;
+    this.imageAttachment.ContentType = file.type;
+    this.imageAttachment.Title = file.name;
+    this.imageAttachment.Size = file.size;
   }
 
   setFileAttachment(res: UploadPreSignedUrlResponse, file: File) {
     this.fileUploadPercentage = 1;
-    this.fileAttachment.url = res?.fileName;
-    this.fileAttachment.publicId = res?.fileName;
-    this.fileAttachment.contentType = file.type;
-    this.fileAttachment.title = file.name;
-    this.fileAttachment.size = file.size;
+    this.fileAttachment.Url = res?.FileName;
+    this.fileAttachment.PublicId = res?.FileName;
+    this.fileAttachment.ContentType = file.type;
+    this.fileAttachment.Title = file.name;
+    this.fileAttachment.Size = file.size;
   }
 
   removeUploadedFile(type: string) {

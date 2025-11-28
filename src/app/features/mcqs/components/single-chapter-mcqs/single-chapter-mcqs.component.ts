@@ -47,9 +47,9 @@ export class SingleChapterMcqsComponent {
 
   constructMcqFilter(): EntityFilter {
     const filter = new EntityFilter();
-    filter.query = this.searchedQuery;
-    filter.chapterIds = [this.selectedChapterId];
-    filter.limit = 999;
+    filter.Query = this.searchedQuery;
+    filter.ChapterIds = [this.selectedChapterId];
+    filter.Limit = 999;
     return filter;
   }
 
@@ -61,7 +61,7 @@ export class SingleChapterMcqsComponent {
         filter(res => !!res),
         tap((res: PagedResponse<Mcq>) => {
           this.pagedMcqs = res;
-          this.subjectAndClassName = res?.items?.[0]?.grade + ' : ' + res?.items?.[0]?.subject;
+          this.subjectAndClassName = res?.Items?.[0]?.Grade + ' : ' + res?.Items?.[0]?.Subject;
         }),
         catchError(() => {
           return EMPTY;
@@ -91,7 +91,7 @@ export class SingleChapterMcqsComponent {
   }
 
   isCorrectOption(mcq: Mcq, option: McqOption): boolean {
-    return mcq?.correctOption?.refId === option?.mcqId || mcq?.correctOption?.text === option?.text;
+    return mcq?.CorrectOption?.RefId === option?.McqId || mcq?.CorrectOption?.Text === option?.Text;
   }
 
   handleSearchClick(query: string) {

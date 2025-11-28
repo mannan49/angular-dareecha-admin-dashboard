@@ -1,8 +1,8 @@
 export class Attachment {
-  url: string;
-  publicId: string;
-  contentType: string;
-  title: string;
-  size: number;
-  created: Date;
+  Url: string;
+  PublicId: string;
+  ContentType: string;
+  Title: string;
+  Size: number;
+  Created: Date;
 }

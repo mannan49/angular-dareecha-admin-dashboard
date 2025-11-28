@@ -1,15 +1,15 @@
-import { Reference } from "@models/shared/reference.model";
-import { McqOptionForm } from "./mcq-option-form.model";
-import { Annotation } from "@models/shared/annotation.model";
+import { Reference } from '@models/shared/reference.model';
+import { McqOptionForm } from './mcq-option-form.model';
+import { Annotation } from '@models/shared/annotation.model';
 
 export class McqForm {
-    statement: string;
-    options: McqOptionForm[];
-    correctOptionId: string;
-    grade: string;
-    subject: string;
-    chapter: Reference;
-    difficultyLevel: string;
-    attachments: File[];
-    notes?: Annotation[];
+  Statement: string;
+  Options: McqOptionForm[];
+  CorrectOptionId: string;
+  Grade: string;
+  Subject: string;
+  Chapter: Reference;
+  DifficultyLevel: string;
+  Attachments: File[];
+  Notes?: Annotation[];
 }

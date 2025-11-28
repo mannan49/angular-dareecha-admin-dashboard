@@ -53,7 +53,7 @@ export class LoginComponent {
         take(1),
         filter(res => !!res),
         tap((res: AuthResponse) => {
-          this.authService.setAccessToken(res.accessToken);
+          this.authService.setAccessToken(res?.AccessToken);
           this.authService.startTokenRefreshTimer();
           this.router.navigate(['/']);
         }),

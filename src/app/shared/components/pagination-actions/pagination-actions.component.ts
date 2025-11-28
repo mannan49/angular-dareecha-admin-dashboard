@@ -32,12 +32,12 @@ export class PaginationActionsComponent {
 
   private updateButtonArray() {
     const maxButtons = 6;
-    const count = Math.min(maxButtons, this.pagedResponse?.totalPages - this.startPage + 1);
+    const count = Math.min(maxButtons, this.pagedResponse?.TotalPages - this.startPage + 1);
     this.buttonArray = Array.from({ length: count }, (_, i) => this.startPage + i);
   }
 
   onNextButtonClick() {
-    if (this.startPage + 6 <= this.pagedResponse?.totalPages) {
+    if (this.startPage + 6 <= this.pagedResponse?.TotalPages) {
       this.startPage += 6;
       this.currentPage = this.startPage;
       this.pageChanged.emit(this.currentPage);
@@ -64,10 +64,10 @@ export class PaginationActionsComponent {
   }
 
   onLastButtonClick() {
-    this.startPage = this.pagedResponse?.totalPages - ((this.pagedResponse?.totalPages - 1) % 6);
-    this.currentPage = this.pagedResponse?.totalPages;
+    this.startPage = this.pagedResponse?.TotalPages - ((this.pagedResponse?.TotalPages - 1) % 6);
+    this.currentPage = this.pagedResponse?.TotalPages;
     this.updateButtonArray();
-    this.pageChanged.emit(this.pagedResponse?.totalPages);
+    this.pageChanged.emit(this.pagedResponse?.TotalPages);
   }
 
   onPageButtonClick(index: number) {

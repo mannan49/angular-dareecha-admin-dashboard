@@ -10,6 +10,7 @@ import { EntityFilter } from '@models/payload/entity-filter.model';
 import { AuthResponse } from '@models/response/auth-response.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 import { ActionResponse } from '@models/response/action-response.model';
+import { DashboardAnalytics } from '@models/response/dashboard-analytics.model';
 import { ChapterAggregatedResponse } from '@models/response/chapter-aggregated-response.model';
 import { UploadPreSignedUrlResponse } from '@models/response/upload-pre-signed-url-response.model';
 
@@ -20,6 +21,10 @@ import { ApiUrlService } from './api-url.service';
 })
 export class ApiHttpService {
   constructor(private httpClient: HttpClient) {}
+
+  getDashboardAnalytics(): Observable<DashboardAnalytics> {
+    return this.httpClient.get<DashboardAnalytics>(ApiUrlService.getDashboardAnalyticsUrl());
+  }
 
   //#region Auth
   login(email: string, password: string): Observable<AuthResponse> {

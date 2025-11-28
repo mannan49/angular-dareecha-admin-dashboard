@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-statistic-card',
@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './statistic-card.component.css'
 })
 export class StatisticCardComponent {
-
+  @Input() number = 0;
+  @Input() label = String.Empty;
 }

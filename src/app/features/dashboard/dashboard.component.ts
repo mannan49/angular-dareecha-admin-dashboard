@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
-import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { catchError, EMPTY, finalize, take, tap } from 'rxjs';
 
 import { ApiHttpService } from '@shared/services/api-http.service';
+import { DashboardAnalytics } from '@models/response/dashboard-analytics.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,13 +12,31 @@ import { ApiHttpService } from '@shared/services/api-http.service';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  loading = false;
+  loading = true;
+  analytics: DashboardAnalytics;
 
   constructor(private apiHttpService: ApiHttpService) {}
 
   ngOnInit() {
-    // this.fetchUpcomingBuses();
+    this.fetchAnalytics();
   }
 
- 
+  fetchAnalytics() {
+    this.loading = true;
+    this.apiHttpService
+      .getDashboardAnalytics()
+      .pipe(
+        take(1),
+        tap((res: DashboardAnalytics) => {
+          this.analytics = res;
+        }),
+        catchError(() => {
+          return EMPTY;
+        }),
+        finalize(()=>{
+          this.loading = false;
+        })
+      )
+      .subscribe();
+  }
 }

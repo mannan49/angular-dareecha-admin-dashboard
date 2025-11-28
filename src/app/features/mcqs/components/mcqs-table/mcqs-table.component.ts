@@ -26,7 +26,7 @@ export class McqsTableComponent {
   }
 
   isCorrectOption(mcq: Mcq, option: McqOption): boolean {
-    return mcq?.correctOption?.refId === option?.mcqId || mcq?.correctOption?.text === option?.text;
+    return mcq?.CorrectOption?.RefId === option?.McqId || mcq?.CorrectOption?.Text === option?.Text;
   }
 
   onDeleteMcqButtonClick(mcqId: string) {

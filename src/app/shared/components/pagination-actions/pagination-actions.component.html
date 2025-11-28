@@ -14,8 +14,8 @@
 
   <div class="wt-button-font order-2 col-span-2 flex justify-end gap-1 md:gap-2">
     <button class="pagination-button icon-arrow-right md:text-2xl" (click)="onNextButtonClick()"
-     [disabled]="(pagedResponse?.totalPages - pagedResponse?.pageIndex) < 6"
-     [ngClass]="{'disabled-button': (pagedResponse?.totalPages - pagedResponse?.pageIndex) < 6  }" ></button>
+     [disabled]="(pagedResponse?.TotalPages - pagedResponse?.PageIndex) < 6"
+     [ngClass]="{'disabled-button': (pagedResponse?.TotalPages - pagedResponse?.PageIndex) < 6  }" ></button>
     <span class="pagination-button" (click)="onLastButtonClick()">Last</span>
   </div>
 </div>

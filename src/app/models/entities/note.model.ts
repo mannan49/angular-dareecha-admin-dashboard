@@ -4,17 +4,17 @@ import { Attachment } from '../shared/attachment.model';
 import { Reference } from '@models/shared/reference.model';
 
 export class Note extends BaseEntity {
-  title: string;
-  description: string;
-  grade: string;
-  subject: string;
-  chapter: string;
-  medium: string;
-  topic: string;
-  type: string;
-  board: string;
-  file: Attachment;
-  coverImage: Attachment;
-  uploadedBy: Reference;
-  annotations: Annotation[];
+  Title: string;
+  Description: string;
+  Grade: string;
+  Subject: string;
+  Chapter: string;
+  Medium: string;
+  Topic: string;
+  Type: string;
+  Board: string;
+  File: Attachment;
+  CoverImage: Attachment;
+  UploadedBy: Reference;
+  Annotations: Annotation[];
 }

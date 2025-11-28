@@ -85,13 +85,13 @@ export class ChaptersFormComponent {
 
   patchChapterForm(chapter: Chapter) {
     this.chapterForm.patchValue({
-      name: chapter?.name,
-      board: chapter?.board,
-      grade: chapter?.grade,
-      subject: chapter?.subject,
-      index: chapter?.index,
+      name: chapter?.Name,
+      board: chapter?.Board,
+      grade: chapter?.Grade,
+      subject: chapter?.Subject,
+      index: chapter?.Index,
     });
-    this.filePreview = chapter?.media?.url;
+    this.filePreview = chapter?.Media?.Url;
   }
 
   onFileSelected(event: Event) {
@@ -147,7 +147,7 @@ export class ChaptersFormComponent {
       .pipe(
         take(1),
         tap((res: ActionResponse) => {
-          this.toast.success(res?.message);
+          this.toast.success(res?.Message);
           this.resetForm();
         }),
         catchError(() => {
@@ -168,7 +168,7 @@ export class ChaptersFormComponent {
       .pipe(
         take(1),
         tap((res: ActionResponse) => {
-          this.toast.success(res?.message);
+          this.toast.success(res?.Message);
           this.router.navigate(['chapters']);
           this.resetForm();
         }),

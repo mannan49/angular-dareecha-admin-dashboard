@@ -102,20 +102,20 @@ export class McqFormComponent {
 
   patchMcqForm(mcq: Mcq) {
     this.mcqForm.patchValue({
-      statement: mcq?.statement,
-      correctOption: mcq?.correctOption?.refId,
-      options: mcq?.options,
-      grade: mcq?.grade,
-      subject: mcq?.subject,
-      chapters: mcq?.chapters,
-      difficultyLevel: mcq?.difficultyLevel,
-      boards: mcq?.boards,
-      media: mcq?.attachments?.[0],
+      statement: mcq?.Statement,
+      correctOption: mcq?.CorrectOption?.RefId,
+      options: mcq?.Options,
+      grade: mcq?.Grade,
+      subject: mcq?.Subject,
+      chapters: mcq?.Chapters,
+      difficultyLevel: mcq?.DifficultyLevel,
+      boards: mcq?.Boards,
+      media: mcq?.Attachments?.[0],
     });
-    this.mediaPreview = mcq.attachments?.[0]?.url;
-    mcq.options?.forEach(opt => {
-      if (opt.media?.url) {
-        this.filePreviews[opt?.mcqId] = opt.media.url;
+    this.mediaPreview = mcq.Attachments?.[0]?.Url;
+    mcq.Options?.forEach(opt => {
+      if (opt?.Media?.Url) {
+        this.filePreviews[opt?.McqId] = opt?.Media?.Url;
       }
     });
   }
@@ -170,7 +170,7 @@ export class McqFormComponent {
 
   removeUploadedMedia() {
     this.mcqForm.patchValue({ media: null });
-    this.attachmentsToRemove = [this.mcq?.attachments?.[0]?.publicId];
+    this.attachmentsToRemove = [this.mcq?.Attachments?.[0]?.PublicId];
     this.mediaPreview = null;
   }
 
@@ -198,9 +198,9 @@ export class McqFormComponent {
       formData.append('Boards', board);
     });
     mcqValue.chapters.forEach((chapter: ScopedReference, i: number) => {
-      formData.append(`Chapters[${i}].RefId`, chapter.refId);
-      formData.append(`Chapters[${i}].Text`, chapter.text);
-      formData.append(`Chapters[${i}].System`, chapter.system);
+      formData.append(`Chapters[${i}].RefId`, chapter?.RefId);
+      formData.append(`Chapters[${i}].Text`, chapter?.Text);
+      formData.append(`Chapters[${i}].System`, chapter?.System);
     });
     formData.append('DifficultyLevel', mcqValue.difficultyLevel);
     formData.append('Active', mcqValue.active);
@@ -231,7 +231,7 @@ export class McqFormComponent {
       .pipe(
         take(1),
         tap((res: ActionResponse) => {
-          this.toast.success(res?.message);
+          this.toast.success(res?.Message);
           this.resetForm();
         }),
         catchError(error => {
@@ -253,7 +253,7 @@ export class McqFormComponent {
         take(1),
         filter(res => !!res),
         tap(res => {
-          this.toast.success(res?.message);
+          this.toast.success(res?.Message);
         }),
         catchError(() => {
           this.toast.error(ToasterMessageConstants.ERROR_UPDATING_MCQ);
@@ -275,9 +275,9 @@ export class McqFormComponent {
   constructChaptersFilter(): EntityFilter {
     const formValue = this.mcqForm.value;
     const chaptersFilter = new EntityFilter();
-    chaptersFilter.grade = formValue.grade;
-    chaptersFilter.subject = formValue.subject;
-    chaptersFilter.boards = formValue.boards;
+    chaptersFilter.Grade = formValue.grade;
+    chaptersFilter.Subject = formValue.subject;
+    chaptersFilter.Boards = formValue.boards;
     return chaptersFilter;
   }
 
@@ -289,12 +289,12 @@ export class McqFormComponent {
         take(1),
         filter(res => !!res),
         tap((res: PagedResponse<Chapter>) => {
-          this.chapterList = res?.items?.map(chapter => {
-            const displayedChapterName = `${chapter?.name} - ${chapter?.board}`;
+          this.chapterList = res?.Items?.map(chapter => {
+            const displayedChapterName = `${chapter?.Name} - ${chapter?.Board}`;
             const chapterInfo: ScopedReference = {
-              refId: chapter?.id,
-              text: chapter?.name,
-              system: chapter?.board,
+              RefId: chapter?.Id,
+              Text: chapter?.Name,
+              System: chapter?.Board,
             };
             return {
               Display: displayedChapterName,

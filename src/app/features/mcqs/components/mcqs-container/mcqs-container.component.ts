@@ -46,14 +46,14 @@ export class McqsContainerComponent {
 
   constructMcqFilter(): EntityFilter {
     const filter = new EntityFilter();
-    filter.grade = this.selectedGrade;
+    filter.Grade = this.selectedGrade;
     if (this.selectedBoard) {
-      filter.boards = [this.selectedBoard];
+      filter.Boards = [this.selectedBoard];
     }
-    filter.subject = this.selectedSubject;
-    filter.query = this.searchedQuery;
+    filter.Subject = this.selectedSubject;
+    filter.Query = this.searchedQuery;
     if (this.selectedChapterId) {
-      filter.chapterIds = [this.selectedChapterId];
+      filter.ChapterIds = [this.selectedChapterId];
     }
     return filter;
   }
@@ -99,7 +99,7 @@ export class McqsContainerComponent {
 
   handlePageChange(index: number) {
     const filter = this.constructMcqFilter();
-    filter.pageIndex = index;
+    filter.PageIndex = index;
     this.getMcqsByFilter(filter);
   }
 
@@ -121,7 +121,7 @@ export class McqsContainerComponent {
   }
 
   isCorrectOption(mcq: Mcq, option: McqOption): boolean {
-    return mcq?.correctOption?.refId === option?.mcqId || mcq?.correctOption?.text === option?.text;
+    return mcq?.CorrectOption?.RefId === option?.McqId || mcq?.CorrectOption?.Text === option?.Text;
   }
 
   handleSearchClick(query: string) {

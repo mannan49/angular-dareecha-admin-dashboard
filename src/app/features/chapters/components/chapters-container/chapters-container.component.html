@@ -19,7 +19,7 @@
   @if(loading){
     <app-loader />
   } @else {
-        @if(pagedChapters?.items?.length > 0){
+        @if(pagedChapters?.Items?.length > 0){
             <app-chapters-table [pagedChapters]="pagedChapters" (deleteButtonClicked) = "handleDeleteButtonClick($event)" />
         } @else {
             <div class="flex bg-main py-10 rounded-2xl flex-col justify-center items-center gap-2 my-auto mt-10">
@@ -28,9 +28,9 @@
             </div>
         }
         
-        @if( pagedChapters?.totalCount > pagedChapters?.pageSize ){
+        @if( pagedChapters?.TotalCount > pagedChapters?.PageSize ){
             <div class="grid grid-cols-12 items-center py-4">
-              <div class="col-span-12 md:col-span-4 text-center md:text-left">Showing {{ pagedChapters?.items?.length * pagedChapters?.pageIndex }} of {{ pagedChapters?.totalCount }} chapters</div>
+              <div class="col-span-12 md:col-span-4 text-center md:text-left">Showing {{ pagedChapters?.Items?.length * pagedChapters?.PageIndex }} of {{ pagedChapters?.TotalCount }} chapters</div>
               <div class="col-span-12 md:col-span-8">
                 <app-pagination-actions [pagedResponse]="pagedChapters" (pageChanged)="handlePageChange($event)" />
               </div>

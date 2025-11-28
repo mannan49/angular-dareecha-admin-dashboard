@@ -11,6 +11,6 @@ export class NotesCardComponent {
   @Input() note : Note;
 
   onDownlaodButtonClick(){
-    window.open(this.note?.file?.url, '_blank');
+    window.open(this.note?.File?.Url, '_blank');
   }
 }

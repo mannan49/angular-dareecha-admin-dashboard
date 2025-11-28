@@ -1,4 +1,4 @@
 export class ActionResponse {
-  id: string;
-  message: string;
+  Id: string;
+  Message: string;
 }

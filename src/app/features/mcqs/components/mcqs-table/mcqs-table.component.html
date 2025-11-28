@@ -10,16 +10,16 @@
     </tr>
   </thead>
   <tbody>
-    @for(mcq of pagedMcqs?.items; track $index){
+    @for(mcq of pagedMcqs?.Items; track $index){
         <tr>
-            <td class="border px-4 py-2">{{ mcq?.statement }}</td>
-            @for(option of mcq.options; track $index){
-              <td class="border text-center px-4 py-2 hidden md:table-cell" [ngClass]="{ 'correct-option': isCorrectOption(mcq, option) }">{{ option?.text }}</td>
+            <td class="border px-4 py-2">{{ mcq?.Statement }}</td>
+            @for(option of mcq.Options; track $index){
+              <td class="border text-center px-4 py-2 hidden md:table-cell" [ngClass]="{ 'correct-option': isCorrectOption(mcq, option) }">{{ option?.Text }}</td>
             }
             <td class="border px-4 py-2">
                 <div class="flex justify-center items-center gap-2">
-                  <span class="icon-edit-pencil cursor-pointer hover:text-primary" (click)="onEditButtonClick(mcq?.id)"></span>
-                  <span class="text-xl icon-delete cursor-pointer hover:text-secondary" (click)="onDeleteMcqButtonClick(mcq?.id)"></span>
+                  <span class="icon-edit-pencil cursor-pointer hover:text-primary" (click)="onEditButtonClick(mcq?.Id)"></span>
+                  <span class="text-xl icon-delete cursor-pointer hover:text-secondary" (click)="onDeleteMcqButtonClick(mcq?.Id)"></span>
                 </div>
             </td>
         </tr>

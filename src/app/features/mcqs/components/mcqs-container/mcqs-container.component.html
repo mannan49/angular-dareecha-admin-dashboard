@@ -23,7 +23,7 @@
         <app-mcqs-table [pagedMcqs]="pagedMcqs" (deleteButtonClicked)="handleDeleteMcq($event)" />
         <div class="grid grid-cols-1 md:grid-cols-12 items-center py-4">
             <div class="md:col-span-4 text-center md:text-left">
-                Showing {{ pagedMcqs?.items?.length * pagedMcqs?.pageIndex }} of {{pagedMcqs?.totalCount}} mcqs
+                Showing {{ pagedMcqs?.Items?.length * pagedMcqs?.PageIndex }} of {{pagedMcqs?.TotalCount}} mcqs
             </div>
     
             <div class="md:col-span-8">

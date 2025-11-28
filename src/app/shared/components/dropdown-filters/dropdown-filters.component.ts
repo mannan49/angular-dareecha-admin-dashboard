@@ -53,12 +53,12 @@ export class DropdownFiltersComponent {
 
   constructChapterFilter(): EntityFilter {
     const filter = new EntityFilter();
-    filter.grade = this.selectedGrade;
+    filter.Grade = this.selectedGrade;
     if (this.selectedBoard) {
-      filter.boards = [this.selectedBoard];
+      filter.Boards = [this.selectedBoard];
     }
-    filter.subject = this.selectedSubject;
-    filter.limit = 200;
+    filter.Subject = this.selectedSubject;
+    filter.Limit = 200;
     return filter;
   }
 
@@ -69,10 +69,10 @@ export class DropdownFiltersComponent {
         take(1),
         filter(res => !!res),
         tap((res: PagedResponse<Chapter>) => {
-          this.chaptersList = res?.items?.map(chapter => {
+          this.chaptersList = res?.Items?.map(chapter => {
             return {
-              Display: chapter?.name,
-              Value: chapter?.id,
+              Display: chapter?.Name,
+              Value: chapter?.Id,
             };
           });
         }),

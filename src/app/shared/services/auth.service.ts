@@ -75,7 +75,7 @@ export class AuthService {
   refreshToken(): Observable<AuthResponse> {
     return this.apiHttpService.refreshToken().pipe(
       tap(res => {
-        this.setAccessToken(res.accessToken);
+        this.setAccessToken(res?.AccessToken);
         this.startTokenRefreshTimer();
       }),
       catchError(err => {

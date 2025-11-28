@@ -39,12 +39,12 @@ export class ChaptersContainerComponent {
 
   constructChapterFilter(): EntityFilter {
     const filter = new EntityFilter();
-    filter.grade = this.selectedGrade;
+    filter.Grade = this.selectedGrade;
     if (this.selectedBoard) {
-      filter.boards = [this.selectedBoard];
+      filter.Boards = [this.selectedBoard];
     }
-    filter.subject = this.selectedSubject;
-    filter.query = this.searchedQuery;
+    filter.Subject = this.selectedSubject;
+    filter.Query = this.searchedQuery;
     return filter;
   }
 
@@ -69,7 +69,7 @@ export class ChaptersContainerComponent {
 
   handlePageChange(index: number) {
     const filter = this.constructChapterFilter();
-    filter.pageIndex = index;
+    filter.PageIndex = index;
     this.loading = true;
     this.getChaptersByFilter(filter);
   }
@@ -100,7 +100,7 @@ export class ChaptersContainerComponent {
         take(1),
         filter(res => !!res),
         tap((res: ActionResponse) => {
-          this.toast.success(res?.message);
+          this.toast.success(res?.Message);
           this.fetchChapters();
         }),
         catchError(() => {

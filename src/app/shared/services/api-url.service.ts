@@ -8,6 +8,10 @@ export class ApiUrlService {
 
   static apiBaseUrl = environment.apiBaseUrl;
 
+  static getDashboardAnalyticsUrl(){
+    return `${this.apiBaseUrl}/Dashboard`;
+  }
+
   //#region Auth
 
   static loginUrl(email: string, password: string): string {

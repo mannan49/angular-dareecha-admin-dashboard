@@ -8,23 +8,23 @@
     <div class="col-span-2 text-center">Actions</div>
 </div>
 
-@for(note of pagedNotes?.items; track $index){
+@for(note of pagedNotes?.Items; track $index){
     <div class="grid grid-cols-18 items-center border-b bg-main border-gray-200 py-2 px-2">
         <div class="col-span-16 mr-2 md:col-span-6 flex items-center">
-            <img [src]="cloudFrontUrl + note.coverImage.url"  class="w-10 h-10 object-cover rounded-full cursor-pointer" />
-            @if(note?.file?.url){
-                <span class="icon-file-pdf text-red-600 text-2xl ml-3 cursor-pointer" (click)="onPdfIconClick(note?.file?.url)"></span>
+            <img [src]="cloudFrontUrl + note?.CoverImage?.Url"  class="w-10 h-10 object-cover rounded-full cursor-pointer" />
+            @if(note?.File?.Url){
+                <span class="icon-file-pdf text-red-600 text-2xl ml-3 cursor-pointer" (click)="onPdfIconClick(note?.File?.Url)"></span>
             }
-            <div class="col-span-5 truncate pl-4"> {{ note?.title }}</div>
+            <div class="col-span-5 truncate pl-4"> {{ note?.Title }}</div>
         </div>
-        <div class="col-span-2 truncate hidden md:block">{{ note?.subject }}</div>
-        <div class="col-span-2 hidden md:block">{{ note?.board }}</div>
-        <div class="col-span-2 hidden md:block">{{ note?.grade }}</div>
-        <div class="col-span-2 hidden md:block">{{ (note?.file?.size / 1024 / 1024) | number:'1.2-2' }} MB</div>
-        <div class="col-span-2 text-center hidden md:block">{{ note?.uploadedBy?.text }}</div>
+        <div class="col-span-2 truncate hidden md:block">{{ note?.Subject }}</div>
+        <div class="col-span-2 hidden md:block">{{ note?.Board }}</div>
+        <div class="col-span-2 hidden md:block">{{ note?.Grade }}</div>
+        <div class="col-span-2 hidden md:block">{{ (note?.File?.Size / 1024 / 1024) | number:'1.2-2' }} MB</div>
+        <div class="col-span-2 text-center hidden md:block">{{ note?.UploadedBy?.Text }}</div>
         <div class="col-span-2 flex justify-center items-center gap-2">
-            <span class="icon-edit-pencil text-primary cursor-pointer" (click)="onEditButtonClick(note?.id)"></span>
-            <span class="text-xl icon-delete text-secondary cursor-pointer" (click)="onDeleteButtonClick(note?.id)"></span>
+            <span class="icon-edit-pencil text-primary cursor-pointer" (click)="onEditButtonClick(note?.Id)"></span>
+            <span class="text-xl icon-delete text-secondary cursor-pointer" (click)="onDeleteButtonClick(note?.Id)"></span>
         </div>
     </div>
 }

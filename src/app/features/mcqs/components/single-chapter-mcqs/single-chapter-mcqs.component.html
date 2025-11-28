@@ -9,7 +9,7 @@
             <app-button [label] = "subjectAndClassName"
                 [className]="'bg-primary w-full'" iconClass="text-white" />
         </div>
-        <h2 class="text-2xl col-span-9 font-bold text-center mb-4"> {{pagedMcqs?.items?.[0]?.chapters?.[0]?.text}} MCQs</h2>
+        <h2 class="text-2xl col-span-9 font-bold text-center mb-4"> {{pagedMcqs?.Items?.[0]?.Chapters?.[0]?.Text}} MCQs</h2>
         <div class="col-span-2">
             <app-button label="Add New MCQ" (click)="onAddNewButtonClick()"
              [className]="'bg-primary w-full'" iconClass="icon-add text-white" />
@@ -18,12 +18,12 @@
     @if(loading){
         <app-loader />
     } @else {
-        @if(pagedMcqs?.items?.length >= 1){
+        @if(pagedMcqs?.Items?.length >= 1){
             <div class="mb-1">
-                @if(pagedMcqs?.items?.length == 1){
-                    Showing {{ pagedMcqs?.items?.length }} mcq
-                } @else if(pagedMcqs?.items?.length > 1){
-                    Showing {{ pagedMcqs?.items?.length }} mcqs
+                @if(pagedMcqs?.Items?.length == 1){
+                    Showing {{ pagedMcqs?.Items?.length }} mcq
+                } @else if(pagedMcqs?.Items?.length > 1){
+                    Showing {{ pagedMcqs?.Items?.length }} mcqs
                 }
             </div>
             <app-mcqs-table [pagedMcqs]="pagedMcqs" (deleteButtonClicked)="handleDeleteMcq($event)" />

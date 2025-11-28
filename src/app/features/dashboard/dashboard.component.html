@@ -7,27 +7,27 @@
       <h1 class="text-4xl font-bold my-4">Dashboard</h1>
 
       <div class="grid grid-cols-5 gap-5">
-        <app-statistic-card />
-        <app-statistic-card />
-        <app-statistic-card />
-        <app-statistic-card />
-        <app-statistic-card />
+        <app-statistic-card label="Chapters" [number]="analytics?.Chapters" />
+        <app-statistic-card label="Mcqs" [number]="analytics?.Mcqs" />
+        <app-statistic-card label="Text Books" [number]="analytics?.Textbooks"/>
+        <app-statistic-card label="Notes" [number]="analytics?.Notes" />
+        <app-statistic-card label="Users" [number]="analytics?.Users" />
       </div>
 
       <div class="grid grid-cols-12 gap-5 items-start">
         <div class="bg-main col-span-5 p-4 shadow-xl rounded-2xl text-center">
-          <div class="max-w-fit mx-auto">
-            <app-pie-chart />
-          </div>
+            <div class="max-w-fit mx-auto">
+              <app-pie-chart [data]="analytics?.ClassWiseMcqs" />
+            </div>
         </div>
 
         <div class="bg-main p-4 col-span-7 shadow-xl rounded-2xl">
-          <app-bar-chart />
+          <app-bar-chart [data]="analytics?.ClassSubjectMcqs" />
         </div>
 
         <div class="bg-main col-span-5 p-4 shadow-xl rounded-2xl text-center">
           <div class="max-w-fit mx-auto">
-            <app-doughnut-chart />
+            <app-doughnut-chart [data]="analytics?.SubjectWiseMcqs" />
           </div>
         </div>
         

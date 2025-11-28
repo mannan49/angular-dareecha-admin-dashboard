@@ -1,7 +1,8 @@
 import { ChartOptions } from 'chart.js';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { BaseChartDirective } from 'ng2-charts';
+import { Select } from '@models/shared/select.model';
 
 @Component({
   selector: 'app-pie-chart',
@@ -10,17 +11,28 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrl: './pie-chart.component.css',
 })
 export class PieChartComponent {
+  private _data: Select[] = [];
+  @Input()
+  set data(value: Select[]) {
+    this._data = value;
+    this.updateChartData();
+  }
 
   public pieChartOptions: ChartOptions<'pie'> = {
     responsive: true,
   };
-  public pieChartLabels = ['9th Class', '10th Class' , '11th Class', '12th Class'];
-  public pieChartDatasets = [
+  pieChartLabels: string[] = [];
+  pieChartDatasets = [
     {
-      data: [300, 500, 100, 200],
+      data: [] as number[],
     },
   ];
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
-  
+  pieChartLegend = true;
+  pieChartPlugins = [];
+
+  private updateChartData() {
+    if (!this._data || this._data.length === 0) return;
+    this.pieChartLabels = this._data.map(x => x?.Display);
+    this.pieChartDatasets[0].data = this._data.map(x => Number(x?.Value));
+  }
 }

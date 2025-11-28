@@ -90,14 +90,14 @@ export class NotesFormComponent {
 
   fetchNoteData() {
     const noteFilter = new EntityFilter();
-    noteFilter.id = this.existingNoteId;
+    noteFilter.Id = this.existingNoteId;
     this.apiHttpService
       .getNotesByFilter(noteFilter)
       .pipe(
         take(1),
         filter(res => !!res),
         tap((res: PagedResponse<Note>) => {
-          this.note = res?.items?.[0];
+          this.note = res?.Items?.[0];
           this.patchNoteForm();
         }),
         catchError(() => {
@@ -112,18 +112,18 @@ export class NotesFormComponent {
 
   patchNoteForm() {
     this.notesForm.patchValue({
-      title: this.note?.title,
-      description: this.note?.description,
-      topic: this.note?.topic,
-      grade: this.note?.grade,
-      board: this.note?.board,
-      subject: this.note?.subject,
-      chapter: this.note?.chapter,
-      medium: this.note?.medium,
-      type: this.note?.type,
+      title: this.note?.Title,
+      description: this.note?.Description,
+      topic: this.note?.Topic,
+      grade: this.note?.Grade,
+      board: this.note?.Board,
+      subject: this.note?.Subject,
+      chapter: this.note?.Chapter,
+      medium: this.note?.Medium,
+      type: this.note?.Type,
     });
-    this.filePreview = this.cloudFrontUrl + this.note?.file?.url;
-    this.coverImagePreview = this.cloudFrontUrl + this.note?.coverImage?.url;
+    this.filePreview = this.cloudFrontUrl + this.note?.File?.Url;
+    this.coverImagePreview = this.cloudFrontUrl + this.note?.CoverImage?.Url;
   }
 
   onSubmitForm() {
@@ -141,27 +141,27 @@ export class NotesFormComponent {
   }
 
   handleImageUpload(coverImage: Attachment) {
-    this.note.coverImage = coverImage;
+    this.note.CoverImage = coverImage;
   }
 
   handleFileUpload(file: Attachment) {
-    this.note.file = file;
+    this.note.File = file;
   }
 
   setFormData(formValue: any) {
-    this.note.title = formValue.title;
-    this.note.description = formValue.description;
-    this.note.grade = formValue.grade;
-    this.note.subject = formValue.subject;
-    this.note.topic = formValue.topic;
-    this.note.chapter = formValue.chapter;
-    this.note.medium = formValue.medium;
+    this.note.Title = formValue.title;
+    this.note.Description = formValue.description;
+    this.note.Grade = formValue.grade;
+    this.note.Subject = formValue.subject;
+    this.note.Topic = formValue.topic;
+    this.note.Chapter = formValue.chapter;
+    this.note.Medium = formValue.medium;
     if (this.isTextBookForm) {
-      this.note.type = ResourceType.TEXT_BOOK;
+      this.note.Type = ResourceType.TEXT_BOOK;
     } else {
-      this.note.type = formValue.type;
+      this.note.Type = formValue.type;
     }
-    this.note.board = formValue.board;
+    this.note.Board = formValue.board;
   }
 
   addNote() {
@@ -171,7 +171,7 @@ export class NotesFormComponent {
       .pipe(
         take(1),
         tap((res: ActionResponse) => {
-          this.toast.success(res?.message);
+          this.toast.success(res?.Message);
           this.resetForm();
         }),
         catchError(() => {
@@ -201,7 +201,7 @@ export class NotesFormComponent {
         take(1),
         filter(res => !!res),
         tap((res: ActionResponse) => {
-          this.toast.success(res?.message);
+          this.toast.success(res?.Message);
         }),
         catchError(() => {
           this.toast.error(ToasterMessageConstants.ERROR_DELETING_NOTE);
@@ -228,10 +228,10 @@ export class NotesFormComponent {
         take(1),
         filter(res => !!res),
         tap((res: PagedResponse<Chapter>) => {
-          this.chaptersList = res?.items?.map(chapter => {
+          this.chaptersList = res?.Items?.map(chapter => {
             return {
-              Display: chapter?.name,
-              Value: chapter?.id,
+              Display: chapter?.Name,
+              Value: chapter?.Id,
             };
           });
         })
@@ -242,10 +242,10 @@ export class NotesFormComponent {
   constructChaptersFilter(): EntityFilter {
     const formValue = this.notesForm.value;
     const chaptersFilter = new EntityFilter();
-    chaptersFilter.grade = formValue.grade;
-    chaptersFilter.subject = formValue.subject;
+    chaptersFilter.Grade = formValue.grade;
+    chaptersFilter.Subject = formValue.subject;
     if (formValue.board) {
-      chaptersFilter.boards = [formValue.board];
+      chaptersFilter.Boards = [formValue.board];
     }
     return chaptersFilter;
   }
