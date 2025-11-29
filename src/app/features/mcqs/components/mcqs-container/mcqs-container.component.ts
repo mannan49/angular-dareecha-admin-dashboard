@@ -121,7 +121,7 @@ export class McqsContainerComponent {
   }
 
   isCorrectOption(mcq: Mcq, option: McqOption): boolean {
-    return mcq?.CorrectOption?.RefId === option?.McqId || mcq?.CorrectOption?.Text === option?.Text;
+    return mcq?.CorrectOption?.RefId === option?.OptionId || mcq?.CorrectOption?.Text === option?.Text;
   }
 
   handleSearchClick(query: string) {

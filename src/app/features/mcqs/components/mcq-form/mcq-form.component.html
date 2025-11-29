@@ -30,12 +30,12 @@
             @for(option of optionFormGroups; track $index){ 
                 <div [formGroup]="option" class="col-span-12 md:col-span-6 my-2">
                     <div class="grid grid-cols-12 gap-2 items-end">
-                        <app-input controlName="text" class="col-span-10 md:col-span-9" [label]="'Option '+option?.value?.id" placeholder="Option" />
+                        <app-input controlName="Text" class="col-span-10 md:col-span-9" [label]="'Option '+option?.value?.Id" placeholder="Option" />
                         <div class="col-span-2 md:col-span-3 cursor-pointer">
                             <input type="file" #fileInput hidden (change)="onFileSelected($event, option)" />
-                            @if(filePreviews[option.value.id]){
+                            @if(filePreviews[option.value.Id]){
                                 <div class="flex items-center gap-1">
-                                    <img [src]="filePreviews[option.value.id]" class="w-16 h-16 object-cover rounded cursor-pointer" (click)="triggerFileInput(fileInput)" />
+                                    <img [src]="filePreviews[option.value?.Id]" class="w-16 h-16 object-cover rounded cursor-pointer" (click)="triggerFileInput(fileInput)" />
                                     <button type="button" (click)="removeUploadedFile(option)">
                                         <span class="icon-close-outline text-xl cursor-pointer"></span>
                                     </button>

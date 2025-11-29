@@ -10,6 +10,7 @@ import { Chapter } from '@models/entities/chapter.model';
 import { EntityFilter } from '@models/payload/entity-filter.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 import { ScopedReference } from '@models/shared/scoped-reference.model';
+import { ActionResponse } from '@models/response/action-response.model';
 
 import { GradesList } from '@constants/grades-list.constant';
 import { BoardsList } from '@constants/boards-list.constants';
@@ -20,7 +21,6 @@ import { DifficultyLevelList } from '@constants/difficulty-level-list.constants'
 
 import { HotToastService } from '@ngxpert/hot-toast';
 import { ApiHttpService } from '@shared/services/api-http.service';
-import { ActionResponse } from '@models/response/action-response.model';
 
 @Component({
   selector: 'app-mcq-form',
@@ -115,16 +115,16 @@ export class McqFormComponent {
     this.mediaPreview = mcq.Attachments?.[0]?.Url;
     mcq.Options?.forEach(opt => {
       if (opt?.Media?.Url) {
-        this.filePreviews[opt?.McqId] = opt?.Media?.Url;
+        this.filePreviews[opt?.OptionId] = opt?.Media?.Url;
       }
     });
   }
 
   createOption(id: string): FormGroup {
     return this.formBuilder.group({
-      id: [id],
-      text: [''],
-      media: [null],
+      Id: [id],
+      Text: [''],
+      Media: [null],
     });
   }
 
@@ -144,11 +144,11 @@ export class McqFormComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      if (option?.value?.id) {
-        option.patchValue({ media: file });
+      if (option?.value?.Id) {
+        option.patchValue({ Media: file });
         const reader = new FileReader();
         reader.onload = () => {
-          this.filePreviews[option.value.id] = reader.result;
+          this.filePreviews[option.value.Id] = reader.result;
         };
         reader.readAsDataURL(file);
       } else {
@@ -164,8 +164,8 @@ export class McqFormComponent {
   }
 
   removeUploadedFile(option: FormGroup) {
-    option.patchValue({ media: null });
-    delete this.filePreviews[option.value.id];
+    option.patchValue({ Media: null });
+    delete this.filePreviews[option.value.Id];
   }
 
   removeUploadedMedia() {
@@ -212,12 +212,12 @@ export class McqFormComponent {
     });
 
     mcqValue.options.forEach((option: any, index: number) => {
-      formData.append(`Options[${index}].Id`, option.id);
-      formData.append(`Options[${index}].Text`, option.text || '');
+      formData.append(`Options[${index}].Id`, option.Id);
+      formData.append(`Options[${index}].Text`, option.Text || String.Empty);
       if (option.media) {
-        formData.append(`Options[${index}].Media`, option.media);
+        formData.append(`Options[${index}].Media`, option.Media);
       }
-      const isMediaRemoved = !option.media && !this.filePreviews[option.id];
+      const isMediaRemoved = !option.media && !this.filePreviews[option.Id];
       formData.append(`Options[${index}].RemoveExistingMedia`, String(isMediaRemoved));
     });
 
@@ -312,8 +312,8 @@ export class McqFormComponent {
     
     this.optionsFormArray.controls.forEach(optionControl => {
       optionControl.patchValue({
-        text: String.Empty,
-        media: null,
+        Text: String.Empty,
+        Media: null,
       });
     });
 
