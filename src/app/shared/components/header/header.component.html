@@ -23,7 +23,7 @@
     </button>
     <div class="flex flex-col items-start space-y-4 mt-12">
       @for(item of menuItems; track $index){
-      <div class="w-full flex justify-center items-center gap-2" routerLinkActive="bg-main mx-2 py-1 rounded-xl text-primary" [routerLinkActiveOptions]="{ exact: true }">
+      <div class="w-full flex items-center gap-2" routerLinkActive="bg-main px-2 md:px-0 md:mx-2 py-1 rounded-xl text-primary" [routerLinkActiveOptions]="{ exact: item?.exact}">
         <a class="flex justify-center items-center gap-2" [routerLink]="item.route" (click)="item.label === 'Logout' ? logout($event) : null">
           <span [class]="'text-2xl ' + item.icon"></span>
           {{ item.label }}
@@ -50,7 +50,7 @@
     </div>
     @for(item of menuItems; track $index){
       <div class="w-9/10 px-6 flex justify-start items-center gap-2 lg:mx-12"
-        routerLinkActive="bg-main mx-2 py-1 rounded-xl text-primary" [routerLinkActiveOptions]="{ exact: true }">
+        routerLinkActive="bg-main mx-2 py-1 rounded-xl text-primary" [routerLinkActiveOptions]="{ exact: item?.exact}">
         <a class="flex justify-center items-center gap-2" [routerLink]="item.route" (click)="item.label === 'Logout' ? logout($event) : null">
           <span [class]="'text-2xl ' + item.icon"></span>
           {{ item.label }}

@@ -1,7 +1,6 @@
 .pagination-button {
   border-radius: 0.5rem;
   background-color: var(--color-main);
-  display: flex;
   align-items: center;
   gap: 0.5rem;
   border: 0.5px solid;
