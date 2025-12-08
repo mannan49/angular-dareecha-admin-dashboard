@@ -1,0 +1,52 @@
+<div class="mb-10 w-full">
+  <h1 class="text-2xl font-bold text-center my-4">Add MCQs By Image</h1>
+  <div class="items-end gap-4 border border-dashed px-10">
+    <div class="col-span-2 cursor-pointer w-full">
+      <input type="file" #fileInput hidden (change)="onFileSelected($event)" />
+
+      <div class="w-full hidden md:block py-4">
+        @if(mediaPreview){
+            <div class="w-full flex justify-center items-center">
+                <div class="flex items-center gap-1 py-4">
+                <img [src]="mediaPreview" class="w-70 h-70 object-cover rounded cursor-pointer"
+                    (click)="triggerFileInput(fileInput)" />
+                <button type="button" (click)="removeUploadedMedia()">
+                    <span class="icon-close-outline text-xl cursor-pointer"></span>
+                </button>
+            </div>
+            </div>
+        } @else {
+            <div class="w-full h-70 flex justify-center items-center">
+                <span class="text-6xl icon-upload-file text-primary" (click)="triggerFileInput(fileInput)"></span>
+                <h3 class="text-2xl italic">Upload Image</h3>
+            </div>
+        }
+        <input readonly class="border rounded-full px-4 py-2" placeholder="Paste Screenshot Here" (paste)="onPaste($event)" />
+      </div>
+
+    </div>
+  </div>
+
+  @if(loading) {
+    <div class="bg-primary rounded-full flex justify-center gap-2 items-center px-4 py-1 w-1/2 mx-auto mt-10">
+        <app-spinner [spinnerColor]="'fill-white'" />
+        <span class="text-xl text-white">Analyzing Text</span>
+    </div>
+  } 
+  
+  @if (!generatingMcqs && extractedOcrText && mcqData?.length === 0) {
+    <div class="bg-primary rounded-full flex justify-center cursor-pointer gap-2 items-center px-4 py-1 w-1/2 mx-auto my-10" (click)="onGenerateButtonClick()">
+        <span class="text-xl text-white">Generate Mcqs</span>
+    </div>
+  } @else if (generatingMcqs && mcqData?.length === 0) {
+     <div class="bg-primary rounded-full flex justify-center gap-2 items-center px-4 py-1 w-1/2 mx-auto my-10">
+        <app-spinner [spinnerColor]="'fill-white'" />
+        <span class="text-xl text-white">Generating Mcqs</span>
+    </div>
+  }
+  
+  @if(mcqData?.length) {
+    <app-generated-mcqs-table [mcqs]="mcqData" (allMcqsDeleted)="handleAllMcqsDeletion()"
+    (submitButtonClicked)="handleSubmitButtonClick($event)" />
+  }
+</div>

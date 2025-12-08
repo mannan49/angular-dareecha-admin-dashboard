@@ -45,6 +45,18 @@ export class ApiUrlService {
     return `${this.apiBaseUrl}/Mcq`;
   }
 
+  static batchMcqUrl(): string {
+    return `${this.apiBaseUrl}/Mcq/batch`;
+  }
+
+  static getOcrTextUrl(): string {
+    return `${this.apiBaseUrl}/Mcq/ocr`;
+  }
+
+  static generateMcqsFromOcrTextUrl(): string {
+    return `${this.apiBaseUrl}/Mcq/generate`;
+  }
+
   // #endregion;
 
   //#region Note

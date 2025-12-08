@@ -23,10 +23,8 @@ export class ChaptersTableComponent {
     this.router.navigate([`chapters/form/${chapterId}`]);
   }
   
-  onRightArrowButtonClick(chapterId: string, mcqCount: number){
-    if(mcqCount > 1){
-      this.router.navigate([`mcqs/${chapterId}`]);
-    }
+  onRightArrowButtonClick(chapterId: string){
+    this.router.navigate([`mcqs/${chapterId}`]);
   }
 
   onDeleteButtonClick(chapterId: string) {

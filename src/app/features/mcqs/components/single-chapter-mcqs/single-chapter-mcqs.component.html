@@ -5,14 +5,23 @@
 
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="grid grid-cols-14">
-        <div class="col-span-3">
+        <div class="col-span-4 md:col-span-3">
             <app-button [label] = "subjectAndClassName"
                 [className]="'bg-primary w-full'" iconClass="text-white" />
         </div>
-        <h2 class="text-2xl col-span-9 font-bold text-center mb-4"> {{pagedMcqs?.Items?.[0]?.Chapters?.[0]?.Text}} MCQs</h2>
-        <div class="col-span-2">
-            <app-button label="Add New MCQ" (click)="onAddNewButtonClick()"
-             [className]="'bg-primary w-full'" iconClass="icon-add text-white" />
+        <h2 class="md:text-2xl col-span-6 md:col-span-9 font-bold text-center mb-4"> {{ chapter?.Name }} MCQs</h2>
+        <div class="col-span-4 md:col-span-2">
+            <div class="hidden md:block">
+                <app-button label="Add New MCQ" (click)="onAddNewButtonClick()"
+                 [className]="'bg-primary w-full'" iconClass="icon-add text-white" />
+            </div>
+             <div class="block md:hidden">
+                 <app-button label="Add" (click)="onAddNewButtonClick()" [className]="'bg-primary w-full'" iconClass="icon-add text-white" />
+             </div>
+             <div class="hidden md:block md:mt-2">
+                <app-button label="Add By Image" (click)="onAddMcqsByAIButtonClick()"
+                  [className]="'bg-primary w-full hidden md:block'" iconClass="icon-lab text-white" />
+             </div>
         </div>
     </div>
     @if(loading){
@@ -30,7 +39,7 @@
         } @else {
             <div class="flex py-10 rounded-2xl flex-col justify-center items-center gap-2 my-auto mt-10">
                 <span class="icon-clear text-5xl"></span>
-                <h2 class="text-2xl">No mcq exists on search criteria.</h2>
+                <h2 class="text-2xl">No mcq found.</h2>
             </div>
         }
     }

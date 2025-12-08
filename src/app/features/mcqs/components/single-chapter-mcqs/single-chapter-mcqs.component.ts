@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, EMPTY, filter, finalize, take, tap } from 'rxjs';
 
 import { Mcq } from '@models/entities/mcq.model';
+import { Chapter } from '@models/entities/chapter.model';
 import { McqOption } from '@models/shared/mcq-option.model';
 import { EntityFilter } from '@models/payload/entity-filter.model';
 import { PagedResponse } from '@models/response/paged-response.model';
@@ -20,6 +21,7 @@ import { ApiHttpService } from '@shared/services/api-http.service';
 })
 export class SingleChapterMcqsComponent {
   loading = false;
+  chapter: Chapter;
   searchedQuery = String.Empty;
   selectedChapterId = String.Empty;
   subjectAndClassName = String.Empty;
@@ -36,9 +38,26 @@ export class SingleChapterMcqsComponent {
   }
 
   ngOnInit() {
+    this.fetchChapter();
     this.fetchMcqs();
   }
 
+  fetchChapter() {
+    this.apiHttpService
+      .getChapterById(this.selectedChapterId)
+      .pipe(
+        take(1),
+        filter(res => !!res),
+        tap((res: Chapter) => {
+          this.chapter = res;
+          this.subjectAndClassName = res?.Grade + ' : ' + res?.Subject;
+        }),
+        catchError(() => {
+          return EMPTY;
+        })
+      )
+      .subscribe();
+  }
   fetchMcqs() {
     this.loading = true;
     const mcqFilter = this.constructMcqFilter();
@@ -61,7 +80,6 @@ export class SingleChapterMcqsComponent {
         filter(res => !!res),
         tap((res: PagedResponse<Mcq>) => {
           this.pagedMcqs = res;
-          this.subjectAndClassName = res?.Items?.[0]?.Grade + ' : ' + res?.Items?.[0]?.Subject;
         }),
         catchError(() => {
           return EMPTY;
@@ -101,5 +119,9 @@ export class SingleChapterMcqsComponent {
 
   onAddNewButtonClick() {
     this.router.navigate(['mcqs/form']);
+  }
+
+  onAddMcqsByAIButtonClick() {
+    this.router.navigate([`mcqs/${this.selectedChapterId}/ocr`]);
   }
 }

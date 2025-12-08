@@ -1,0 +1,62 @@
+<form [formGroup]="mcqsForm" class="mt-10" (ngSubmit)="onSubmit()">
+
+  <!-- wrapper div to provide parent FormGroup -->
+  <div [formGroup]="mcqsForm">
+    <table class="table-auto bg-main w-full">
+      <thead>
+        <tr>
+          <th class="px-4 border py-2 w-4/15">Statement</th>
+          <th class="px-4 border py-2 hidden md:table-cell w-2/15">Option A</th>
+          <th class="px-4 border py-2 hidden md:table-cell w-2/15">Option B</th>
+          <th class="px-4 border py-2 hidden md:table-cell w-2/15">Option C</th>
+          <th class="px-4 border py-2 hidden md:table-cell w-2/15">Option D</th>
+          <th class="px-4 border py-2 w-2/15">Correct Option</th>
+          <th class="px-4 border py-2 w-1/15">Actions</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="mcqsData">
+        <tr *ngFor="let mcqGroup of mcqsData.controls; let i = index" [formGroupName]="i">
+          <td class="border px-4 py-2">
+            <textarea autoResize formControlName="Statement"
+               class="w-full leading-tight p-1 overflow-hidden resize-none">
+            </textarea>
+          </td>
+          <ng-container formArrayName="Options">
+            <td *ngFor="let optionGroup of getOptionsArray(i).controls; let j = index"
+                class="border text-center px-4 py-2 hidden md:table-cell"
+                [formGroupName]="j">
+                <textarea autoResize formControlName="Text">
+                </textarea>
+            </td>
+          </ng-container>
+
+          
+           <td class="border p-2">
+                <div class="h-full w-full flex justify-between">
+                    <div *ngFor="let optionGroup of getOptionsArray(i).controls; let j = index"
+                        class="flex items-center h-full gap-1">
+                    <input type="radio"
+                            formControlName="CorrectOption"
+                            [value]="optionGroup.value.OptionId" />
+                    {{ optionGroup.value.OptionId }}
+                    </div>
+                </div>
+            </td>
+
+
+
+          <td class="border px-4 py-2">
+            <div class="flex justify-center items-center gap-2">
+              <span class="text-xl icon-delete cursor-pointer hover:text-secondary"
+                    (click)="onDeleteMcqButtonClick(i)"></span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-4 flex items-center justify-center mx-auto">
+    <app-button [type]="'submit'" label="Add Mcqs" className="w-100 bg-primary" />
+  </div>
+</form>

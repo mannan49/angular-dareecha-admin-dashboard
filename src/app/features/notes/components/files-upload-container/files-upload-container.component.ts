@@ -54,7 +54,6 @@ export class FilesUploadContainerComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      console.log('File', file);
       this.getPreSignedUrl(file?.type?.split('/')[1], file, type);
 
       // this.notesForm.patchValue({ [type]: file });
@@ -95,9 +94,7 @@ export class FilesUploadContainerComponent {
             } else if (type === 'pdf') {
               this.fileUploadPercentage = progress;
             }
-            console.log(`Upload progress: ${progress}%`);
           } else if (event.type === HttpEventType.Response) {
-            console.log('File upload complete!', event);
             if (type === 'coverImage') {
               this.isImageUploadingCompleted = true;
               this.imageUploaded.emit(this.imageAttachment);
@@ -108,7 +105,6 @@ export class FilesUploadContainerComponent {
           }
         }),
         catchError(err => {
-          console.error('File upload failed', err);
           return EMPTY;
         })
       )

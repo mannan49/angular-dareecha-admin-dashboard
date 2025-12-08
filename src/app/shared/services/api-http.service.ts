@@ -5,11 +5,13 @@ import { Observable } from 'rxjs';
 
 import { Mcq } from '@models/entities/mcq.model';
 import { Note } from '@models/entities/note.model';
+import { McqItem } from '@models/shared/mcq-item.model';
 import { Chapter } from '@models/entities/chapter.model';
 import { EntityFilter } from '@models/payload/entity-filter.model';
 import { AuthResponse } from '@models/response/auth-response.model';
 import { PagedResponse } from '@models/response/paged-response.model';
 import { ActionResponse } from '@models/response/action-response.model';
+import { McqBatchUploadDto } from '@models/payload/mcq-batch-upload-dto';
 import { DashboardAnalytics } from '@models/response/dashboard-analytics.model';
 import { ChapterAggregatedResponse } from '@models/response/chapter-aggregated-response.model';
 import { UploadPreSignedUrlResponse } from '@models/response/upload-pre-signed-url-response.model';
@@ -39,10 +41,9 @@ export class ApiHttpService {
     return this.httpClient.get<AuthResponse>(ApiUrlService.refreshTokenUrl(), { withCredentials: true });
   }
 
-  resetPassword(currentPassword:string, newPassword:string): Observable<string> {
-    return this.httpClient.get<string>(ApiUrlService.resetPasswordUrl(currentPassword,newPassword));
+  resetPassword(currentPassword: string, newPassword: string): Observable<string> {
+    return this.httpClient.get<string>(ApiUrlService.resetPasswordUrl(currentPassword, newPassword));
   }
-
 
   //#endregion;
 
@@ -56,6 +57,10 @@ export class ApiHttpService {
     return this.httpClient.post<ActionResponse>(ApiUrlService.addMcqUrl(), mcq);
   }
 
+  batchMcqs(payload: McqBatchUploadDto): Observable<ActionResponse> {
+    return this.httpClient.post<ActionResponse>(ApiUrlService.batchMcqUrl(), payload);
+  }
+
   updateMcq(id: string, mcq: FormData): Observable<ActionResponse> {
     return this.httpClient.put<ActionResponse>(ApiUrlService.mcqByIdUrl(id), mcq);
   }
@@ -66,6 +71,14 @@ export class ApiHttpService {
 
   getMcqById(id: string): Observable<Mcq> {
     return this.httpClient.get<Mcq>(ApiUrlService.mcqByIdUrl(id));
+  }
+
+  getOcrText(file: FormData): Observable<{ Text: string }> {
+    return this.httpClient.post<{ Text: string }>(ApiUrlService.getOcrTextUrl(), file);
+  }
+
+  generateMcqsFromOcrTextUrl({ Text: string }): Observable<McqItem[]> {
+    return this.httpClient.post<McqItem[]>(ApiUrlService.generateMcqsFromOcrTextUrl(), { Text: string });
   }
 
   // #endregion;
@@ -97,7 +110,10 @@ export class ApiHttpService {
   }
 
   getAggregatedChaptersByFilter(filter: EntityFilter): Observable<PagedResponse<ChapterAggregatedResponse>> {
-    return this.httpClient.post<PagedResponse<ChapterAggregatedResponse>>(ApiUrlService.getAggregatedChaptersByFilterUrl(), filter);
+    return this.httpClient.post<PagedResponse<ChapterAggregatedResponse>>(
+      ApiUrlService.getAggregatedChaptersByFilterUrl(),
+      filter
+    );
   }
 
   deleteChapter(id: string): Observable<ActionResponse> {

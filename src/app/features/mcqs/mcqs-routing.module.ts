@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { McqFormComponent } from './components/mcq-form/mcq-form.component';
+import { McqsOcrComponent } from './components/mcqs-ocr/mcqs-ocr.component';
 import { McqsContainerComponent } from './components/mcqs-container/mcqs-container.component';
 import { SingleChapterMcqsComponent } from './components/single-chapter-mcqs/single-chapter-mcqs.component';
 
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'form',
     component: McqFormComponent,
+  },
+  {
+    path: ':id/ocr',
+    component: McqsOcrComponent,
   },
   {
     path: 'form/:id',

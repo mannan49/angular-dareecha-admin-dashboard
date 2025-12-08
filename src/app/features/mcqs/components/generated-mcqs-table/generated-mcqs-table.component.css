@@ -1,0 +1,15 @@
+input[type='text'] {
+  all: unset;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  all: unset;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}

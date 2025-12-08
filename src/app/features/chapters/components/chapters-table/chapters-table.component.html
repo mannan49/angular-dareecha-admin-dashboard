@@ -19,8 +19,7 @@
         <div class="col-span-2 flex justify-center items-center gap-1">
             <span class="icon-edit-pencil text-primary cursor-pointer" (click)="onEditButtonClick(chapter?.Id)"></span>
             <span class="text-xl icon-delete text-secondary cursor-pointer" (click)="onDeleteButtonClick(chapter?.Id)"></span>
-            <span class="text-xl icon-arrow-right cursor-pointer" [ngClass]="{'disabled-arrow': chapter?.McqCount < 1}"
-             (click)="onRightArrowButtonClick(chapter?.Id, chapter?.McqCount)"></span>
+            <span class="text-xl icon-arrow-right cursor-pointer" (click)="onRightArrowButtonClick(chapter?.Id)"></span>
         </div>
     </div>
 }
