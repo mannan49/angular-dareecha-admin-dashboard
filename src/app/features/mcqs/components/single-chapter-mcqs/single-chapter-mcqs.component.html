@@ -5,10 +5,12 @@
 
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="grid grid-cols-14">
-        <div class="col-span-4 md:col-span-3">
-            <app-button [label] = "subjectAndClassName"
-                [className]="'bg-primary w-full'" iconClass="text-white" />
-        </div>
+        @if(subjectAndClassName){
+            <div class="col-span-4 md:col-span-3">
+                <app-button [label] = "subjectAndClassName"
+                    [className]="'bg-primary w-full'" iconClass="text-white" />
+            </div>
+        }
         <h2 class="md:text-2xl col-span-6 md:col-span-9 font-bold text-center mb-4"> {{ chapter?.Name }} MCQs</h2>
         <div class="col-span-4 md:col-span-2">
             <div class="hidden md:block">

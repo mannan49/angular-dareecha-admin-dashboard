@@ -15,6 +15,7 @@ export class GeneratedMcqsTableComponent {
   @Output() allMcqsDeleted =  new EventEmitter<void>();
   @Output() submitButtonClicked =  new EventEmitter<McqItem[]>();
 
+  loading = false;
   mcqsForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
@@ -62,6 +63,7 @@ export class GeneratedMcqsTableComponent {
   }
 
   onSubmit() {
+    this.loading = true;
     this.submitButtonClicked.emit(this.mcqsForm.value.mcqsData);
   }
 
