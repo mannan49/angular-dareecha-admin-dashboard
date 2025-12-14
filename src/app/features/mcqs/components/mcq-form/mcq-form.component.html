@@ -58,9 +58,10 @@
               controlName="grade" [options]="gradesList" (selectionChanged)="handleSelectionChange($event)" />
             <app-select placeholder="Select Subject" label="Subject" 
               controlName="subject" [options]="subjectsList" (selectionChanged)="handleSelectionChange($event)" />
-            <app-multi-select  placeholder="Select Boards" controlName="boards"
-                  [options]="boardsList" (selectionChanged)="handleSelectionChange($event)" label="Boards" />
-            <app-multi-select placeholder="Select Chapter" label="Chapter" controlName="chapters" [options]="chapterList" />
+            <app-multi-select  placeholder="Select Boards" controlName="boards" [compareWith]="compareBoards"
+                [options]="boardsList" (selectionChanged)="handleSelectionChange($event)" label="Boards" />
+            <app-multi-select placeholder="Select Chapter" label="Chapter" controlName="chapters"
+                [compareWith]="compareChapters" [options]="chapterList" />
             <app-select placeholder="Choose Difficulty" controlName="difficultyLevel" [options]="difficultyLevelList" />
             <app-radio label="Correct Option :" controlName="correctOption" [options]="optionsList" />
         </div>

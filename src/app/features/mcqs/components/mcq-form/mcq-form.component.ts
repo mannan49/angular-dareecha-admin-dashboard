@@ -72,9 +72,9 @@ export class McqFormComponent {
       options: this.formBuilder.array([this.createOption('A'), this.createOption('B'), this.createOption('C'), this.createOption('D')]),
       grade: [String.Empty, Validators.required],
       subject: [String.Empty, Validators.required],
-      chapters: [String.Empty, Validators.required],
+      chapters: [[], Validators.required],
       difficultyLevel: [String.Empty, Validators.required],
-      boards: [String.Empty, Validators.required],
+      boards: [[], Validators.required],
       media: [String.Empty],
       active: [true],
     });
@@ -112,6 +112,7 @@ export class McqFormComponent {
       boards: mcq?.Boards,
       media: mcq?.Attachments?.[0],
     });
+    console.log("boards", mcq?.Boards);
     this.mediaPreview = mcq.Attachments?.[0]?.Url;
     mcq.Options?.forEach(opt => {
       if (opt?.Media?.Url) {
@@ -305,6 +306,16 @@ export class McqFormComponent {
       )
       .subscribe();
   }
+
+  compareBoards = (a: string, b: string): boolean => {
+    return a === b;
+  };
+
+  compareChapters = (c1: ScopedReference, c2: ScopedReference): boolean => {
+    return c1 && c2 ? c1.RefId === c2.RefId : c1 === c2;
+  };
+
+
 
   resetForm() {
     this.mcqForm.get('statement')?.reset();

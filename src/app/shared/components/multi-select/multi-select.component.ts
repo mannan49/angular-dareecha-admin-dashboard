@@ -7,7 +7,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { Select } from '@models/shared/select.model';
-import { ScopedReference } from '@models/shared/scoped-reference.model';
 
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { ValidateControlDirective } from '@shared/directives/validate-control.directive';
@@ -34,6 +33,7 @@ export class MultiSelectComponent {
   @Input() options: Select[] = [];
   @Input() valueField = 'Value';
   @Input() displayField = 'Display';
+  @Input() compareWith: (o1: any, o2: any) => boolean;
 
   @Output() selectionChanged = new EventEmitter<any>();
 
@@ -47,9 +47,5 @@ export class MultiSelectComponent {
       this.selectionChanged.emit(value);
     });
   }
-
-  compareChapters = (c1: ScopedReference, c2: ScopedReference): boolean => {
-     return c1 && c2 ? c1.RefId === c2.RefId : c1 === c2;
-  };
 
 }
