@@ -23,12 +23,16 @@
 
         <div class="bg-main p-4 md:col-span-7 shadow-xl rounded-2xl">
           <app-bar-chart [data]="analytics?.ClassSubjectMcqs" />
-        </div>
+        </div>      
 
         <div class="bg-main md:col-span-5 p-4 shadow-xl rounded-2xl text-center">
           <div class="max-w-fit mx-auto">
             <app-doughnut-chart [data]="analytics?.SubjectWiseMcqs" />
           </div>
+        </div>
+
+        <div class="bg-main p-4 md:col-span-7 shadow-xl rounded-2xl">
+          <app-bar-chart [data]="analytics?.ClassPersonMcqs" />
         </div>
         
         <!-- <div class="bg-main p-4 md:col-span-7 shadow-xl rounded-2xl">

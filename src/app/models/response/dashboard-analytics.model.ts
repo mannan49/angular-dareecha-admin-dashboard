@@ -11,4 +11,5 @@ export class DashboardAnalytics {
   ClassWiseMcqs: Select[];
   SubjectWiseMcqs: Select[];
   ClassSubjectMcqs: ClassSubjectMcq[];
+  ClassPersonMcqs: ClassSubjectMcq[];
 }
